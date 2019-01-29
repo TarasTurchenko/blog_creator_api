@@ -18,13 +18,13 @@ module BlogCreatorApi
         post do
           attributes = params[:data]
           attributes[:blog_id] = params[:blog_id]
-          Post.create!(attributes).preview
+          Post.create!(attributes).short_attrs
         end
 
         desc 'Get all post for blog'
         get do
           blog = Blog.find params[:blog_id]
-          blog.posts.map(&:preview)
+          blog.posts.map(&:short_attrs)
         end
       end
 

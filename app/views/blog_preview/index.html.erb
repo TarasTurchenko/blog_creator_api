@@ -1,0 +1,11 @@
+<head>
+  <title><%= @blog['name'] %></title>
+</head>
+<body>
+<header>
+  <h1><%= @blog['name'] %> by <%= @blog['author'] %></h1>
+</header>
+<main>
+  <%= render posts_template, posts: @blog['posts'], last_post: @blog['last_post'] %>
+</main>
+</body>

@@ -20,7 +20,7 @@ class Post < ApplicationRecord
   validates :thumbnail, format: OPTIONAL_URL_FORMATTER
   validates :blog_id, presence: true
 
-  def preview
+  def short_attrs
     {
       id: id,
       published: published,
@@ -32,6 +32,14 @@ class Post < ApplicationRecord
     attrs = attributes
     attrs[:blog] = blog.attributes
     attrs
+  end
+
+  def prepare_for_blog_preview
+    {
+      id: id,
+      title: title,
+      thumbnail: thumbnail
+    }
   end
 
   private
