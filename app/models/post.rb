@@ -14,6 +14,7 @@ class Post < ApplicationRecord
   before_create :set_default_values
 
   belongs_to :blog
+  has_many :containers, dependent: :destroy
 
   validates :title, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
@@ -30,7 +31,8 @@ class Post < ApplicationRecord
 
   def capture_attrs
     attrs = attributes
-    attrs[:blog] = blog.attributes
+    attrs['blog'] = blog.attributes
+    attrs['containers'] = containers.map(&:capture_attrs)
     attrs
   end
 
@@ -40,6 +42,10 @@ class Post < ApplicationRecord
       title: title,
       thumbnail: thumbnail
     }
+  end
+
+  def containers
+    super.order(:position)
   end
 
   private

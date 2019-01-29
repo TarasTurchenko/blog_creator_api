@@ -11,5 +11,6 @@ module BlogCreatorApi
 
     mount BlogCreatorApi::Blogs::V1
     mount BlogCreatorApi::Posts::V1
+    mount BlogCreatorApi::Containers::V1
   end
 end
