@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_204855) do
+ActiveRecord::Schema.define(version: 2019_01_28_230048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 2019_01_28_204855) do
     t.string "name"
     t.string "author"
     t.boolean "published"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.boolean "published"
+    t.string "offset_top"
+    t.string "offset_right"
+    t.string "offset_bottom"
+    t.string "offset_left"
+    t.string "bg_color"
+    t.string "bg_image"
+    t.string "thumbnail"
+    t.integer "blog_id"
+    t.index ["blog_id"], name: "index_posts_on_blog_id"
   end
 
 end
