@@ -5,5 +5,8 @@ module BlogCreatorApi
     helpers BlogCreatorApi::Shared::BaseHelpers
 
     format :json
+    rescue_from :all
+
+    mount BlogCreatorApi::Blogs::V1
   end
 end
