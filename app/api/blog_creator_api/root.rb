@@ -2,11 +2,8 @@
 
 module BlogCreatorApi
   class Root < Grape::API
+    helpers BlogCreatorApi::Shared::BaseHelpers
+
     format :json
-
-
-    get :hello do
-      'Hello World'
-    end
   end
 end
