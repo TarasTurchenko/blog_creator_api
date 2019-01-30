@@ -42,6 +42,16 @@ module BlogCreatorApi
           container.destroy!
           body false
         end
+
+        params do
+          requires :data, type: Hash do
+            requires :position, type: Integer
+          end
+        end
+        patch :position do
+          container = Container.find params[:container_id]
+          container.move params[:data][:position]
+        end
       end
     end
   end

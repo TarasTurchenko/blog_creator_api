@@ -22,6 +22,13 @@ class Container < ApplicationRecord
     attributes
   end
 
+  def move(to)
+    positions = post.containers_positions
+    positions.delete_if { |container| container[:id] == id }
+    positions.insert to, position_representation
+    save_position_changes positions
+  end
+
   private
 
   def set_default_values
@@ -32,8 +39,7 @@ class Container < ApplicationRecord
   end
 
   def reorder
-    positions = post.containers.order(:position, id: :desc).map(&:position_representation)
-    changes = positions_changes positions
-    save_position_changes changes
+    positions = post.containers_positions(id: :desc)
+    save_position_changes positions
   end
 end

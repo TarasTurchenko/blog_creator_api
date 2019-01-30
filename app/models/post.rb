@@ -44,6 +44,10 @@ class Post < ApplicationRecord
     }
   end
 
+  def containers_positions(*also_order_by)
+    containers.order(:position, *also_order_by).map(&:position_representation)
+  end
+
   private
 
   def set_default_values
