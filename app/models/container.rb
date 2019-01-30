@@ -11,6 +11,7 @@ class Container < ApplicationRecord
 
   before_create :set_default_values
   after_create :reorder
+  after_destroy :reorder
 
   belongs_to :post
 

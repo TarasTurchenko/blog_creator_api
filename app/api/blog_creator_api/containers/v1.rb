@@ -36,6 +36,12 @@ module BlogCreatorApi
           container.update! data
           container
         end
+
+        delete do
+          container = Container.find params[:container_id]
+          container.destroy!
+          body false
+        end
       end
     end
   end
