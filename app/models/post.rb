@@ -32,7 +32,7 @@ class Post < ApplicationRecord
   def capture_attrs
     attrs = attributes
     attrs['blog'] = blog.attributes
-    attrs['containers'] = containers.map(&:capture_attrs)
+    attrs['containers'] = containers.order(:position).map(&:capture_attrs)
     attrs
   end
 
@@ -42,10 +42,6 @@ class Post < ApplicationRecord
       title: title,
       thumbnail: thumbnail
     }
-  end
-
-  def containers
-    super.order(:position)
   end
 
   private
