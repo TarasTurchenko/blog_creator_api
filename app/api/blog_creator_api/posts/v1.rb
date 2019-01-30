@@ -16,7 +16,7 @@ module BlogCreatorApi
           end
         end
         post do
-          attributes = params[:data]
+          attributes = declared_params[:data]
           attributes[:blog_id] = params[:blog_id]
           Post.create!(attributes).short_attrs
         end
@@ -55,7 +55,7 @@ module BlogCreatorApi
         end
         put do
           post = Post.find params[:post_id]
-          post.update! params[:data]
+          post.update! declared_params[:data]
           post
         end
 

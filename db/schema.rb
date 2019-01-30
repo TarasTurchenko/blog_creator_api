@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_01_29_215420) do
 
   create_table "containers", force: :cascade do |t|
     t.string "offset_top"
-    t.string "offset_rigth"
+    t.string "offset_right"
     t.string "offset_bottom"
     t.string "offset_left"
     t.string "bg_color"

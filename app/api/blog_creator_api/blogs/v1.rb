@@ -13,7 +13,7 @@ module BlogCreatorApi
         end
       end
       post :blogs do
-        Blog.create! params[:data]
+        Blog.create! declared_params[:data]
       end
     end
   end

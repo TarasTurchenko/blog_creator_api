@@ -3,7 +3,7 @@ class CreateContainers < ActiveRecord::Migration[5.2]
     create_table :containers
 
     add_column :containers, :offset_top, :string
-    add_column :containers, :offset_rigth, :string
+    add_column :containers, :offset_right, :string
     add_column :containers, :offset_bottom, :string
     add_column :containers, :offset_left, :string
     add_column :containers, :bg_color, :string

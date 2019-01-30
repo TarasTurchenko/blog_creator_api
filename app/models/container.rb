@@ -1,5 +1,5 @@
 # string :offset_top
-# string :offset_rigth
+# string :offset_right
 # string :offset_bottom
 # string :offset_left
 # string :bg_color
