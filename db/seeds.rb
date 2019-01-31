@@ -6,14 +6,12 @@ def print_post(post, *containers)
   puts "Post #{post} with containers #{containers} created"
 end
 
-
 blog1 = Blog.create! name: 'Test blog', author: 'Me'
 blog2 = Blog.create! name: 'Second blog', author: 'Me, again'
 
 post1 = Post.create! title: 'My first post', blog: blog1
 post2 = Post.create! title: 'My second post', blog: blog1
 post3 = Post.create! title: 'Test', blog: blog2
-
 
 container1 = Container.create! position: 0, post: post1
 container2 = Container.create! position: 1, post: post1

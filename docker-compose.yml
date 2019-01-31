@@ -4,7 +4,7 @@ services:
     container_name: blog_creator_api_db
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - data-postgres:/var/lib/postgresql/data
   web:
     container_name: blog_creator_api_main
     build: .
@@ -13,7 +13,16 @@ services:
       - .env
     volumes:
       - .:/myapp
+      - data-ruby-tmp:/myapp/tmp
+      - data-ruby-bundle:/bundle
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - db
+volumes:
+  data-ruby-tmp:
+    driver: local
+  data-postgres:
+    driver: local
+  data-ruby-bundle:
+    driver: local
