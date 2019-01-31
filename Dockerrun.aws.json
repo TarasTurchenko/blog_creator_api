@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "tarasturchenko/blog-creator-api",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "3000"
+    }
+  ]
+}
