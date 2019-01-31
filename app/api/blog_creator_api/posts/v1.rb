@@ -48,9 +48,9 @@ module BlogCreatorApi
             optional :offset_left, type: String
 
             optional :bg_color, type: String
-            optional :bg_image, type: String, url?: true
+            optional :bg_image, type: String
 
-            optional :thumbnail, type: String, url?: true
+            optional :thumbnail, type: String
           end
         end
         put do

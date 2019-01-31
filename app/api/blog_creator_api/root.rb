@@ -4,8 +4,6 @@ module BlogCreatorApi
   class Root < Grape::API
     helpers BlogCreatorApi::Shared::BaseHelpers
 
-    Grape::Validations.register_validator 'url?', BlogCreatorApi::Validators::Url
-
     format :json
     rescue_from :all
 

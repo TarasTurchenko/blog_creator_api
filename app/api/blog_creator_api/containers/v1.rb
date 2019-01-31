@@ -27,7 +27,7 @@ module BlogCreatorApi
             optional :offset_bottom, type: String
             optional :offset_left, type: String
             optional :bg_color, type: String
-            optional :bg_image, type: String, url?: true
+            optional :bg_image, type: String
           end
         end
         put do
