@@ -10,5 +10,7 @@ module BlogCreatorApi
     mount BlogCreatorApi::Blogs::V1
     mount BlogCreatorApi::Posts::V1
     mount BlogCreatorApi::Containers::V1
+
+    add_swagger_documentation mount_path: '/swagger_doc'
   end
 end
