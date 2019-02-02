@@ -6,11 +6,10 @@
   - [Environment variables](#contributing-envs)
 - [Links](#links)
 
-## Contributing {#contributing}
+<h2 id="contributing">Contributing</h2>
 
-### How to setup? {#contributing-setup}
+<h3 id="contributing-setup">How to setup?</h3>
 
-a) run
 ```bash
 # Build images
 docker-compose build
@@ -30,7 +29,7 @@ docker-compose run --rm web rails db:seed
 docker-compose up
 
 ```
-### Environment variables {#contributing-envs}
+<h3 id="contributing-envs">Environment variables</h3>
 ```dotenv
 RAILS_ENV
 
@@ -44,5 +43,5 @@ DB_PASSWORD
 # Amazon
 CLOUDFRONT
 ``` 
-## Links #{links}
-- Front-End
+<h2 id="links">Links</h2>
+- [Front-End](https://github.com/v-lavs/blog-creator)
