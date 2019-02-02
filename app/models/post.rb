@@ -11,8 +11,6 @@
 # string :thumbnail
 # integer :blog_id
 class Post < ApplicationRecord
-  before_create :set_default_values
-
   belongs_to :blog
   has_many :containers, dependent: :destroy
 

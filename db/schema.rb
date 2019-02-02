@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_215420) do
+ActiveRecord::Schema.define(version: 2019_02_02_194315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,21 @@ ActiveRecord::Schema.define(version: 2019_01_29_215420) do
     t.integer "post_id"
     t.integer "position"
     t.index ["post_id"], name: "index_containers_on_post_id"
+  end
+
+  create_table "elements", force: :cascade do |t|
+    t.integer "container_id"
+    t.string "offset_top"
+    t.string "offset_right"
+    t.string "offset_bottom"
+    t.string "offset_left"
+    t.string "bg_image"
+    t.string "bg_color"
+    t.integer "size"
+    t.integer "position"
+    t.integer "kind"
+    t.jsonb "main_settings"
+    t.index ["container_id"], name: "index_elements_on_container_id"
   end
 
   create_table "posts", force: :cascade do |t|

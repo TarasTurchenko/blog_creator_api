@@ -9,14 +9,15 @@
 class Container < ApplicationRecord
   include SharedModels::PositionableModel
 
-  before_create :set_default_values
   after_create :reorder
   after_destroy :reorder
 
   belongs_to :post
+  has_many :elements, dependent: :destroy
 
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
-  validates :position, presence: true
+  validates :position, POSITION_VALIDATIONS
+  validates :post_id, presence: true
 
   def capture_attrs
     attributes

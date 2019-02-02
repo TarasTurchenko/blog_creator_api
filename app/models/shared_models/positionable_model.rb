@@ -2,6 +2,11 @@
 
 module SharedModels
   module PositionableModel
+    POSITION_VALIDATIONS = {
+      presence: true,
+      numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+    }.freeze
+
     def position_representation
       { id: id, position: position }
     end
