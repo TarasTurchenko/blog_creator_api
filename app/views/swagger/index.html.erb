@@ -1,0 +1,27 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <% base_asset_path = swagger_asset_path %>
+  <%= stylesheet_link_tag "#{base_asset_path}/styles.css" %>
+  <link rel="icon" type="image/png" href="<%= "#{base_asset_path}/favicon-32x32.png" %>" sizes="32x32" />
+  <link rel="icon" type="image/png" href="<%= "#{base_asset_path}/favicon-16x16.png" %>" sizes="16x16" />
+  <%= javascript_include_tag "#{base_asset_path}/bundle.js" %>
+  <%= javascript_include_tag "#{base_asset_path}/standalone-preset.js" %>
+</head>
+
+<body>
+  <div id="swagger-ui"></div>
+  <script defer>
+      window.ui = SwaggerUIBundle({
+          url: '/swagger_doc',
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          presets: [
+              SwaggerUIBundle.presets.apis,
+              SwaggerUIStandalonePreset
+          ],
+          plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
+          layout: 'StandaloneLayout'
+      });
+  </script>
+</body>
