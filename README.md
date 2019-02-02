@@ -2,13 +2,13 @@
 
 ## Contents
 - [Contributing](#contributing)
-  - [How to setup?](#contributing-setup)
-  - [Environment variables](#contributing-envs)
+  - [How to setup?](#how-to-setup)
+  - [Environment variables](#environment-variables)
 - [Links](#links)
 
-<h2 id="contributing">Contributing</h2>
+## Contributing
 
-<h3 id="contributing-setup">How to setup?</h3>
+### How to setup?
 
 ```bash
 # Build images
@@ -29,8 +29,8 @@ docker-compose run --rm web rails db:seed
 docker-compose up
 
 ```
-<h3 id="contributing-envs">Environment variables</h3>
-```
+### Environment variables
+```dotenv
 RAILS_ENV
 
 # PostgreSQL
@@ -44,5 +44,6 @@ DB_PASSWORD
 CLOUDFRONT
 ``` 
 
-<h2 id="links">Links</h2>
+## Links
+
 - [Front-End](https://github.com/v-lavs/blog-creator)
