@@ -30,7 +30,7 @@ docker-compose up
 
 ```
 <h3 id="contributing-envs">Environment variables</h3>
-```dotenv
+```
 RAILS_ENV
 
 # PostgreSQL
