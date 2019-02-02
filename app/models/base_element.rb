@@ -11,31 +11,14 @@
 # integer :position
 # string :kind
 # jsonb :main_settings
-class Element < ApplicationRecord
+class BaseElement < ApplicationRecord
+  self.table_name = :elements
+
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
-  # DEFAULT_SETTINGS = {
-  #   text: { content: 'Hey! Your text will be here' }.freeze,
-  #   image: {
-  #     src: Constants::Images::PLACEHOLDER,
-  #     alt: 'Placeholder image'
-  #   }.freeze,
-  #   link: {
-  #     kind: :external,
-  #     destination: 'http://example-link.com'
-  #   }.freeze
-  # }.freeze
 
   belongs_to :container
-
-  defaults(
-    offset_top: '20px',
-    offset_right: '5%',
-    offset_bottom: '20px',
-    offset_left: '5%',
-    main_settings: {}
-  )
 
   enum kind: %i(text image link)
 
