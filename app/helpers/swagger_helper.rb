@@ -1,5 +1,5 @@
 module SwaggerHelper
-  def swagger_asset_path(filename)
-    "#{ENV['CLOUDFRONT']}/swagger/#{filename}"
+  def swagger_asset_path
+    "#{ENV['CLOUDFRONT']}/swagger"
   end
 end
