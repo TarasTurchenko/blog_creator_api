@@ -14,6 +14,15 @@ class Post < ApplicationRecord
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
+  defaults(
+    published: false,
+    thumbnail: Constants::Images::PLACEHOLDER,
+    offset_top: '20px',
+    offset_right: '5%',
+    offset_bottom: '20px',
+    offset_left: '5%'
+  )
+
   validates :title, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
   validates :thumbnail, format: OPTIONAL_URL_FORMATTER
@@ -44,16 +53,5 @@ class Post < ApplicationRecord
 
   def containers_positions(*also_order_by)
     containers.order(:position, *also_order_by).map(&:position_representation)
-  end
-
-  private
-
-  def set_default_values
-    self.published ||= false
-    self.thumbnail ||= Constants::Images::PLACEHOLDER
-    self.offset_top ||= '20px'
-    self.offset_right ||= '5%'
-    self.offset_bottom ||= '20px'
-    self.offset_left ||= '5%'
   end
 end

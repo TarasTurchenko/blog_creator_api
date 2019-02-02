@@ -15,6 +15,13 @@ class Container < ApplicationRecord
   belongs_to :post
   has_many :elements, dependent: :destroy
 
+  defaults(
+    offset_top: '20px',
+    offset_right: '5%',
+    offset_bottom: '20px',
+    offset_left: '5%'
+  )
+
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
   validates :position, POSITION_VALIDATIONS
   validates :post_id, presence: true
@@ -31,13 +38,6 @@ class Container < ApplicationRecord
   end
 
   private
-
-  def set_default_values
-    self.offset_top ||= '20px'
-    self.offset_right ||= '5%'
-    self.offset_bottom ||= '20px'
-    self.offset_left ||= '5%'
-  end
 
   def reorder
     positions = post.containers_positions(id: :desc)

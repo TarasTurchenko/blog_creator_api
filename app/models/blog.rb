@@ -6,6 +6,8 @@
 class Blog < ApplicationRecord
   has_many :posts, dependent: :destroy
 
+  defaults published: false
+
   validates :name, presence: true
   validates :author, presence: true
 
@@ -20,9 +22,5 @@ class Blog < ApplicationRecord
 
   def capture_posts_data
     posts.where(published: true).order(id: :desc).map(&:prepare_for_blog_preview)
-  end
-
-  def set_default_values
-    self.published ||= false
   end
 end
