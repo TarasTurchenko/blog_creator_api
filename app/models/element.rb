@@ -1,16 +1,26 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: elements
+#
+#  id            :bigint(8)        not null, primary key
+#  bg_color      :string           default("#FFF")
+#  bg_image      :string
+#  kind          :integer          not null
+#  main_settings :jsonb
+#  offset_bottom :string           default("5px")
+#  offset_left   :string           default("5px")
+#  offset_right  :string           default("5px")
+#  offset_top    :string           default("5px")
+#  position      :integer          not null
+#  size          :integer          not null
+#  container_id  :integer          not null
+#
+# Indexes
+#
+#  index_elements_on_container_id  (container_id)
+#
 
-# integer :container_id
-# string :offset_top
-# string :offset_right
-# string :offset_bottom
-# string :offset_left
-# string :bg_image
-# string :bg_color
-# integer :size
-# integer :position
-# string :kind
-# jsonb :main_settings
 class Element < ApplicationRecord
   self.table_name = :elements
 
@@ -19,30 +29,23 @@ class Element < ApplicationRecord
   MAX_SIZE = 12
 
   DEFAULT_SETTINGS = {
-    text: { content: 'Hey! Your text will be here' }.freeze,
-    image: {
+    'text' => { content: 'Hey! Your text will be here' }.freeze,
+    'image' => {
       src: Constants::Images::PLACEHOLDER,
       alt: 'Placeholder image'
     }.freeze,
-    link: {
+    'link' => {
       destination_type: :external,
       destination: 'http://example-link.com',
       text: 'Example link'
     }.freeze
   }.freeze
 
+  before_create
   after_create :reorder
   after_destroy :reorder
 
   belongs_to :container
-
-  defaults(
-    offset_top: '20px',
-    offset_right: '5%',
-    offset_bottom: '20px',
-    offset_left: '5%',
-    main_settings: {},
-  )
 
   enum kind: %i(text image link)
 
@@ -64,5 +67,9 @@ class Element < ApplicationRecord
   def reorder
     positions = container.elements_positions(id: :desc)
     save_position_changes positions
+  end
+
+  def set_defaults
+    self.main_settings ||= DEFAULT_SETTINGS[kind]
   end
 end

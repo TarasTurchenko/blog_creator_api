@@ -1,27 +1,30 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: posts
+#
+#  id            :bigint(8)        not null, primary key
+#  bg_color      :string           default("#FFF")
+#  bg_image      :string
+#  offset_bottom :string
+#  offset_left   :string
+#  offset_right  :string
+#  offset_top    :string
+#  published     :boolean          default(FALSE)
+#  thumbnail     :string
+#  title         :string           not null
+#  blog_id       :integer          not null
+#
+# Indexes
+#
+#  index_posts_on_blog_id  (blog_id)
+#
 
-# string :title
-# boolean :published
-# string :offset_top
-# string :offset_right
-# string :offset_bottom
-# string :offset_left
-# string :bg_color
-# string :bg_image
-# string :thumbnail
-# integer :blog_id
 class Post < ApplicationRecord
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
-  defaults(
-    published: false,
-    thumbnail: Constants::Images::PLACEHOLDER,
-    offset_top: '20px',
-    offset_right: '5%',
-    offset_bottom: '20px',
-    offset_left: '5%'
-  )
+  before_create
 
   validates :title, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
@@ -53,5 +56,11 @@ class Post < ApplicationRecord
 
   def containers_positions(*also_order_by)
     containers.order(:position, *also_order_by).map(&:position_representation)
+  end
+
+  private
+
+  def set_defaults
+    self.thumbnail ||= Constants::Images::PLACEHOLDER
   end
 end
