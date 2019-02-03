@@ -19,6 +19,12 @@ module SharedModels
       changes
     end
 
+    def move(to, positions)
+      positions.delete_if { |model| model[:id] == id }
+      positions.insert to, position_representation
+      save_position_changes positions
+    end
+
     private
 
     def positions_changes(positions)

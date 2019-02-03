@@ -1,11 +1,23 @@
-# string :offset_top
-# string :offset_right
-# string :offset_bottom
-# string :offset_left
-# string :bg_color
-# string :bg_image
-# integer :post_id
-# integer :position
+# frozen_string_literal: true
+# == Schema Information
+#
+# Table name: containers
+#
+#  id            :bigint(8)        not null, primary key
+#  bg_color      :string           default("#FFF")
+#  bg_image      :string
+#  offset_bottom :string           default("20px")
+#  offset_left   :string           default("10%")
+#  offset_right  :string           default("10%")
+#  offset_top    :string           default("20px")
+#  position      :integer          not null
+#  post_id       :integer          not null
+#
+# Indexes
+#
+#  index_containers_on_post_id  (post_id)
+#
+
 class Container < ApplicationRecord
   include SharedModels::PositionableModel
 
@@ -14,13 +26,6 @@ class Container < ApplicationRecord
 
   belongs_to :post
   has_many :elements, dependent: :destroy
-
-  defaults(
-    offset_top: '20px',
-    offset_right: '5%',
-    offset_bottom: '20px',
-    offset_left: '5%'
-  )
 
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
   validates :position, POSITION_VALIDATIONS
@@ -31,10 +36,11 @@ class Container < ApplicationRecord
   end
 
   def move(to)
-    positions = post.containers_positions
-    positions.delete_if { |container| container[:id] == id }
-    positions.insert to, position_representation
-    save_position_changes positions
+    super to, post.containers_positions
+  end
+
+  def elements_positions(*also_order_by)
+    elements.order(:position, *also_order_by).map(&:position_representation)
   end
 
   private

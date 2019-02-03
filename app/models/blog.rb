@@ -1,12 +1,16 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: blogs
+#
+#  id        :bigint(8)        not null, primary key
+#  author    :string           not null
+#  name      :string           not null
+#  published :boolean          default(FALSE)
+#
 
-# string :name
-# string :author
-# boolean :published
 class Blog < ApplicationRecord
   has_many :posts, dependent: :destroy
-
-  defaults published: false
 
   validates :name, presence: true
   validates :author, presence: true
