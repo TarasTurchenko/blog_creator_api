@@ -25,6 +25,6 @@ class Blog < ApplicationRecord
   private
 
   def capture_posts_data
-    posts.where(published: true).order(id: :desc).map(&:prepare_for_blog_preview)
+    posts.where(published: true).order(id: :desc).map(&:short_attrs)
   end
 end

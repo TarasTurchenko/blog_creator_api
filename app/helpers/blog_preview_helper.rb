@@ -6,4 +6,8 @@ module BlogPreviewHelper
   def posts_template
     posts? ? Templates::POSTS_CONTENT : Templates::POSTS_PLACEHOLDER
   end
+
+  def post_preview_path(post_id)
+    "/v1/posts/#{post_id}"
+  end
 end

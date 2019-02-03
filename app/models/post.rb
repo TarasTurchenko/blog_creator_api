@@ -6,6 +6,7 @@
 #  id            :bigint(8)        not null, primary key
 #  bg_color      :string           default("#FFF")
 #  bg_image      :string
+#  description   :string
 #  offset_bottom :string
 #  offset_left   :string
 #  offset_right  :string
@@ -24,7 +25,7 @@ class Post < ApplicationRecord
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
-  before_create
+  before_create :set_defaults
 
   validates :title, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
@@ -34,8 +35,10 @@ class Post < ApplicationRecord
   def short_attrs
     {
       id: id,
+      title: title,
       published: published,
-      title: title
+      thumbnail: thumbnail,
+      description: description
     }
   end
 
@@ -44,14 +47,6 @@ class Post < ApplicationRecord
     attrs['blog'] = blog.attributes
     attrs['containers'] = containers.order(:position).map(&:capture_attrs)
     attrs
-  end
-
-  def prepare_for_blog_preview
-    {
-      id: id,
-      title: title,
-      thumbnail: thumbnail
-    }
   end
 
   def containers_positions(*also_order_by)

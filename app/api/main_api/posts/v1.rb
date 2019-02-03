@@ -24,7 +24,7 @@ module MainApi
         desc 'Get all post for blog'
         get do
           blog = Blog.find params[:blog_id]
-          blog.posts.map(&:short_attrs)
+          blog.posts.order(id: :desc).map(&:short_attrs)
         end
       end
 
