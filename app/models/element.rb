@@ -31,6 +31,9 @@ class Element < ApplicationRecord
     }.freeze
   }.freeze
 
+  after_create :reorder
+  after_destroy :reorder
+
   belongs_to :container
 
   defaults(
@@ -51,4 +54,15 @@ class Element < ApplicationRecord
   }
   validates :kind, presence: true, inclusion: { in: kinds }
   validates :position, POSITION_VALIDATIONS
+
+  def move(to)
+    super to, container.elements_positions
+  end
+
+  private
+
+  def reorder
+    positions = container.elements_positions(id: :desc)
+    save_position_changes positions
+  end
 end

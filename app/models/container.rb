@@ -31,10 +31,11 @@ class Container < ApplicationRecord
   end
 
   def move(to)
-    positions = post.containers_positions
-    positions.delete_if { |container| container[:id] == id }
-    positions.insert to, position_representation
-    save_position_changes positions
+    super to, post.containers_positions
+  end
+
+  def elements_positions(*also_order_by)
+    elements.order(:position, *also_order_by).map(&:position_representation)
   end
 
   private
