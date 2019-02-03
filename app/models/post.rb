@@ -25,7 +25,7 @@ class Post < ApplicationRecord
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
-  before_create
+  before_create :set_defaults
 
   validates :title, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
