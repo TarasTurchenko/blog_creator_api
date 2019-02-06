@@ -27,7 +27,7 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
-
+  KINDS = %i(text image link)
   DEFAULT_SETTINGS = {
     'text' => { content: 'Hey! Your text will be here' }.freeze,
     'image' => {
@@ -41,13 +41,13 @@ class Element < ApplicationRecord
     }.freeze
   }.freeze
 
-  before_create
+  after_create :set_defaults
   after_create :reorder
   after_destroy :reorder
 
   belongs_to :container
 
-  enum kind: %i(text image link)
+  enum kind: KINDS
 
   validates :container_id, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
