@@ -7,13 +7,10 @@ module MainApi
 
       params do
         requires :post_id, type: Integer
-        requires :data, type: Hash do
-          requires :position, type: Integer
-        end
+        requires :position, type: Integer
       end
       post 'posts/:post_id/containers' do
-        position = params[:data][:position]
-        Container.create! post_id: params[:post_id], position: position
+        Container.create! declared_params
       end
 
       params do
@@ -21,36 +18,30 @@ module MainApi
       end
       resources 'containers/:container_id' do
         params do
-          requires :data, type: Hash do
-            optional :offset_top, type: String
-            optional :offset_right, type: String
-            optional :offset_bottom, type: String
-            optional :offset_left, type: String
-            optional :bg_color, type: String
-            optional :bg_image, type: String
-          end
+          optional :offset_top, type: String
+          optional :offset_right, type: String
+          optional :offset_bottom, type: String
+          optional :offset_left, type: String
+          optional :bg_color, type: String
+          optional :bg_image, type: String
         end
         put do
-          data = declared_params[:data]
           container = Container.find params[:container_id]
-          container.update! data
+          container.update! declared_params.except(:container_id)
           container
         end
 
         delete do
-          container = Container.find params[:container_id]
-          container.destroy!
+          Container.find(params[:container_id]).destroy!
           body false
         end
 
         params do
-          requires :data, type: Hash do
-            requires :position, type: Integer
-          end
+          requires :position, type: Integer
         end
         patch :position do
           container = Container.find params[:container_id]
-          container.move params[:data][:position]
+          container.move params[:position]
         end
       end
     end
