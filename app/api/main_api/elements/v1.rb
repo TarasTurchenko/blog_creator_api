@@ -15,6 +15,18 @@ module MainApi
       post 'containers/:container_id/elements' do
         Element.create! declared_params
       end
+
+      desc 'Mass update elements sizes'
+      params do
+        requires :sizes, type: Array do
+          requires :id, type: Integer
+          requires :size, type: Integer
+        end
+      end
+      patch 'elements/sizes' do
+        Element.update_sizes declared_params[:sizes]
+        body false
+      end
     end
   end
 end

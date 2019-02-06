@@ -63,8 +63,8 @@ class Element < ApplicationRecord
   end
 
   def self.update_sizes(sizes)
-    keys = sizes.keys.map(&:to_i)
-    sizes_list = sizes.values.map { |size| { size: size } }
+    keys = sizes.map { |element| element[:id].to_i }
+    sizes_list = sizes.map { |element| { size: element[:size] } }
     Element.update keys, sizes_list
   end
 
