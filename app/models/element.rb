@@ -41,7 +41,7 @@ class Element < ApplicationRecord
     }.freeze
   }.freeze
 
-  after_create :set_defaults
+  before_create :set_defaults
   after_create :reorder
   after_destroy :reorder
 
@@ -60,6 +60,12 @@ class Element < ApplicationRecord
 
   def move(to)
     super to, container.elements_positions
+  end
+
+  def self.update_sizes(sizes)
+    keys = sizes.keys.map(&:to_i)
+    sizes_list = sizes.values.map { |size| { size: size } }
+    Element.update keys, sizes_list
   end
 
   private
