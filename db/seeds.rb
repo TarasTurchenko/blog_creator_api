@@ -27,6 +27,6 @@ container_2 = containers.second
 container_2 = create_record(Container, post: post, position: 1) unless container_2
 
 container_2_elements = container_2.elements
-create_record(Element, container: container_2, position: 0, size: 12, kind: 'link') if container_2_elements.first
+create_record(Element, container: container_2, position: 0, size: 12, kind: 'link') unless container_2_elements.first
 
 puts '--------------------------- Seeds finished ---------------------------'
