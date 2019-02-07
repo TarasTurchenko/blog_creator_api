@@ -97,6 +97,15 @@ module MainApi
           end
         end
         put(:link) { update_element_settings }
+
+        params do
+          use :common_element_options
+        end
+        put :blank do
+          element = params[:element_id]
+          element.update! declared_params.except(:element_id)
+          element
+        end
       end
     end
   end

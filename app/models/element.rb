@@ -27,8 +27,9 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
-  KINDS = %i(text image link)
+  KINDS = %i(blank text image link)
   DEFAULT_SETTINGS = {
+    'blank' => {}.freeze,
     'text' => { content: 'Hey! Your text will be here' }.freeze,
     'image' => {
       src: Constants::Images::PLACEHOLDER,
