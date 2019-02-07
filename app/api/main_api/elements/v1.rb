@@ -5,6 +5,25 @@ module MainApi
     class V1 < Grape::API
       version 'v1', using: :path
 
+      helpers do
+        params :common_element_options do
+          optional :bg_color, type: String
+          optional :bg_image, type: String
+          optional :offset_bottom, type: String
+          optional :offset_left, type: String
+          optional :offset_right, type: String
+          optional :offset_top, type: String
+        end
+
+        def update_element_settings
+          element = Element.find params[:element_id]
+          declared = declared_params
+          element.attributes = declared.except(:element_id, :main_settings)
+          element.update_main_settings declared[:main_settings]
+          element.save!
+        end
+      end
+
       desc 'Create new element'
       params do
         requires :container_id, type: Integer
@@ -44,6 +63,40 @@ module MainApi
           element = Element.find params[:element_id]
           element.move position
         end
+
+        params do
+          use :common_element_options
+          requires :main_settings, type: Hash do
+            optional :content, type: String
+          end
+        end
+        put(:text) { update_element_settings }
+
+        params do
+          use :common_element_options
+          requires :main_settings, type: Hash do
+            optional :alt, type: String
+            optional :src, type: String
+          end
+        end
+        put(:image) { update_element_settings }
+
+        params do
+          use :common_element_options
+          requires :main_settings, type: Hash do
+            optional :destination_type, type: String, values: Element::LINK_DESTINATION_TYPES
+            optional :text, type: String
+
+            given destination_type: ->(val) { val == 'external' } do
+              requires :destination, type: String, regexp: Constants::Regexps::URL
+            end
+
+            given destination_type: ->(val) { val == 'post' } do
+              requires :destination, type: Integer, desc: 'Post id'
+            end
+          end
+        end
+        put(:link) { update_element_settings }
       end
     end
   end

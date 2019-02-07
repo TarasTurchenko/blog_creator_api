@@ -35,11 +35,12 @@ class Element < ApplicationRecord
       alt: 'Placeholder image'
     }.freeze,
     'link' => {
-      destination_type: :external,
+      destination_type: 'external',
       destination: 'http://example-link.com',
       text: 'Example link'
     }.freeze
   }.freeze
+  LINK_DESTINATION_TYPES = %w(external homepage post)
 
   before_create :set_defaults
   after_create :reorder
@@ -60,6 +61,11 @@ class Element < ApplicationRecord
 
   def move(to)
     super to, container.elements_positions
+  end
+
+  def update_main_settings(changes)
+    old = main_settings
+    self.main_settings = old.merge changes
   end
 
   def self.update_sizes(sizes)
