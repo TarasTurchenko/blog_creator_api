@@ -11,14 +11,10 @@ module MainApi
       resources 'blogs/:blog_id/posts' do
         desc 'Create new post'
         params do
-          requires :data, type: Hash do
-            requires :title, type: String
-          end
+          requires :title, type: String
         end
         post do
-          attributes = declared_params[:data]
-          attributes[:blog_id] = params[:blog_id]
-          Post.create!(attributes).short_attrs
+          Post.create!(declared_params).short_attrs
         end
 
         desc 'Get all post for blog'
@@ -39,23 +35,21 @@ module MainApi
 
         desc 'Update post settings'
         params do
-          requires :data, type: Hash do
-            optional :title, type: String
+          optional :title, type: String
 
-            optional :offset_top, type: String
-            optional :offset_right, type: String
-            optional :offset_bottom, type: String
-            optional :offset_left, type: String
+          optional :offset_top, type: String
+          optional :offset_right, type: String
+          optional :offset_bottom, type: String
+          optional :offset_left, type: String
 
-            optional :bg_color, type: String
-            optional :bg_image, type: String
+          optional :bg_color, type: String
+          optional :bg_image, type: String
 
-            optional :thumbnail, type: String
-          end
+          optional :thumbnail, type: String
         end
         put do
           post = Post.find params[:post_id]
-          post.update! declared_params[:data]
+          post.update! declared_params.except(:post_id)
           post
         end
 

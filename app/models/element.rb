@@ -27,27 +27,29 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
-
+  KINDS = %i(blank text image link)
   DEFAULT_SETTINGS = {
+    'blank' => {}.freeze,
     'text' => { content: 'Hey! Your text will be here' }.freeze,
     'image' => {
       src: Constants::Images::PLACEHOLDER,
       alt: 'Placeholder image'
     }.freeze,
     'link' => {
-      destination_type: :external,
+      destination_type: 'external',
       destination: 'http://example-link.com',
       text: 'Example link'
     }.freeze
   }.freeze
+  LINK_DESTINATION_TYPES = %w(external homepage post)
 
-  before_create
+  before_create :set_defaults
   after_create :reorder
   after_destroy :reorder
 
   belongs_to :container
 
-  enum kind: %i(text image link)
+  enum kind: KINDS
 
   validates :container_id, presence: true
   validates :bg_image, format: OPTIONAL_URL_FORMATTER
@@ -60,6 +62,17 @@ class Element < ApplicationRecord
 
   def move(to)
     super to, container.elements_positions
+  end
+
+  def update_main_settings(changes)
+    old = main_settings
+    self.main_settings = old.merge changes
+  end
+
+  def self.update_sizes(sizes)
+    keys = sizes.map { |element| element[:id].to_i }
+    sizes_list = sizes.map { |element| { size: element[:size] } }
+    Element.update keys, sizes_list
   end
 
   private

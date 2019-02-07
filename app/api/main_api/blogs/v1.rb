@@ -7,13 +7,11 @@ module MainApi
 
       desc 'Create new blog'
       params do
-        requires :data, type: Hash do
-          requires :name, type: String
-          requires :author, type: String
-        end
+        requires :name, type: String
+        requires :author, type: String
       end
       post :blogs do
-        Blog.create! declared_params[:data]
+        Blog.create! declared_params
       end
     end
   end
