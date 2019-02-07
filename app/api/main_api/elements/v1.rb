@@ -36,6 +36,14 @@ module MainApi
           Element.find(params[:element_id]).destroy!
           body false
         end
+
+        params do
+          requires :position, type: Integer
+        end
+        patch :position do
+          element = Element.find params[:element_id]
+          element.move position
+        end
       end
     end
   end
