@@ -27,6 +27,16 @@ module MainApi
         Element.update_sizes declared_params[:sizes]
         body false
       end
+
+      params do
+        requires :element_id, type: Integer
+      end
+      resources 'elements/:element_id' do
+        delete do
+          Element.find(params[:element_id]).destroy!
+          body false
+        end
+      end
     end
   end
 end
