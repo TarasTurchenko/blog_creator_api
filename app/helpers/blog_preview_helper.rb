@@ -1,6 +1,6 @@
 module BlogPreviewHelper
   def posts?
-    @blog['last_post'].present?
+    @last_post.present?
   end
 
   def posts_template
@@ -8,6 +8,6 @@ module BlogPreviewHelper
   end
 
   def post_preview_path(post_id)
-    "/v1/posts/#{post_id}"
+    "/posts/#{post_id}/preview"
   end
 end

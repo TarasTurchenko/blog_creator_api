@@ -1,4 +1,2 @@
-<%= render 'blog_preview/last_post', last_post %>
-<% posts.each do |post| %>
-  <%= render 'blog_preview/post', post %>
-<% end %>
+<%= render partial: 'blog_preview/last_post', layout: 'post_wrapper', locals: { post: last_post } %>
+<%= render partial: 'blog_preview/post', layout: 'post_wrapper', collection: posts %>

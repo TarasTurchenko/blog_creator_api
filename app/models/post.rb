@@ -45,12 +45,16 @@ class Post < ApplicationRecord
   def capture_attrs
     attrs = attributes
     attrs['blog'] = blog.attributes
-    attrs['containers'] = containers.order(:position).map(&:capture_attrs)
+    attrs['containers'] = containers_with_order.map(&:capture_attrs)
     attrs
   end
 
   def containers_positions(*also_order_by)
-    containers.order(:position, *also_order_by).map(&:position_representation)
+    containers_with_order(*also_order_by).map(&:position_representation)
+  end
+
+  def containers_with_order(*also_order_by)
+    containers.order(:position, *also_order_by)
   end
 
   private
