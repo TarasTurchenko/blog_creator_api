@@ -1,0 +1,63 @@
+.app-grid__row {
+  display: flex
+}
+
+.app-grid__element--1 {
+  flex-basis: 8%;
+  flex-grow: 1;
+}
+
+.app-grid__element--2 {
+  flex-basis: 16%;
+  flex-grow: 2;
+}
+
+.app-grid__element--3 {
+  flex-basis: 25%;
+  flex-grow: 3;
+}
+
+.app-grid__element--4 {
+  flex-basis: 33%;
+  flex-grow: 4;
+}
+
+.app-grid__element--5 {
+  flex-basis: 41%;
+  flex-grow: 5;
+}
+
+.app-grid__element--6 {
+  flex-basis: 50%;
+  flex-grow: 6;
+}
+
+.app-grid__element--7 {
+  flex-basis: 58%;
+  flex-grow: 7;
+}
+
+.app-grid__element--8 {
+  flex-basis: 66%;
+  flex-grow: 8;
+}
+
+.app-grid__element--9 {
+  flex-basis: 75%;
+  flex-grow: 9;
+}
+
+.app-grid__element--10 {
+  flex-basis: 83%;
+  flex-grow: 10;
+}
+
+.app-grid__element--11 {
+  flex-basis: 91%;
+  flex-grow: 11;
+}
+
+.app-grid__element--12 {
+  flex-basis: 100%;
+  flex-grow: 12
+}

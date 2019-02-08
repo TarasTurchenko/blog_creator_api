@@ -75,6 +75,21 @@ class Element < ApplicationRecord
     Element.update keys, sizes_list
   end
 
+  def link_preview_destination
+    raise BlogCreatorError.new('Element must be a link') unless link?
+
+    destination = main_settings['destination']
+
+    case main_settings['destination_type']
+    when 'post'
+      "/posts/#{destination}/preview"
+    when 'homepage'
+      "/blogs#{blog_id}/preview"
+    else
+      destination
+    end
+  end
+
   private
 
   def reorder
