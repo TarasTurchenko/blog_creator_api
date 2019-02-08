@@ -1,8 +1,1 @@
-<head>
-  <title><%= @post.title %></title>
-  <%= stylesheet_link_tag 'post_preview' %>
-</head>
-
-<body style="<%= wrapper_styles @post %>" data-blog="<%= @post.blog.id %>" data-post="<%= @post.id %>">
-  <%= render partial: 'post_preview/container', collection: @post.containers_with_order %>
-</body>
+<%= render partial: 'post_preview/container', collection: @post.containers_with_order %>
