@@ -84,7 +84,7 @@ class Element < ApplicationRecord
     when 'post'
       "/posts/#{destination}/preview"
     when 'homepage'
-      "/blogs#{blog_id}/preview"
+      "/blogs/#{blog_id}/preview"
     else
       destination
     end
