@@ -28,7 +28,10 @@ module MainApi
       params do
         requires :container_id, type: Integer
         requires :position, type: Integer
-        requires :kind, type: Symbol, values: Element::KINDS, desc: 'Type of element'
+        requires :kind,
+                 type: Symbol,
+                 values: Element::KINDS,
+                 desc: 'Type of element'
         requires :size, type: Integer
       end
       post 'containers/:container_id/elements' do
@@ -84,11 +87,15 @@ module MainApi
         params do
           use :common_element_options
           requires :main_settings, type: Hash do
-            optional :destination_type, type: String, values: Element::LINK_DESTINATION_TYPES
+            optional :destination_type,
+                     type: String,
+                     values: Element::LINK_DESTINATION_TYPES
             optional :text, type: String
 
             given destination_type: ->(val) { val == 'external' } do
-              requires :destination, type: String, regexp: Constants::Regexps::URL
+              requires :destination,
+                       type: String,
+                       regexp: Constants::Regexps::URL
             end
 
             given destination_type: ->(val) { val == 'post' } do
