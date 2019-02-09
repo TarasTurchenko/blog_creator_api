@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: elements
@@ -27,7 +28,7 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
-  KINDS = %i(blank text image link)
+  KINDS = %i[blank text image link].freeze
   DEFAULT_SETTINGS = {
     'blank' => {}.freeze,
     'text' => { content: 'Hey! Your text will be here' }.freeze,
@@ -41,7 +42,7 @@ class Element < ApplicationRecord
       text: 'Example link'
     }.freeze
   }.freeze
-  LINK_DESTINATION_TYPES = %w(external homepage post)
+  LINK_DESTINATION_TYPES = %w[external homepage post].freeze
 
   before_create :set_defaults
   after_create :reorder
@@ -76,7 +77,7 @@ class Element < ApplicationRecord
   end
 
   def link_preview_destination
-    raise BlogCreatorError.new('Element must be a link') unless link?
+    raise BlogCreatorError, 'Element must be a link' unless link?
 
     destination = main_settings['destination']
 
