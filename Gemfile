@@ -8,6 +8,7 @@ ruby '2.5.1'
 gem 'grape'
 gem 'grape-swagger'
 gem 'rack-cors'
+gem 'aws-sdk', '~> 3.0', '>= 3.0.1'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '>= 0.18', '< 2.0'

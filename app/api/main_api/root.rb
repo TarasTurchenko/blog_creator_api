@@ -12,6 +12,8 @@ module MainApi
     mount Containers::V1
     mount Elements::V1
 
+    mount Images::V1
+
     add_swagger_documentation mount_path: '/swagger_doc'
   end
 end
