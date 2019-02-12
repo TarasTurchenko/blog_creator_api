@@ -16,11 +16,11 @@ post = create_record(
   blog: blog
 )
 
-cont1 = create_record(Container, post: post, position: 0)
+container1 = create_record(Container, post: post, position: 0)
 
 create_record(
   Element,
-  container: cont1,
+  container: container1,
   position: 0,
   size: 4,
   kind: 'image'
@@ -28,19 +28,27 @@ create_record(
 
 create_record(
   Element,
-  container: cont1,
+  container: container1,
   position: 1,
   size: 8,
   kind: 'text'
 )
 
-cont2 = create_record(Container, post: post, position: 1)
+container2 = create_record(Container, post: post, position: 1)
 
 create_record(
   Element,
-  container: cont2,
+  container: container2,
   position: 0,
-  size: 12,
+  size: 4,
+  kind: 'blank'
+)
+
+create_record(
+  Element,
+  container: container2,
+  position: 1,
+  size: 8,
   kind: 'link'
 )
 
