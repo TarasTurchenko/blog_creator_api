@@ -1,5 +1,5 @@
 <section class="app-grid__row" style="<%= wrapper_styles(container) %>" data-container="<%= container.id %>">
-  <% container.elements.each do |element| %>
+  <% container.elements_with_order.each do |element| %>
     <%= render \
       partial: "post_preview/elements/#{element.kind}",
       layout: 'element_wrapper',

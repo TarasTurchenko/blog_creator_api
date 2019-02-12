@@ -43,7 +43,11 @@ class Container < ApplicationRecord
   end
 
   def elements_positions(*also_order_by)
-    elements.order(:position, *also_order_by).map(&:position_representation)
+    elements_with_order(*also_order_by).map(&:position_representation)
+  end
+
+  def elements_with_order(*also_order_by)
+    elements.order(:position, *also_order_by)
   end
 
   private
