@@ -8,61 +8,48 @@ end
 
 puts '----------------------------- Seeds started -----------------------------'
 
-blog = Blog.last
-unless blog
-  params = { name: 'Godly blog', author: 'Jesus' }
-  blog = create_record(Blog, params)
-end
+blog = create_record(Blog, name: 'Godly blog', author: 'Jesus')
 
-post = blog.posts.last
-unless post
-  params = { title: 'Water to wine. It\'s real, or fantasy?', blog: blog }
-  post = create_record(Post, params)
-end
+post = create_record(
+  Post,
+  title: 'Water to wine. It\'s real, or fantasy?',
+  blog: blog
+)
 
-conts = post.containers
+container1 = create_record(Container, post: post, position: 0)
 
-cont1 = conts.first
-unless cont1
-  params = { post: post, position: 0 }
-  cont1 = create_record(Container, params)
-end
+create_record(
+  Element,
+  container: container1,
+  position: 0,
+  size: 4,
+  kind: 'image'
+)
 
-cont1_els_count = cont1.elements.count
-if cont1_els_count < 2
-  if cont1_els_count.zero?
-    params = {
-      container: cont1,
-      position: 0,
-      size: 4,
-      kind: 'image'
-    }
-    create_record(Element, params)
-  end
-  params = {
-    container: cont1,
-    position: 1,
-    size: 8,
-    kind: 'text'
-  }
-  create_record(Element, params)
-end
+create_record(
+  Element,
+  container: container1,
+  position: 1,
+  size: 8,
+  kind: 'text'
+)
 
-cont2 = conts.second
-unless cont2
-  params = { post: post, position: 1 }
-  cont2 = create_record(Container, params)
-end
+container2 = create_record(Container, post: post, position: 1)
 
-cont2_els = cont2.elements
-unless cont2_els.first
-  params = {
-    container: cont2,
-    position: 0,
-    size: 12,
-    kind: 'link'
-  }
-  create_record(Element, params)
-end
+create_record(
+  Element,
+  container: container2,
+  position: 0,
+  size: 4,
+  kind: 'blank'
+)
+
+create_record(
+  Element,
+  container: container2,
+  position: 1,
+  size: 8,
+  kind: 'link'
+)
 
 puts '----------------------------- Seeds finished ----------------------------'
