@@ -17,7 +17,13 @@ module Representation
 
     def initialize(model)
       self.attributes = model.attributes
-      self.elements = model.elements_with_order
+      self.elements = elements_representations(model)
+    end
+
+    private
+
+    def elements_representations(container)
+      container.elements_with_order.map(&:template_representation)
     end
   end
 end
