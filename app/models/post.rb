@@ -58,6 +58,10 @@ class Post < ApplicationRecord
     containers.order(:position, *also_order_by)
   end
 
+  def template_representation
+    Representation::PostTemplate.new self
+  end
+
   private
 
   def set_defaults

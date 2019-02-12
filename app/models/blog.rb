@@ -19,4 +19,8 @@ class Blog < ApplicationRecord
   def published_posts
     posts.where(published: true)
   end
+
+  def template_representation
+    Representation::BlogTemplate.new self
+  end
 end
