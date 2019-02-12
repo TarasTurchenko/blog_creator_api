@@ -2,7 +2,7 @@
 
 module BlogPreviewHelper
   def posts?
-    @last_post.present?
+    @blog.last_post.present?
   end
 
   def posts_template
