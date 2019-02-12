@@ -14,4 +14,8 @@ module PostPreviewHelper
   def build_element_size(size)
     "app-grid__element--#{size}"
   end
+
+  def preview_element_template(element_type)
+    "post_preview/elements/#{element_type}"
+  end
 end
