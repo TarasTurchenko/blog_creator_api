@@ -13,6 +13,13 @@ module MainApi
       post :blogs do
         Blog.create! declared_params
       end
+
+      params do
+        requires :blog_id, type: Integer
+      end
+      post 'blogs/:blog_id/publish' do
+
+      end
     end
   end
 end

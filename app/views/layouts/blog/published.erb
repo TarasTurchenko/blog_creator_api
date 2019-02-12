@@ -1,0 +1,11 @@
+<head>
+  <title><%= @blog.name %></title>
+</head>
+<body>
+<header>
+  <h1><%= @blog.name %> by <%= @blog.author %></h1>
+</header>
+<main>
+  <%= yield %>
+</main>
+</body>

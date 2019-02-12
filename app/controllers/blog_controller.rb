@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class BlogPreviewController < ApplicationController
+class BlogController < ApplicationController
   layout 'blog/preview'
 
-  def index
+  def preview
     @blog = Blog.find(params[:blog_id]).template_representation
   end
 end
