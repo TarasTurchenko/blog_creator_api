@@ -9,5 +9,9 @@ module Representation
       self.posts = model.published_posts.to_a
       self.last_post = posts.delete_at(0)
     end
+
+    def posts?
+      last_post.present?
+    end
   end
 end
