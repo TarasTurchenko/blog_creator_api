@@ -22,8 +22,13 @@ module Representation
     def initialize(model)
       self.attributes = model.attributes
       self.blog = model.blog
-      containers = model.containers_with_order
-      self.containers = containers.map(&:template_representation)
+      self.containers = containers_representations(model)
+    end
+
+    private
+
+    def containers_representations(post)
+      post.containers_with_order.map(&:template_representation)
     end
   end
 end
