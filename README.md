@@ -28,4 +28,4 @@ docker-compose up
 
 ## Links
 
-- [Front-End](https://github.com/v-lavs/blog-creator)
+- [Front-End](https://github.com/blog-creator-team/blog-creator)
