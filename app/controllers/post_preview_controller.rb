@@ -4,6 +4,6 @@ class PostPreviewController < ApplicationController
   layout 'post/preview'
 
   def index
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id]).template_representation
   end
 end
