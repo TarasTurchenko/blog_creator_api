@@ -17,15 +17,9 @@ module MainApi
       params do
         requires :blog_id, type: Integer
       end
-      get 'blogs/:blog_id/publish' do
-        @blog = Blog.find(params[:blog_id]).template_representation
-        
-        html = ApplicationController.render(
-          template: 'blog/published',
-          layout: 'blog/published',
-          assigns: {blog: @blog}
-        )
-        html
+      post 'blogs/:blog_id/publish' do
+        url = Blog.find(params[:blog_id]).publish
+        { url: url }
       end
     end
   end
