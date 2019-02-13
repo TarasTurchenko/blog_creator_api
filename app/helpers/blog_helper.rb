@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module BlogHelper
-  POSTS_PREVIEW_PLACEHOLDER = "blog/placeholder/preview"
-  POSTS_PREVIEW_CONTENT = "blog/content/preview"
+  POSTS_PREVIEW_PLACEHOLDER = "blog/placeholder"
+  POSTS_PREVIEW_CONTENT = "blog/content"
 
-  def posts_template
+  def content_template
     @blog.posts? ? POSTS_PREVIEW_CONTENT : POSTS_PREVIEW_PLACEHOLDER
   end
 
