@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module PostPreviewHelper
+module PostHelper
   def wrapper_styles(wrapper)
     insert_styles \
       'background-image': wrapper.bg_image,
@@ -16,6 +16,6 @@ module PostPreviewHelper
   end
 
   def preview_element_template(element_type)
-    "post_preview/elements/#{element_type}"
+    "post/elements/#{element_type}"
   end
 end

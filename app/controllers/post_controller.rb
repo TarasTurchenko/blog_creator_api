@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class PostPreviewController < ApplicationController
+class PostController < ApplicationController
   layout 'post/preview'
 
-  def index
+  def preview
     @post = Post.find(params[:post_id]).template_representation
   end
 end
