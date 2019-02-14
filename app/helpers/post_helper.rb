@@ -15,7 +15,7 @@ module PostHelper
     "app-grid__element--#{size}"
   end
 
-  def preview_element_template(element_type)
+  def element_template(element_type)
     "post/elements/#{element_type}"
   end
 end
