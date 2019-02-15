@@ -1,0 +1,4 @@
+[data-post="<%= @post.id %>"] {<%= wrapper_styles @post %>}
+<% @post.containers.each do |container| %>
+  <%= render 'post/container/published_styles', container: container %>
+<% end %>
