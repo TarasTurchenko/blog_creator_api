@@ -21,7 +21,7 @@ class Blog < ApplicationRecord
   validates :author, presence: true
   validates :publish_key, uniqueness: true
 
-  after_create :generate_publish_key
+  after_create :set_publish_key
 
   def published_posts
     posts.where(published: true)
@@ -32,14 +32,10 @@ class Blog < ApplicationRecord
   end
 
   def publish
-    publisher = Services::BlogPublished.new( self)
+    publisher = Services::BlogPublisher.new(self)
     publisher.publish
-
-    if published
-      publisher.reset_cdn_caches
-    else
-      update! published: true
-    end
+    publisher.reset_cdn_caches
+    update!(published: true) unless published
 
     build_cdn_url
   end
@@ -50,8 +46,11 @@ class Blog < ApplicationRecord
 
   private
 
-  def generate_publish_key
-    key = Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
-    update! publish_key: key
+  def set_publish_key
+    update! publish_key: generate_unique_key
+  end
+
+  def generate_unique_key
+    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 end

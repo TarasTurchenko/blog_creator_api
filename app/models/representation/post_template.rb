@@ -16,7 +16,8 @@ module Representation
       :title,
       :blog,
       :blog_id,
-      :containers
+      :containers,
+      :additional_styles
     )
 
     def initialize(model)

@@ -62,9 +62,30 @@ class Post < ApplicationRecord
     Representation::PostTemplate.new self
   end
 
+  def publish
+    publisher = Services::PostPublisher.new(self)
+    publisher.publish
+
+    blog_publisher = Services::BlogPublisher.new(blog)
+    blog_publisher.publish
+
+    items = [*blog_publisher.invalidation_items, *publisher.invalidation_items]
+    Helpers::Aws.invalidate_cdn_paths generate_unique_key, items
+
+    build_cdn_url
+  end
+
   private
 
   def set_defaults
     self.thumbnail ||= Constants::Images::PLACEHOLDER
+  end
+
+  def generate_unique_key
+    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
+  end
+
+  def build_cdn_url
+    "#{ENV['CDN_URL']}/blogs/#{blog.publish_key}/posts/#{id}/index.html"
   end
 end

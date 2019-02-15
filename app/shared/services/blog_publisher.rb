@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Services
-  class BlogPublished
+  class BlogPublisher
     attr_accessor :blog, :html_path
 
     def initialize(blog)
@@ -13,8 +13,8 @@ module Services
       upload_html
     end
 
-    def reset_cdn_caches
-      Helpers::Aws.invalidate_cdn_paths generate_unique_key, invalidation_items
+    def invalidation_items
+      ["/#{html_path}"]
     end
 
     private
@@ -34,14 +34,6 @@ module Services
         layout: 'blog/published',
         assigns: {blog: blog.template_representation}
       )
-    end
-
-    def generate_unique_key
-      Digest::SHA1.hexdigest "#{blog.id}_#{DateTime.now}"
-    end
-
-    def invalidation_items
-      ["/#{html_path}"]
     end
   end
 end
