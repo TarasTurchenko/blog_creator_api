@@ -62,9 +62,10 @@ module MainApi
         content_type :html, 'text/html'
         format :html
         get :preview do
-          post = Post.find params[:post_id]
+          post = Post.find(params[:post_id])
+
           ApplicationController.render(
-            template: 'post/preview',
+            template: 'post/index',
             assigns: { post: post.template_representation },
             layout: 'post/preview'
           )

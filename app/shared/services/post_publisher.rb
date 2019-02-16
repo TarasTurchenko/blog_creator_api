@@ -33,7 +33,7 @@ module Services
 
     def render_html(post)
       ApplicationController.render(
-        template: 'post/published',
+        template: 'post/index',
         assigns: { post: post },
         layout: 'post/published'
       )

@@ -2,9 +2,10 @@
   <head>
     <title><%= @post.title %></title>
     <%= stylesheet_link_tag 'post' %>
+    <style><%= render template: 'post/styles' %></style>
   </head>
 
-  <body style="<%= wrapper_styles @post %>" data-blog="<%= @post.blog.id %>" data-post="<%= @post.id %>">
+  <body data-blog="<%= @post.blog.id %>" data-post="<%= @post.id %>">
     <%= yield %>
   </body>
 </html>

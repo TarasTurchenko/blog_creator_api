@@ -1,5 +1,0 @@
-[data-container="<%= container.id %>"] {<%= wrapper_styles(container) %>}
-<% container.elements.each do |element| %>
-  <%= render 'post/element_wrapper/published_styles', element: element %>
-  <%= render "#{element_template(element.kind)}/published_styles", element: element %>
-<% end %>
