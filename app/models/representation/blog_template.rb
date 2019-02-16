@@ -2,7 +2,7 @@
 
 module Representation
   class BlogTemplate < Base
-    IGNORED_ATTRIBUTES = %w(publish_key published)
+    IGNORED_ATTRIBUTES = %w(published)
 
     attr_accessor :id, :author, :name, :last_post, :posts
 

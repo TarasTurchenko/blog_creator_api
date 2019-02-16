@@ -6,7 +6,7 @@ module Services
 
     def initialize(blog)
       self.blog = blog
-      self.html_path = "blogs/#{blog.publish_key}/index.html"
+      self.html_path = "blogs/#{blog.id}/index.html"
     end
 
     def publish

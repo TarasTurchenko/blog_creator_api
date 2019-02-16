@@ -86,6 +86,6 @@ class Post < ApplicationRecord
   end
 
   def build_cdn_url
-    "#{ENV['CDN_URL']}/blogs/#{blog.publish_key}/posts/#{id}/index.html"
+    "#{ENV['CDN_URL']}/blogs/#{blog_id}/posts/#{id}/index.html"
   end
 end

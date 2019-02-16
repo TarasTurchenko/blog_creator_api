@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_13_115152) do
+ActiveRecord::Schema.define(version: 2019_02_06_143810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 2019_02_13_115152) do
     t.string "name", null: false
     t.string "author", null: false
     t.boolean "published", default: false
-    t.string "publish_key"
-    t.index ["publish_key"], name: "index_blogs_on_publish_key", unique: true
   end
 
   create_table "containers", force: :cascade do |t|

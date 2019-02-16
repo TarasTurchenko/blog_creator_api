@@ -2,11 +2,10 @@
 
 module Services
   class PostPublisher
-    attr_accessor :post, :blog, :html_path, :css_path
+    attr_accessor :post, :html_path, :css_path
 
     def initialize(post)
       self.post = post
-      self.blog = post.blog
       self.html_path = build_resource_path('index.html')
       self.css_path = build_resource_path('styles.css')
     end
@@ -24,7 +23,7 @@ module Services
     private
 
     def build_resource_path(name)
-      "blogs/#{blog.publish_key}/posts/#{post.id}/#{name}"
+      "blogs/#{post.blog_id}/posts/#{post.id}/#{name}"
     end
 
     def prepare_post_data
