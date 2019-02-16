@@ -12,7 +12,7 @@ module Services
     end
 
     def publish
-      post = self.post.template_representation
+      post = self.post.template_representation(true)
       Helpers::Aws.upload_to_storage html_path, render_html(post)
       Helpers::Aws.upload_to_storage css_path, render_css(post)
     end

@@ -76,8 +76,8 @@ class Element < ApplicationRecord
     Element.update keys, sizes_list
   end
 
-  def template_representation
-    Representation::ElementTemplate.new self
+  def template_representation(publish_mode = false)
+    Representation::ElementTemplate.new self, publish_mode
   end
 
   private

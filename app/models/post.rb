@@ -58,8 +58,8 @@ class Post < ApplicationRecord
     containers.order(:position, *also_order_by)
   end
 
-  def template_representation
-    Representation::PostTemplate.new self
+  def template_representation(publish_mode = false)
+    Representation::PostTemplate.new self, publish_mode
   end
 
   def publish
