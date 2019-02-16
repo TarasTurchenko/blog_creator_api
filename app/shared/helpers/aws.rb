@@ -28,5 +28,9 @@ module Helpers
         key: path
       )
     end
+
+    def self.build_cdn_url(resource)
+      "#{ENV['CDN_URL']}/#{resource}"
+    end
   end
 end

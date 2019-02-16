@@ -2,6 +2,6 @@
 
 module SwaggerHelper
   def swagger_asset_path
-    "#{ENV['CDN_URL']}/swagger"
+    Helpers::Aws.build_cdn_url("swagger")
   end
 end

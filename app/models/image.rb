@@ -19,11 +19,7 @@ class Image
       body: src,
       acl: Constants::Storage::Permissions::PUBLIC_READ
     )
-    build_cdn_path
-  end
-
-  def build_cdn_path
-    "#{ENV['CDN_URL']}/#{relative_path}"
+    Helpers::Aws.build_cdn_url(relative_path)
   end
 
   def generate_key(extension)

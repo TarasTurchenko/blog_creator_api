@@ -63,16 +63,15 @@ class Post < ApplicationRecord
   end
 
   def publish
-    publisher = Services::PostPublisher.new(self)
-    publisher.publish
+    Services::PostPublisher.new(self).publish
+    update!(published: true) unless published
 
     blog_publisher = Services::BlogPublisher.new(blog)
     blog_publisher.publish
 
-    items = [*blog_publisher.invalidation_items, *publisher.invalidation_items]
-    Helpers::Aws.invalidate_cdn_paths generate_unique_key, items
+    blog_publisher.reset_cdn_caches
 
-    build_cdn_url
+    Helpers::Aws.build_cdn_url(post_relative_url)
   end
 
   private
@@ -85,7 +84,7 @@ class Post < ApplicationRecord
     Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 
-  def build_cdn_url
-    "#{ENV['CDN_URL']}/blogs/#{blog_id}/posts/#{id}/index.html"
+  def post_relative_url
+    "blogs/#{blog_id}/posts/#{id}/index.html"
   end
 end

@@ -29,10 +29,6 @@ class Blog < ApplicationRecord
     publisher.reset_cdn_caches
     update!(published: true) unless published
 
-    build_cdn_url
-  end
-
-  def build_cdn_url
-    "#{ENV['CDN_URL']}/blogs/#{id}/index.html"
+    Helpers::Aws.build_cdn_url("blogs/#{id}/index.html")
   end
 end
