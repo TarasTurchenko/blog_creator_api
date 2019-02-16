@@ -59,6 +59,11 @@ module MainApi
           body false
         end
 
+        post :publish do
+          url = Post.find(params[:post_id]).publish
+          {url: url}
+        end
+
         content_type :html, 'text/html'
         format :html
         get :preview do
