@@ -2,31 +2,23 @@
 
 module Services
   class BlogPublisher
-    attr_accessor :blog, :html_path
+    attr_accessor :blog, :dir
 
     def initialize(blog)
       self.blog = blog
-      self.html_path = "blogs/#{blog.id}/index.html"
+      self.dir = "blogs/#{blog.id}"
     end
 
     def publish
-      upload_html
+      path = "#{dir}/index.html"
+      Helpers::Aws.upload_to_storage path, render_html
     end
 
-    def invalidation_items
-      ["/#{html_path}"]
+    def reset_cdn_caches
+      Helpers::Aws.invalidate_cdn_paths generate_unique_key, ["/#{dir}/*"]
     end
 
     private
-
-    def upload_html
-      S3_BUCKET.put_object(
-        acl: Constants::Storage::Permissions::PUBLIC_READ,
-        body: render_html,
-        content_type: 'text/html',
-        key: html_path
-      )
-    end
 
     def render_html
       ApplicationController.render(
@@ -34,6 +26,10 @@ module Services
         layout: 'blog/published',
         assigns: {blog: blog.template_representation}
       )
+    end
+
+    def generate_unique_key
+      "#{blog.id}_#{DateTime.now}"
     end
   end
 end

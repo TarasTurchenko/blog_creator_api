@@ -26,7 +26,7 @@ class Blog < ApplicationRecord
   def publish
     publisher = Services::BlogPublisher.new(self)
     publisher.publish
-
+    publisher.reset_cdn_caches
     update!(published: true) unless published
 
     build_cdn_url
@@ -34,11 +34,5 @@ class Blog < ApplicationRecord
 
   def build_cdn_url
     "#{ENV['CDN_URL']}/blogs/#{id}/index.html"
-  end
-
-  private
-
-  def generate_unique_key
-    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 end

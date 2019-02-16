@@ -16,5 +16,17 @@ module Helpers
         }
       )
     end
+
+    # @param [String] path to upload. eg blogs/5/index.html
+    # @param [String] body
+    def self.upload_to_storage(path, body)
+      extension = path.split('.').last
+      S3_BUCKET.put_object(
+        acl: Constants::Storage::Permissions::PUBLIC_READ,
+        body: body,
+        content_type: "text/#{extension}",
+        key: path
+      )
+    end
   end
 end
