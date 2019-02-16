@@ -9,6 +9,6 @@ module BlogHelper
   end
 
   def post_preview_path(post_id)
-    "/posts/#{post_id}/preview"
+    "/v1/posts/#{post_id}/preview"
   end
 end

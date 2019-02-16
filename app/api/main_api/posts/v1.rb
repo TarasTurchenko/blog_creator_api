@@ -58,6 +58,17 @@ module MainApi
           Post.find(params[:post_id]).destroy!
           body false
         end
+
+        content_type :html, 'text/html'
+        format :html
+        get :preview do
+          post = Post.find params[:post_id]
+          ApplicationController.render(
+            template: 'post/preview',
+            assigns: { post: post.template_representation },
+            layout: 'post/preview'
+          )
+        end
       end
     end
   end
