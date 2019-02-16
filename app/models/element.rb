@@ -31,7 +31,7 @@ class Element < ApplicationRecord
   KINDS = %i[blank text image link].freeze
   DEFAULT_SETTINGS = {
     'blank' => {}.freeze,
-    'text' => { content: 'Hey! Your text will be here' }.freeze,
+    'text' => {content: 'Hey! Your text will be here'}.freeze,
     'image' => {
       src: Constants::Images::PLACEHOLDER,
       alt: 'Placeholder image'
@@ -58,7 +58,7 @@ class Element < ApplicationRecord
     only_integer: true, greater_than: 0,
     less_than_or_equal_to: MAX_SIZE
   }
-  validates :kind, presence: true, inclusion: { in: kinds }
+  validates :kind, presence: true, inclusion: {in: kinds}
   validates :position, POSITION_VALIDATIONS
 
   def move(to)
@@ -71,13 +71,13 @@ class Element < ApplicationRecord
   end
 
   def self.update_sizes(sizes)
-    keys = sizes.map { |element| element[:id].to_i }
-    sizes_list = sizes.map { |element| { size: element[:size] } }
+    keys = sizes.map {|element| element[:id].to_i}
+    sizes_list = sizes.map {|element| {size: element[:size]}}
     Element.update keys, sizes_list
   end
 
   def template_representation(publish_mode = false)
-    Representation::ElementTemplate.new self, publish_mode
+    element_template_model.new self, publish_mode
   end
 
   private
@@ -89,5 +89,14 @@ class Element < ApplicationRecord
 
   def set_defaults
     self.main_settings ||= DEFAULT_SETTINGS[kind]
+  end
+
+  def element_template_model
+    case kind
+    when 'link'
+      Representation::ElementLinkTemplate
+    else
+      Representation::ElementTemplate
+    end
   end
 end
