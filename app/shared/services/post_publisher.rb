@@ -12,7 +12,7 @@ module Services
     end
 
     def publish
-      post = prepare_post_data
+      post = self.post.template_representation
       Helpers::Aws.upload_to_storage html_path, render_html(post)
       Helpers::Aws.upload_to_storage css_path, render_css(post)
     end
@@ -23,25 +23,19 @@ module Services
 
     private
 
-    def prepare_post_data
-      post = self.post.template_representation
-      post.additional_styles = [
-        Helpers::Aws.build_cdn_url(css_path)
-      ]
-      post
-    end
-
     def render_html(post)
+      styles_url = Helpers::Aws.build_cdn_url(css_path)
+
       ApplicationController.render(
         template: 'post/index',
-        assigns: { post: post },
+        assigns: { post: post, styles_url: styles_url },
         layout: 'post/published'
       )
     end
 
     def render_css(post)
       ApplicationController.render(
-        template: 'post/published_styles',
+        template: 'post/styles',
         assigns: { post: post }
       )
     end

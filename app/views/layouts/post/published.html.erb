@@ -2,9 +2,7 @@
   <head>
     <title><%= @post.title %></title>
     <%= stylesheet_link_tag 'post' %>
-    <% @post.additional_styles.each do |asset| %>
-      <%= stylesheet_link_tag asset %>
-    <% end %>
+    <%= stylesheet_link_tag @styles_url %>
   </head>
 
   <body data-blog="<%= @post.blog.id %>" data-post="<%= @post.id %>">
