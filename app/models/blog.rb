@@ -29,6 +29,6 @@ class Blog < ApplicationRecord
     publisher.reset_cdn_caches
     update!(published: true) unless published
 
-    Helpers::Aws.build_cdn_url("blogs/#{id}/index.html")
+    publisher.page_url
   end
 end

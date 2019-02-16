@@ -18,6 +18,10 @@ module Services
       Helpers::Aws.invalidate_cdn_paths generate_unique_key, ["/#{dir}/*"]
     end
 
+    def page_url
+      Helpers::Aws.build_cdn_url("#{dir}/index.html")
+    end
+
     private
 
     def render_html
