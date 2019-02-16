@@ -28,7 +28,7 @@ module Services
       ApplicationController.render(
         template: 'blog/index',
         layout: 'blog',
-        assigns: {blog: blog.template_representation}
+        assigns: {blog: blog.template_representation(true)}
       )
     end
 
