@@ -28,9 +28,9 @@ module MainApi
         get :preview do
           blog = Blog.find params[:blog_id]
           ApplicationController.render(
-            template: 'blog/preview',
+            template: 'blog/index',
             assigns: { blog: blog.template_representation },
-            layout: 'blog/preview'
+            layout: 'blog'
           )
         end
       end

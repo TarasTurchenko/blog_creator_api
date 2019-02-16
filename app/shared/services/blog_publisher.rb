@@ -26,8 +26,8 @@ module Services
 
     def render_html
       ApplicationController.render(
-        template: 'blog/published',
-        layout: 'blog/published',
+        template: 'blog/index',
+        layout: 'blog',
         assigns: {blog: blog.template_representation}
       )
     end
