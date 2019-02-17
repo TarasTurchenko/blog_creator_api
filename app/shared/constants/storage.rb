@@ -3,6 +3,9 @@
 module Constants
   module Storage
     IMAGE_PATH = 'images'
-    IMAGE_PERMISSIONS = 'public-read'
+
+    module Permissions
+      PUBLIC_READ = 'public-read'
+    end
   end
 end

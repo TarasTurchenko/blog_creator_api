@@ -16,19 +16,24 @@ module Representation
       :title,
       :blog,
       :blog_id,
-      :containers
+      :containers,
+      :additional_styles,
+      :publish_mode
     )
 
-    def initialize(model)
+    def initialize(model, publish_mode)
       self.attributes = model.attributes
       self.blog = model.blog
+      self.publish_mode = publish_mode
       self.containers = containers_representations(model)
     end
 
     private
 
     def containers_representations(post)
-      post.containers_with_order.map(&:template_representation)
+      post.containers_with_order.map do |container|
+        container.template_representation publish_mode
+      end
     end
   end
 end

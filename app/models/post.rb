@@ -58,13 +58,27 @@ class Post < ApplicationRecord
     containers.order(:position, *also_order_by)
   end
 
-  def template_representation
-    Representation::PostTemplate.new self
+  def template_representation(publish_mode = false)
+    Representation::PostTemplate.new self, publish_mode
+  end
+
+  def publish
+    publisher = Services::PostPublisher.new(self)
+    publisher.publish
+    update!(published: true) unless published
+
+    blog.publish
+
+    publisher.page_url
   end
 
   private
 
   def set_defaults
     self.thumbnail ||= Constants::Images::PLACEHOLDER
+  end
+
+  def generate_unique_key
+    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 end

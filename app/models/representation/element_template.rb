@@ -14,26 +14,13 @@ module Representation
       :offset_top,
       :position,
       :size,
-      :container_id
+      :container_id,
+      :publish_mode
     )
 
-    def initialize(model)
+    def initialize(model, publish_mode)
       self.attributes = model.attributes
-    end
-
-    def link_preview_destination
-      raise BlogCreatorError, 'Element must be a link' if kind != 'link'
-
-      destination = main_settings['destination']
-
-      case main_settings['destination_type']
-      when 'post'
-        "/posts/#{destination}/preview"
-      when 'homepage'
-        "/blogs/#{blog_id}/preview"
-      else
-        destination
-      end
+      self.publish_mode = publish_mode
     end
   end
 end

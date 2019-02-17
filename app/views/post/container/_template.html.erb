@@ -1,0 +1,9 @@
+<section class="app-grid__row" data-container="<%= container.id %>">
+  <% container.elements.each do |element| %>
+    <%= render \
+      partial: element_template(element.kind),
+      layout: 'post/element_wrapper/template',
+      locals: { element: element }
+    %>
+  <% end %>
+</section>

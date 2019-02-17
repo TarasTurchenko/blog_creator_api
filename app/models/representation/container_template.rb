@@ -12,18 +12,22 @@ module Representation
       :offset_top,
       :position,
       :post_id,
-      :elements
+      :elements,
+      :publish_mode
     )
 
-    def initialize(model)
+    def initialize(model, publish_mode)
       self.attributes = model.attributes
+      self.publish_mode = publish_mode
       self.elements = elements_representations(model)
     end
 
     private
 
     def elements_representations(container)
-      container.elements_with_order.map(&:template_representation)
+      container.elements_with_order.map do |element|
+        element.template_representation publish_mode
+      end
     end
   end
 end
