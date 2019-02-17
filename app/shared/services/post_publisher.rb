@@ -14,7 +14,8 @@ module Services
     def publish
       post = self.post.template_representation(true)
       Helpers::Aws.upload_to_storage html_path, render_html(post)
-      Helpers::Aws.upload_to_storage css_path, render_css(post)
+      styles = CSS_COMPRESSOR.compress render_css(post)
+      Helpers::Aws.upload_to_storage css_path, styles
     end
 
     def page_url
