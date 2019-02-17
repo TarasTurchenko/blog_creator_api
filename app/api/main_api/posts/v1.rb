@@ -61,7 +61,7 @@ module MainApi
 
         post :publish do
           url = Post.find(params[:post_id]).publish
-          {url: url}
+          { url: url }
         end
 
         content_type :html, 'text/html'

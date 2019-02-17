@@ -2,7 +2,7 @@
 
 module Representation
   class BlogTemplate < Base
-    IGNORED_ATTRIBUTES = %w(published)
+    IGNORED_ATTRIBUTES = %w[published].freeze
 
     attr_accessor :id, :author, :name, :last_post, :posts, :publish_mode
 

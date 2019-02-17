@@ -5,7 +5,7 @@ module Representation
     def attributes=(attributes)
       attributes.each do |name, value|
         setter = "#{name}="
-        self.send(setter, value)
+        send(setter, value)
       end
     end
   end

@@ -20,7 +20,7 @@ module MainApi
       resources 'blogs/:blog_id' do
         post :publish do
           url = Blog.find(params[:blog_id]).publish
-          {url: url}
+          { url: url }
         end
 
         content_type :html, 'text/html'
