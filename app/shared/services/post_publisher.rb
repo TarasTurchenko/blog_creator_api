@@ -2,11 +2,11 @@
 
 module Services
   class PostPublisher
-    attr_accessor :post, :html_path, :css_path
+    attr_accessor :post, :html_path, :css_path, :dir
 
     def initialize(post)
       self.post = post
-      dir = "blogs/#{post.blog_id}/posts/#{post.id}"
+      self.dir = "blogs/#{post.blog_id}/posts/#{post.id}"
       self.html_path = "#{dir}/index.html"
       self.css_path = "#{dir}/styles.css"
     end
@@ -16,6 +16,10 @@ module Services
       Helpers::Aws.upload_to_storage html_path, render_html(post)
       styles = CSS_COMPRESSOR.compress render_css(post)
       Helpers::Aws.upload_to_storage css_path, styles
+    end
+
+    def unpublish
+      Helpers::Aws.delete_folder_from_storage dir
     end
 
     def page_url
