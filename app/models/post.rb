@@ -72,6 +72,16 @@ class Post < ApplicationRecord
     publisher.page_url
   end
 
+  def unpublish
+    raise BlogCreatorError.new('Post already unpublished') unless published
+
+    publisher = Services::PostPublisher.new(self)
+    publisher.unpublish
+    update! published: false
+
+    blog.unpublish
+  end
+
   private
 
   def set_defaults

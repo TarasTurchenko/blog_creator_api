@@ -39,6 +39,7 @@ class Blog < ApplicationRecord
     publisher = Services::BlogPublisher.new(self)
     publisher.unpublish
     publisher.reset_cdn_caches
+
     update! published: false
     posts.update_all published: false
   end
