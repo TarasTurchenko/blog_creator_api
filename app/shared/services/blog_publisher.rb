@@ -14,6 +14,10 @@ module Services
       Helpers::Aws.upload_to_storage path, render_html
     end
 
+    def unpublish
+      Helpers::Aws.delete_folder_from_storage dir
+    end
+
     def reset_cdn_caches
       Helpers::Aws.invalidate_cdn_paths generate_unique_key, ["/#{dir}/*"]
     end

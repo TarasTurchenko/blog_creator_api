@@ -23,6 +23,11 @@ module MainApi
           { url: url }
         end
 
+        post :unpublish do
+          Blog.find(params[:blog_id]).unpublish
+          body false
+        end
+
         content_type :html, 'text/html'
         format :html
         get :preview do
