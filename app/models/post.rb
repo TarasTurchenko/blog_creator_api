@@ -67,7 +67,7 @@ class Post < ApplicationRecord
     publisher.publish
     update!(published: true) unless published
 
-    blog.publish
+    blog.sync_homepage
 
     publisher.page_url
   end
@@ -79,7 +79,7 @@ class Post < ApplicationRecord
     publisher.unpublish
     update! published: false
 
-    blog.unpublish
+    blog.sync_homepage
   end
 
   private
