@@ -59,16 +59,19 @@ module MainApi
           body false
         end
 
+        desc 'Make post available for other anyone'
         post :publish do
           url = Post.find(params[:post_id]).publish
           { url: url }
         end
 
+        desc 'Unshare page'
         post :unpublish do
           Post.find(params[:post_id]).unpublish
           body false
         end
 
+        desc 'Preview for built post page'
         content_type :html, 'text/html'
         format :html
         get :preview do
