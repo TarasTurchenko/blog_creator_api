@@ -28,7 +28,9 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
 
   MAX_SIZE = 12
+
   KINDS = %i[blank text image link].freeze
+
   DEFAULT_SETTINGS = {
     'blank' => {}.freeze,
     'text' => { content: 'Hey! Your text will be here' }.freeze,
@@ -42,7 +44,12 @@ class Element < ApplicationRecord
       text: 'Example link'
     }.freeze
   }.freeze
+
   LINK_DESTINATION_TYPES = %w[external homepage post].freeze
+
+  TEMPLATE_MODELS = {
+    'link' => Representation::ElementLinkTemplate
+  }.freeze
 
   before_create :set_defaults
   after_create :reorder
@@ -76,19 +83,8 @@ class Element < ApplicationRecord
     Element.update keys, sizes_list
   end
 
-  def link_preview_destination
-    raise BlogCreatorError, 'Element must be a link' unless link?
-
-    destination = main_settings['destination']
-
-    case main_settings['destination_type']
-    when 'post'
-      "/posts/#{destination}/preview"
-    when 'homepage'
-      "/blogs/#{blog_id}/preview"
-    else
-      destination
-    end
+  def template_representation(publish_mode = false)
+    template_model.new self, publish_mode
   end
 
   private
@@ -100,5 +96,9 @@ class Element < ApplicationRecord
 
   def set_defaults
     self.main_settings ||= DEFAULT_SETTINGS[kind]
+  end
+
+  def template_model
+    TEMPLATE_MODELS[kind] || Representation::ElementTemplate
   end
 end

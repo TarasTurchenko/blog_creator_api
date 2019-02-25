@@ -2,6 +2,6 @@
 
 module Constants
   module Images
-    PLACEHOLDER = "#{ENV['CDN_URL']}/assets/placeholder.png"
+    PLACEHOLDER = Helpers::Aws.build_cdn_url('assets/placeholder.png')
   end
 end

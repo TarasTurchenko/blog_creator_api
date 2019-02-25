@@ -15,15 +15,11 @@ class Image
 
   def upload
     S3_BUCKET.put_object(
-               key: relative_path,
-               body: src,
-               acl: Constants::Storage::IMAGE_PERMISSIONS
+      key: relative_path,
+      body: src,
+      acl: Constants::Storage::Permissions::PUBLIC_READ
     )
-    build_cdn_path
-  end
-
-  def build_cdn_path
-    "#{ENV['CDN_URL']}/#{relative_path}"
+    Helpers::Aws.build_cdn_url(relative_path)
   end
 
   def generate_key(extension)

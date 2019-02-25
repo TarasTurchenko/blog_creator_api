@@ -50,6 +50,10 @@ class Container < ApplicationRecord
     elements.order(:position, *also_order_by)
   end
 
+  def template_representation(publish_mode = false)
+    Representation::ContainerTemplate.new self, publish_mode
+  end
+
   private
 
   def reorder

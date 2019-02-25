@@ -58,9 +58,37 @@ class Post < ApplicationRecord
     containers.order(:position, *also_order_by)
   end
 
+  def template_representation(publish_mode = false)
+    Representation::PostTemplate.new self, publish_mode
+  end
+
+  def publish
+    publisher = Services::PostPublisher.new(self)
+    publisher.publish
+    update!(published: true) unless published
+
+    blog.sync_homepage
+
+    publisher.page_url
+  end
+
+  def unpublish
+    raise BlogCreatorError.new('Post already unpublished') unless published
+
+    publisher = Services::PostPublisher.new(self)
+    publisher.unpublish
+    update! published: false
+
+    blog.sync_homepage
+  end
+
   private
 
   def set_defaults
     self.thumbnail ||= Constants::Images::PLACEHOLDER
+  end
+
+  def generate_unique_key
+    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 end
