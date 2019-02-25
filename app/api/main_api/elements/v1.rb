@@ -54,11 +54,13 @@ module MainApi
         requires :element_id, type: Integer
       end
       resources 'elements/:element_id' do
+        desc 'Delete element'
         delete do
           Element.find(params[:element_id]).destroy!
           body false
         end
 
+        desc 'Change element position inside container'
         params do
           requires :position, type: Integer
         end
@@ -67,6 +69,7 @@ module MainApi
           element.move position
         end
 
+        desc 'Update settings for text element'
         params do
           use :common_element_options
           requires :main_settings, type: Hash do
@@ -75,6 +78,7 @@ module MainApi
         end
         put(:text) { update_element_settings }
 
+        desc 'Update settings for image element'
         params do
           use :common_element_options
           requires :main_settings, type: Hash do
@@ -84,6 +88,7 @@ module MainApi
         end
         put(:image) { update_element_settings }
 
+        desc 'Update settings for link element'
         params do
           use :common_element_options
           requires :main_settings, type: Hash do
@@ -105,6 +110,7 @@ module MainApi
         end
         put(:link) { update_element_settings }
 
+        desc 'Update settings for blank element'
         params do
           use :common_element_options
         end

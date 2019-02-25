@@ -18,16 +18,19 @@ module MainApi
         requires :blog_id, type: Integer
       end
       resources 'blogs/:blog_id' do
+        desc 'Make homepage available for other anyone'
         post :publish do
           url = Blog.find(params[:blog_id]).publish
           { url: url }
         end
 
+        desc 'Unshare home page and all posts'
         post :unpublish do
           Blog.find(params[:blog_id]).unpublish
           body false
         end
 
+        desc 'Homepage preview'
         content_type :html, 'text/html'
         format :html
         get :preview do

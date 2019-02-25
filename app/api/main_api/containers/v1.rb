@@ -5,6 +5,7 @@ module MainApi
     class V1 < Grape::API
       version 'v1', using: :path
 
+      desc 'Create new container'
       params do
         requires :post_id, type: Integer
         requires :position, type: Integer
@@ -17,6 +18,7 @@ module MainApi
         requires :container_id, type: Integer
       end
       resources 'containers/:container_id' do
+        desc 'Update container settings'
         params do
           optional :offset_top, type: String
           optional :offset_right, type: String
@@ -31,11 +33,13 @@ module MainApi
           container
         end
 
+        desc 'Delete container and all elements for this container'
         delete do
           Container.find(params[:container_id]).destroy!
           body false
         end
 
+        desc 'Change container position inside page'
         params do
           requires :position, type: Integer
         end
