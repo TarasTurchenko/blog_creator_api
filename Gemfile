@@ -9,6 +9,7 @@ gem 'aws-sdk-cloudfront', '~> 1.0.0.rc2'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'grape'
 gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'rack-cors'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '>= 0.18', '< 2.0'
