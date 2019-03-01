@@ -22,7 +22,7 @@ create_record(
   Element,
   container: container1,
   position: 0,
-  size: 4,
+  size: 6,
   kind: 'image'
 )
 
@@ -30,7 +30,7 @@ create_record(
   Element,
   container: container1,
   position: 1,
-  size: 8,
+  size: 6,
   kind: 'text'
 )
 
@@ -40,7 +40,7 @@ create_record(
   Element,
   container: container2,
   position: 0,
-  size: 4,
+  size: 6,
   kind: 'blank'
 )
 
@@ -48,7 +48,7 @@ create_record(
   Element,
   container: container2,
   position: 1,
-  size: 8,
+  size: 6,
   kind: 'link'
 )
 
