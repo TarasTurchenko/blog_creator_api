@@ -11,9 +11,9 @@ module StylesHelper
     insert_styles \
       'background-image': wrapper.bg_image,
       'background-color': wrapper.bg_color,
-      'padding-top': wrapper.offset_top,
-      'padding-right': wrapper.offset_right,
-      'padding-bottom': wrapper.offset_bottom,
-      'padding-left': wrapper.offset_left
+      'padding-top': "#{wrapper.offset_top}px",
+      'padding-right': "#{wrapper.offset_right}%",
+      'padding-bottom': "#{wrapper.offset_bottom}px",
+      'padding-left': "#{wrapper.offset_left}%"
   end
 end

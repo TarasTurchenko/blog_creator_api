@@ -5,21 +5,17 @@
 # Table name: posts
 #
 #  id            :bigint(8)        not null, primary key
+#  title         :string           not null
+#  published     :boolean          default(FALSE)
 #  bg_color      :string           default("#FFF")
 #  bg_image      :string
-#  description   :string
-#  offset_bottom :string
-#  offset_left   :string
-#  offset_right  :string
-#  offset_top    :string
-#  published     :boolean          default(FALSE)
 #  thumbnail     :string
-#  title         :string           not null
 #  blog_id       :integer          not null
-#
-# Indexes
-#
-#  index_posts_on_blog_id  (blog_id)
+#  description   :string
+#  offset_top    :integer
+#  offset_right  :integer
+#  offset_bottom :integer
+#  offset_left   :integer
 #
 
 class Post < ApplicationRecord

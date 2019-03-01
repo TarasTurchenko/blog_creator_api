@@ -5,21 +5,17 @@
 # Table name: elements
 #
 #  id            :bigint(8)        not null, primary key
-#  bg_color      :string           default("#FFF")
+#  container_id  :integer          not null
 #  bg_image      :string
+#  bg_color      :string           default("#FFF")
+#  size          :integer          not null
+#  position      :integer          not null
 #  kind          :integer          not null
 #  main_settings :jsonb
-#  offset_bottom :string           default("5px")
-#  offset_left   :string           default("5px")
-#  offset_right  :string           default("5px")
-#  offset_top    :string           default("5px")
-#  position      :integer          not null
-#  size          :integer          not null
-#  container_id  :integer          not null
-#
-# Indexes
-#
-#  index_elements_on_container_id  (container_id)
+#  offset_top    :integer          default(5)
+#  offset_right  :integer          default(5)
+#  offset_bottom :integer          default(5)
+#  offset_left   :integer          default(5)
 #
 
 class Element < ApplicationRecord

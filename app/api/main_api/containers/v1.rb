@@ -20,10 +20,10 @@ module MainApi
       resources 'containers/:container_id' do
         desc 'Update container settings'
         params do
-          optional :offset_top, type: String
-          optional :offset_right, type: String
-          optional :offset_bottom, type: String
-          optional :offset_left, type: String
+          optional :offset_top, type: Integer
+          optional :offset_right, type: Integer
+          optional :offset_bottom, type: Integer
+          optional :offset_left, type: Integer
           optional :bg_color, type: String
           optional :bg_image, type: String
         end

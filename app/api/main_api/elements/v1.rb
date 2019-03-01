@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+Integer# frozen_string_literal: true
 
 module MainApi
   module Elements
@@ -9,10 +9,10 @@ module MainApi
         params :common_element_options do
           optional :bg_color, type: String
           optional :bg_image, type: String
-          optional :offset_bottom, type: String
-          optional :offset_left, type: String
-          optional :offset_right, type: String
-          optional :offset_top, type: String
+          optional :offset_bottom, type: Integer
+          optional :offset_left, type: Integer
+          optional :offset_right, type: Integer
+          optional :offset_top, type: Integer
         end
 
         def update_element_settings
