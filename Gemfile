@@ -19,6 +19,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'yui-compressor', '~> 0.12.0', :require => "yui/compressor"
 
 group :development, :test do
+  gem 'pry'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
