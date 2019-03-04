@@ -7,20 +7,22 @@ ruby '2.5.1'
 
 gem 'aws-sdk-cloudfront', '~> 1.0.0.rc2'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'grape'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
-gem 'rack-cors'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
+gem 'rack-cors'
 gem 'rails', '~> 5.2.2'
 gem 'sass-rails', '~> 5.0'
-gem 'yui-compressor', '~> 0.12.0', :require => "yui/compressor"
+gem 'sorcery'
+gem 'yui-compressor', '~> 0.12.0', require: 'yui/compressor'
 
 group :development, :test do
-  gem 'pry'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry'
 end
 
 group :development do
