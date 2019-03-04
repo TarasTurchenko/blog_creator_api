@@ -7,16 +7,12 @@
 #  id            :bigint(8)        not null, primary key
 #  bg_color      :string           default("#FFF")
 #  bg_image      :string
-#  offset_bottom :string           default("20px")
-#  offset_left   :string           default("10%")
-#  offset_right  :string           default("10%")
-#  offset_top    :string           default("20px")
-#  position      :integer          not null
 #  post_id       :integer          not null
-#
-# Indexes
-#
-#  index_containers_on_post_id  (post_id)
+#  position      :integer          not null
+#  offset_top    :integer          default(20)
+#  offset_right  :integer          default(10)
+#  offset_bottom :integer          default(20)
+#  offset_left   :integer          default(10)
 #
 
 class Container < ApplicationRecord
