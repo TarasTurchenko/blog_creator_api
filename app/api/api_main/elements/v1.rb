@@ -47,7 +47,7 @@ module ApiMain
       end
       patch 'elements/sizes' do
         Element.update_sizes declared_params[:sizes]
-        body false
+        nil
       end
 
       params do

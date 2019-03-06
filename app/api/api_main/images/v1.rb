@@ -12,7 +12,7 @@ module ApiMain
       end
       post :images do
         image = Image.new(params[:src], params[:extension])
-        { url: image.upload }
+        present :url, image.upload
       end
     end
   end
