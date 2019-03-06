@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SharedApi
+module ApiShared
   module Helpers
     module ErrorResponses
       def formatted_error!(code, status, message)

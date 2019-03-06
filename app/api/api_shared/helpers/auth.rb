@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-module SharedApi
+module ApiShared
   module Helpers
     module Auth
-      def current_user
-        @current_user
-      end
+      attr_reader :current_user
 
       def authenticate!
         payload = jwt_payload headers['Authorization']

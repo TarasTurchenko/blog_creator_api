@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Posts
     class V1 < Grape::API
       version 'v1', using: :path

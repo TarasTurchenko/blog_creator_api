@@ -1,6 +1,6 @@
 Integer# frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Elements
     class V1 < Grape::API
       version 'v1', using: :path

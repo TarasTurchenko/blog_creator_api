@@ -4,11 +4,11 @@ class RootApi < Grape::API
   format :json
   rescue_from :all
 
-  helpers SharedApi::Helpers::Common
-  helpers SharedApi::Helpers::ErrorResponses
-  helpers SharedApi::Helpers::Auth
+  helpers ApiShared::Helpers::Common
+  helpers ApiShared::Helpers::ErrorResponses
+  helpers ApiShared::Helpers::Auth
 
-  mount MainApi::ApiV1
+  mount ApiMain::ApiV1
 
   add_swagger_documentation mount_path: '/swagger_doc'
 end
