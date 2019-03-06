@@ -13,6 +13,7 @@ module ApiMain
       end
 
       resources :auth do
+        desc 'Create new user and login'
         params do
           use :credentials
         end
@@ -26,6 +27,7 @@ module ApiMain
           end
         end
 
+        desc 'Authenticate user'
         params do
           use :credentials
         end

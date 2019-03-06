@@ -67,6 +67,7 @@ module ApiMain
         patch :position do
           element = Element.find params[:element_id]
           element.move position
+          nil
         end
 
         desc 'Update settings for text element'

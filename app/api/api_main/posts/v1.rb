@@ -14,13 +14,15 @@ module ApiMain
           requires :title, type: String
         end
         post do
-          Post.create!(declared_params).short_attrs
+          post = Post.create!(declared_params)
+          present :post, post, with: ApiEntities::Post::ListItem
         end
 
         desc 'Get all post for blog'
         get do
           blog = Blog.find params[:blog_id]
-          blog.posts.order(id: :desc).map(&:short_attrs)
+          posts = blog.posts.order id: :desc
+          present :posts, posts, with: ApiEntities::Post::ListItem
         end
       end
 

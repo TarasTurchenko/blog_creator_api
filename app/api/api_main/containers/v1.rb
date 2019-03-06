@@ -46,6 +46,7 @@ module ApiMain
         patch :position do
           container = Container.find params[:container_id]
           container.move params[:position]
+          nil
         end
       end
     end

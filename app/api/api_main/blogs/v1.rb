@@ -12,6 +12,7 @@ module ApiMain
       end
       post :blogs do
         Blog.create! declared_params
+        nil
       end
 
       params do
