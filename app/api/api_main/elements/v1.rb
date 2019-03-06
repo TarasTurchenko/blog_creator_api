@@ -1,6 +1,6 @@
 Integer# frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Elements
     class V1 < Grape::API
       version 'v1', using: :path
@@ -47,7 +47,7 @@ module MainApi
       end
       patch 'elements/sizes' do
         Element.update_sizes declared_params[:sizes]
-        body false
+        nil
       end
 
       params do
@@ -67,6 +67,7 @@ module MainApi
         patch :position do
           element = Element.find params[:element_id]
           element.move position
+          nil
         end
 
         desc 'Update settings for text element'

@@ -29,16 +29,6 @@ class Post < ApplicationRecord
   validates :thumbnail, format: OPTIONAL_URL_FORMATTER
   validates :blog_id, presence: true
 
-  def short_attrs
-    {
-      id: id,
-      title: title,
-      published: published,
-      thumbnail: thumbnail,
-      description: description
-    }
-  end
-
   def capture_attrs
     attrs = attributes
     attrs['blog'] = blog.attributes

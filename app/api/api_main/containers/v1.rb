@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Containers
     class V1 < Grape::API
       version 'v1', using: :path
@@ -46,6 +46,7 @@ module MainApi
         patch :position do
           container = Container.find params[:container_id]
           container.move params[:position]
+          nil
         end
       end
     end

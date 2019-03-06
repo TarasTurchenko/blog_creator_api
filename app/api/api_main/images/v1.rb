@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Images
     class V1 < Grape::API
       version 'v1', using: :path
@@ -12,7 +12,7 @@ module MainApi
       end
       post :images do
         image = Image.new(params[:src], params[:extension])
-        { url: image.upload }
+        present :url, image.upload
       end
     end
   end

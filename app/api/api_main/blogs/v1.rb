@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Blogs
     class V1 < Grape::API
       version 'v1', using: :path
@@ -12,6 +12,7 @@ module MainApi
       end
       post :blogs do
         Blog.create! declared_params
+        nil
       end
 
       params do
@@ -21,13 +22,13 @@ module MainApi
         desc 'Make homepage available for other anyone'
         post :publish do
           url = Blog.find(params[:blog_id]).publish
-          { url: url }
+          present :url, url
         end
 
         desc 'Unshare home page and all posts'
         post :unpublish do
           Blog.find(params[:blog_id]).unpublish
-          body false
+          nil
         end
 
         desc 'Homepage preview'

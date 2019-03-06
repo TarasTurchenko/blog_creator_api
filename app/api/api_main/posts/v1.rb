@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MainApi
+module ApiMain
   module Posts
     class V1 < Grape::API
       version 'v1', using: :path
@@ -14,13 +14,15 @@ module MainApi
           requires :title, type: String
         end
         post do
-          Post.create!(declared_params).short_attrs
+          post = Post.create!(declared_params)
+          present :post, post, with: ApiEntities::Post::ListItem
         end
 
         desc 'Get all post for blog'
         get do
           blog = Blog.find params[:blog_id]
-          blog.posts.order(id: :desc).map(&:short_attrs)
+          posts = blog.posts.order id: :desc
+          present :posts, posts, with: ApiEntities::Post::ListItem
         end
       end
 
@@ -62,13 +64,13 @@ module MainApi
         desc 'Make post available for other anyone'
         post :publish do
           url = Post.find(params[:post_id]).publish
-          { url: url }
+          present :url, url
         end
 
         desc 'Unshare page'
         post :unpublish do
           Post.find(params[:post_id]).unpublish
-          body false
+          nil
         end
 
         desc 'Preview for built post page'
