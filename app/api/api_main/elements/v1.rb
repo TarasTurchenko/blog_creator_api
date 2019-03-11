@@ -21,6 +21,7 @@ module ApiMain
           element.attributes = declared.except(:element_id, :main_settings)
           element.update_main_settings declared[:main_settings]
           element.save!
+          present :element, element
         end
       end
 
@@ -35,7 +36,8 @@ module ApiMain
         requires :size, type: Integer
       end
       post 'containers/:container_id/elements' do
-        Element.create! declared_params
+        element = Element.create! declared_params
+        present :element, element
       end
 
       desc 'Mass update elements sizes'
@@ -118,7 +120,7 @@ module ApiMain
         put :blank do
           element = params[:element_id]
           element.update! declared_params.except(:element_id)
-          element
+          present :element, element
         end
       end
     end

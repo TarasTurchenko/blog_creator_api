@@ -32,7 +32,8 @@ module ApiMain
       resources 'posts/:post_id' do
         desc 'Get all post data'
         get do
-          Post.find(params[:post_id]).capture_attrs
+          post = Post.find(params[:post_id]).capture_attrs
+          present :post, post
         end
 
         desc 'Update post settings'
@@ -52,7 +53,7 @@ module ApiMain
         put do
           post = Post.find params[:post_id]
           post.update! declared_params.except(:post_id)
-          post
+          present :post, post
         end
 
         desc 'Delete post'

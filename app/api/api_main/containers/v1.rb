@@ -11,7 +11,8 @@ module ApiMain
         requires :position, type: Integer
       end
       post 'posts/:post_id/containers' do
-        Container.create! declared_params
+        container = Container.create! declared_params
+        present :container, container
       end
 
       params do
@@ -30,7 +31,7 @@ module ApiMain
         put do
           container = Container.find params[:container_id]
           container.update! declared_params.except(:container_id)
-          container
+          present :container, container
         end
 
         desc 'Delete container and all elements for this container'
