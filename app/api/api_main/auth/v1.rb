@@ -23,7 +23,7 @@ module ApiMain
           if user.save
             present :token, user.auth_token
           else
-            invalid_credentials!
+            invalid_credentials! user.errors.messages
           end
         end
 

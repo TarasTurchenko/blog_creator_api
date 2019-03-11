@@ -11,8 +11,10 @@ module ApiMain
         requires :author, type: String
       end
       post :blogs do
-        Blog.create! declared_params
-        nil
+        params = declared_params
+        params[:user] = current_user
+        blog = Blog.create! params
+        present :blog, blog, with: ApiEntities::Blog::Blog
       end
 
       params do

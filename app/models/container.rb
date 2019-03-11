@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: containers
@@ -7,12 +6,16 @@
 #  id            :bigint(8)        not null, primary key
 #  bg_color      :string           default("#FFF")
 #  bg_image      :string
-#  post_id       :integer          not null
-#  position      :integer          not null
-#  offset_top    :integer          default(20)
-#  offset_right  :integer          default(10)
 #  offset_bottom :integer          default(20)
 #  offset_left   :integer          default(10)
+#  offset_right  :integer          default(10)
+#  offset_top    :integer          default(20)
+#  position      :integer          not null
+#  post_id       :integer          not null
+#
+# Indexes
+#
+#  index_containers_on_post_id  (post_id)
 #
 
 class Container < ApplicationRecord
