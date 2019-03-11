@@ -3,3 +3,4 @@ en:
     errors:
       unauthorized: "You are not authorized"
       invalid_credentials: "Your email or password is not correct"
+      create_blog: "Firstly you must create blog"

@@ -13,7 +13,7 @@
 #
 
 class User < ApplicationRecord
-  has_one :blog
+  has_one :blog, dependent: :destroy
 
   authenticates_with_sorcery!
 

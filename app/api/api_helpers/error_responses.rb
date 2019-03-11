@@ -17,5 +17,10 @@ module ApiHelpers
       message = I18n.t 'messages.errors.invalid_credentials'
       formatted_error!(:INCORRECT_CREDENTIALS, 422, message, errors)
     end
+
+    def create_blog!
+      message = I18n.t 'messages.errors.create_blog'
+      formatted_error!(:CREATE_BLOG, 422, message)
+    end
   end
 end

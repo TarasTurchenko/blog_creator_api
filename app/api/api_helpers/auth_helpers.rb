@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApiHelpers
-  module Auth
+  module AuthHelpers
     attr_reader :current_user
 
     def authenticate!

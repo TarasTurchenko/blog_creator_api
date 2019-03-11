@@ -4,10 +4,10 @@ class RootApi < Grape::API
   format :json
   rescue_from :all
 
-  helpers ApiHelpers::Common
+  helpers ApiHelpers::CommonHelpers
   helpers ApiHelpers::ErrorResponses
-  helpers ApiHelpers::Auth
-  helpers ApiHelpers::Blog
+  helpers ApiHelpers::AuthHelpers
+  helpers ApiHelpers::BlogHelpers
 
   mount ApiMain::ApiV1
 
