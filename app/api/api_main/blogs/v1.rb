@@ -5,7 +5,7 @@ module ApiMain
     class V1 < Grape::API
       version 'v1', using: :path
 
-      resources :blogs do
+      resources :blog do
         desc 'Create new blog'
         params do
           requires :name, type: String
