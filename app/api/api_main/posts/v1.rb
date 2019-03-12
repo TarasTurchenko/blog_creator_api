@@ -5,35 +5,43 @@ module ApiMain
     class V1 < Grape::API
       version 'v1', using: :path
 
-      params do
-        requires :blog_id, type: Integer
+      helpers do
+        attr_reader :current_post
+
+        def find_blog_page!
+          @current_post = current_blog.posts.find_by(id: params[:post_id])
+          not_found! unless @current_post
+        end
       end
-      resources 'blogs/:blog_id/posts' do
+
+      resources 'blog/posts' do
         desc 'Create new post'
         params do
           requires :title, type: String
         end
         post do
-          post = Post.create!(declared_params)
+          params = declared_params
+          params[:blog] = current_blog
+          post = Post.create! params
           present :post, post, with: ApiEntities::Post::ListItem
         end
 
         desc 'Get all post for blog'
         get do
-          blog = Blog.find params[:blog_id]
+          blog = Blog.find current_blog.id
           posts = blog.posts.order id: :desc
           present :posts, posts, with: ApiEntities::Post::ListItem
         end
       end
 
+      before { find_blog_page! }
       params do
         requires :post_id, type: String
       end
       resources 'posts/:post_id' do
         desc 'Get all post data'
         get do
-          post = Post.find(params[:post_id]).capture_attrs
-          present :post, post
+          present :post, current_post, with: ApiEntities::Post::Full
         end
 
         desc 'Update post settings'
@@ -51,26 +59,26 @@ module ApiMain
           optional :thumbnail, type: String
         end
         put do
-          post = Post.find params[:post_id]
-          post.update! declared_params.except(:post_id)
-          present :post, post
+          params = declared_params.except(:post_id)
+          current_post.update! params
+          present :post, current_post, with: ApiEntities::Post::Post
         end
 
         desc 'Delete post'
         delete do
-          Post.find(params[:post_id]).destroy!
+          current_post.destroy!
           body false
         end
 
         desc 'Make post available for other anyone'
         post :publish do
-          url = Post.find(params[:post_id]).publish
+          url = current_post.publish
           present :url, url
         end
 
         desc 'Unshare page'
         post :unpublish do
-          Post.find(params[:post_id]).unpublish
+          current_post.unpublish
           nil
         end
 
@@ -78,11 +86,10 @@ module ApiMain
         content_type :html, 'text/html'
         format :html
         get :preview do
-          post = Post.find(params[:post_id])
 
           ApplicationController.render(
             template: 'post/index',
-            assigns: { post: post.template_representation },
+            assigns: { post: current_post.template_representation },
             layout: 'post/preview'
           )
         end

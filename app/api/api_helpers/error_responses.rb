@@ -22,5 +22,10 @@ module ApiHelpers
       message = I18n.t 'messages.errors.create_blog'
       formatted_error!(:CREATE_BLOG, 422, message)
     end
+
+    def not_found!
+      message = I18n.t 'messages.errors.not_found'
+      formatted_error!(:NOT_FOUND, 404, message)
+    end
   end
 end
