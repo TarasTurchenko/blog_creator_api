@@ -10,7 +10,7 @@ puts '----------------------------- Seeds started -----------------------------'
 
 user = User.last || create_record(User, email: 'admin@mail.com', password: 'admin')
 
-blog = create_record(Blog, name: 'Godly blog', author: 'Jesus', user: user)
+blog = user.blog || create_record(Blog, name: 'Godly blog', author: 'Jesus', user: user)
 
 post = create_record(
   Post,
