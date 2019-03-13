@@ -32,5 +32,10 @@ module ApiHelpers
       message = I18n.t 'messages.errors.container_not_found'
       formatted_error!(:CONTAINER_NOT_FOUND, 404, message)
     end
+
+    def element_not_found!
+      message = I18n.t 'messages.errors.element_not_found'
+      formatted_error!(:ELEMENT_NOT_FOUND, 404, message)
+    end
   end
 end

@@ -1,62 +1,51 @@
-Integer# frozen_string_literal: true
+# frozen_string_literal: true
 
 module ApiMain
   module Elements
     class V1 < Grape::API
-      helpers do
-        params :common_element_options do
-          optional :bg_color, type: String
-          optional :bg_image, type: String
-          optional :offset_bottom, type: Integer
-          optional :offset_left, type: Integer
-          optional :offset_right, type: Integer
-          optional :offset_top, type: Integer
-        end
-
-        def update_element_settings
-          element = Element.find params[:element_id]
-          declared = declared_params
-          element.attributes = declared.except(:element_id, :main_settings)
-          element.update_main_settings declared[:main_settings]
-          element.save!
-          present :element, element
-        end
-      end
-
-      desc 'Create new element'
-      params do
-        requires :container_id, type: Integer
-        requires :position, type: Integer
-        requires :kind,
-                 type: Symbol,
-                 values: Element::KINDS,
-                 desc: 'Type of element'
-        requires :size, type: Integer
-      end
-      post 'containers/:container_id/elements' do
-        element = Element.create! declared_params
-        present :element, element
-      end
-
-      desc 'Mass update elements sizes'
-      params do
-        requires :sizes, type: Array do
-          requires :id, type: Integer
+      namespace do
+        desc 'Create new element'
+        params do
+          requires :container_id, type: Integer
+          requires :position, type: Integer
+          requires :kind,
+                   type: Symbol,
+                   values: Element::KINDS,
+                   desc: 'Type of element'
           requires :size, type: Integer
         end
-      end
-      patch 'elements/sizes' do
-        Element.update_sizes declared_params[:sizes]
-        nil
+        post 'containers/:container_id/elements' do
+          element = Element.create! declared_params
+          present :element, element
+        end
       end
 
       params do
         requires :element_id, type: Integer
       end
       resources 'elements/:element_id' do
+        helpers do
+          params :common_element_options do
+            optional :bg_color, type: String
+            optional :bg_image, type: String
+            optional :offset_bottom, type: Integer
+            optional :offset_left, type: Integer
+            optional :offset_right, type: Integer
+            optional :offset_top, type: Integer
+          end
+
+          def update_element_settings
+           declared = declared_params
+            current_element.attributes = declared.except(:element_id, :main_settings)
+            current_element.update_main_settings declared[:main_settings]
+            current_element.save!
+            present :element, current_element
+          end
+        end
+
         desc 'Delete element'
         delete do
-          Element.find(params[:element_id]).destroy!
+          current_element.destroy!
           body false
         end
 
@@ -65,8 +54,7 @@ module ApiMain
           requires :position, type: Integer
         end
         patch :position do
-          element = Element.find params[:element_id]
-          element.move position
+          current_element.move position
           nil
         end
 
@@ -116,9 +104,8 @@ module ApiMain
           use :common_element_options
         end
         put :blank do
-          element = params[:element_id]
-          element.update! declared_params.except(:element_id)
-          present :element, element
+          current_element.update! declared_params.except(:element_id)
+          present :element, current_element
         end
       end
     end
