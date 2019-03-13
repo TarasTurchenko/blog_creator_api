@@ -4,4 +4,4 @@ en:
       unauthorized: "You are not authorized"
       invalid_credentials: "Your email or password is not correct"
       create_blog: "Firstly you must create blog"
-      not_found: "Not found"
+      post_not_found: "Post not found"

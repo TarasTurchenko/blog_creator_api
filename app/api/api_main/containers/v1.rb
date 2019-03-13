@@ -5,14 +5,18 @@ module ApiMain
     class V1 < Grape::API
       version 'v1', using: :path
 
-      desc 'Create new container'
-      params do
-        requires :post_id, type: Integer
-        requires :position, type: Integer
-      end
-      post 'posts/:post_id/containers' do
-        container = Container.create! declared_params
-        present :container, container
+      namespace do
+        helpers ApiHelpers::PostHelpers
+        before { find_current_post! }
+        desc 'Create new container'
+        params do
+          requires :post_id, type: Integer
+          requires :position, type: Integer
+        end
+        post 'posts/:post_id/containers' do
+          container = Container.create! declared_params
+          present :container, container
+        end
       end
 
       params do

@@ -5,14 +5,7 @@ module ApiMain
     class V1 < Grape::API
       version 'v1', using: :path
 
-      helpers do
-        attr_reader :current_post
-
-        def find_blog_page!
-          @current_post = current_blog.posts.find_by(id: params[:post_id])
-          not_found! unless @current_post
-        end
-      end
+      helpers ApiHelpers::PostHelpers
 
       resources 'blog/posts' do
         desc 'Create new post'
@@ -34,7 +27,7 @@ module ApiMain
         end
       end
 
-      before { find_blog_page! }
+      before { find_current_post! }
       params do
         requires :post_id, type: String
       end
