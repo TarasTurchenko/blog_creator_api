@@ -37,5 +37,10 @@ module ApiHelpers
       message = I18n.t 'messages.errors.element_not_found'
       formatted_error!(:ELEMENT_NOT_FOUND, 404, message)
     end
+
+    def max_elements_count!
+      message = I18n.t 'messages.errors.max_elements_count'
+      formatted_error!(:MAX_ELEMENTS_COUNT, 422, message)
+    end
   end
 end

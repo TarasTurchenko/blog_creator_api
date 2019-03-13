@@ -4,6 +4,17 @@ module ApiMain
   module Elements
     class V1 < Grape::API
       namespace do
+        helpers ApiHelpers::ContainerHelpers
+        helpers do
+          def check_max_elements_limit!
+            elements_count = current_container.elements.count
+            max_elements_count! if elements_count >= Container::MAX_ELEMENTS_COUNT
+          end
+        end
+        before do
+          find_current_container!
+          check_max_elements_limit!
+        end
         desc 'Create new element'
         params do
           requires :container_id, type: Integer
@@ -12,10 +23,13 @@ module ApiMain
                    type: Symbol,
                    values: Element::KINDS,
                    desc: 'Type of element'
-          requires :size, type: Integer
+          # requires :size, type: Integer
         end
         post 'containers/:container_id/elements' do
-          element = Element.create! declared_params
+          params = declared_params
+          # Half size of container. get size from params in future versions
+          params[:size] = 6
+          element = Element.create! params
           present :element, element
         end
       end
@@ -24,6 +38,7 @@ module ApiMain
         requires :element_id, type: Integer
       end
       resources 'elements/:element_id' do
+        helpers ApiHelpers::ElementHelpers
         helpers do
           params :common_element_options do
             optional :bg_color, type: String
@@ -42,6 +57,8 @@ module ApiMain
             present :element, current_element
           end
         end
+
+        before { find_current_element! }
 
         desc 'Delete element'
         delete do

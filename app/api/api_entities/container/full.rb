@@ -6,7 +6,6 @@ module ApiEntities
       expose :id
       expose :bg_color
       expose :bg_image
-      expose :post_id
       expose :position
       expose :offset_top
       expose :offset_right

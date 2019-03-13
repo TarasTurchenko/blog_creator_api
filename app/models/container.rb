@@ -21,6 +21,8 @@
 class Container < ApplicationRecord
   include SharedModels::PositionableModel
 
+  MAX_ELEMENTS_COUNT = 2
+
   after_create :reorder
   after_destroy :reorder
 
