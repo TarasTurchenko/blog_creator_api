@@ -3,8 +3,6 @@ Integer# frozen_string_literal: true
 module ApiMain
   module Elements
     class V1 < Grape::API
-      version 'v1', using: :path
-
       helpers do
         params :common_element_options do
           optional :bg_color, type: String

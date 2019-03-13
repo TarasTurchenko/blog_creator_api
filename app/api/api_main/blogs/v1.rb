@@ -3,8 +3,6 @@
 module ApiMain
   module Blogs
     class V1 < Grape::API
-      version 'v1', using: :path
-
       resources :blog do
         desc 'Create new blog'
         params do

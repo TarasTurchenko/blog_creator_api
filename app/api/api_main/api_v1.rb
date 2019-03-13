@@ -2,6 +2,8 @@
 
 module ApiMain
   class ApiV1 < Grape::API
+    version 'v1', using: :path
+
     mount ApiMain::Auth::V1
 
     before { authenticate! }

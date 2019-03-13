@@ -3,8 +3,6 @@
 module ApiMain
   module Containers
     class V1 < Grape::API
-      version 'v1', using: :path
-
       namespace do
         helpers ApiHelpers::PostHelpers
         before { find_current_post! }
