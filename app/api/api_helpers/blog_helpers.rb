@@ -6,7 +6,7 @@ module ApiHelpers
 
     def update_current_blog
       @current_blog = current_user.blog
-      create_blog! unless @current_blog
+      create_blog! unless current_blog
     end
   end
 end

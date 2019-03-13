@@ -6,7 +6,7 @@ module ApiHelpers
 
     def find_current_post!
       @current_post = current_blog.posts.find_by(id: params[:post_id])
-      post_not_found! unless @current_post
+      post_not_found! unless current_post
     end
   end
 end
