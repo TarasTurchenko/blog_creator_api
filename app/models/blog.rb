@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: blogs
@@ -8,10 +7,20 @@
 #  author    :string           not null
 #  name      :string           not null
 #  published :boolean          default(FALSE)
+#  user_id   :bigint(8)
+#
+# Indexes
+#
+#  index_blogs_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 
 class Blog < ApplicationRecord
   has_many :posts, dependent: :destroy
+  belongs_to :user
 
   validates :name, presence: true
   validates :author, presence: true

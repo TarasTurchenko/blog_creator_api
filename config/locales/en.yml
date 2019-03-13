@@ -3,3 +3,8 @@ en:
     errors:
       unauthorized: "You are not authorized"
       invalid_credentials: "Your email or password is not correct"
+      create_blog: "Firstly you must create blog"
+      post_not_found: "Post not found"
+      container_not_found: "Container not found"
+      element_not_found: "Element not found"
+      max_elements_count: "Can't create more elements for this container"

@@ -3,8 +3,6 @@
 module ApiMain
   module Images
     class V1 < Grape::API
-      version 'v1', using: :path
-
       desc 'Upload image to storage and get cdn url to file'
       params do
         requires :src, type: String, desc: 'Base64 image'

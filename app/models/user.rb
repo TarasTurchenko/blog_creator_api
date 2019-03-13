@@ -1,4 +1,20 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id               :bigint(8)        not null, primary key
+#  crypted_password :string
+#  email            :string           not null
+#  salt             :string
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#
+
 class User < ApplicationRecord
+  has_one :blog, dependent: :destroy
+
   authenticates_with_sorcery!
 
   validates :email, presence: true, format: { with: Constants::Regexps::EMAIL }

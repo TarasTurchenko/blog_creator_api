@@ -3,21 +3,27 @@
 module ApiMain
   module Containers
     class V1 < Grape::API
-      version 'v1', using: :path
-
-      desc 'Create new container'
-      params do
-        requires :post_id, type: Integer
-        requires :position, type: Integer
-      end
-      post 'posts/:post_id/containers' do
-        Container.create! declared_params
+      namespace do
+        helpers ApiHelpers::PostHelpers
+        before { find_current_post! }
+        desc 'Create new container'
+        params do
+          requires :post_id, type: Integer
+          requires :position, type: Integer
+        end
+        post 'posts/:post_id/containers' do
+          container = Container.create! declared_params
+          present :container, container
+        end
       end
 
       params do
         requires :container_id, type: Integer
       end
       resources 'containers/:container_id' do
+        helpers ApiHelpers::ContainerHelpers
+        before { find_current_container! }
+
         desc 'Update container settings'
         params do
           optional :offset_top, type: Integer
@@ -28,14 +34,13 @@ module ApiMain
           optional :bg_image, type: String
         end
         put do
-          container = Container.find params[:container_id]
-          container.update! declared_params.except(:container_id)
-          container
+          current_container.update! declared_params.except(:container_id)
+          present :container, current_container
         end
 
         desc 'Delete container and all elements for this container'
         delete do
-          Container.find(params[:container_id]).destroy!
+          current_container.destroy!
           body false
         end
 
@@ -44,8 +49,7 @@ module ApiMain
           requires :position, type: Integer
         end
         patch :position do
-          container = Container.find params[:container_id]
-          container.move params[:position]
+          current_container.move params[:position]
           nil
         end
       end

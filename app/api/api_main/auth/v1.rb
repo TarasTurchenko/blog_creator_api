@@ -3,8 +3,6 @@
 module ApiMain
   module Auth
     class V1 < Grape::API
-      version 'v1', using: :path
-
       helpers do
         params :credentials do
           requires :email, type: String, regexp: Constants::Regexps::EMAIL
@@ -23,7 +21,7 @@ module ApiMain
           if user.save
             present :token, user.auth_token
           else
-            invalid_credentials!
+            invalid_credentials! user.errors.messages
           end
         end
 

@@ -1,21 +1,24 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: elements
 #
 #  id            :bigint(8)        not null, primary key
-#  container_id  :integer          not null
-#  bg_image      :string
 #  bg_color      :string           default("#FFF")
-#  size          :integer          not null
-#  position      :integer          not null
+#  bg_image      :string
 #  kind          :integer          not null
 #  main_settings :jsonb
-#  offset_top    :integer          default(5)
-#  offset_right  :integer          default(5)
 #  offset_bottom :integer          default(5)
 #  offset_left   :integer          default(5)
+#  offset_right  :integer          default(5)
+#  offset_top    :integer          default(5)
+#  position      :integer          not null
+#  size          :integer          not null
+#  container_id  :integer          not null
+#
+# Indexes
+#
+#  index_elements_on_container_id  (container_id)
 #
 
 class Element < ApplicationRecord

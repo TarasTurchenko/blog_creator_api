@@ -1,21 +1,24 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: posts
 #
 #  id            :bigint(8)        not null, primary key
-#  title         :string           not null
-#  published     :boolean          default(FALSE)
 #  bg_color      :string           default("#FFF")
 #  bg_image      :string
-#  thumbnail     :string
-#  blog_id       :integer          not null
 #  description   :string
-#  offset_top    :integer
-#  offset_right  :integer
 #  offset_bottom :integer
 #  offset_left   :integer
+#  offset_right  :integer
+#  offset_top    :integer
+#  published     :boolean          default(FALSE)
+#  thumbnail     :string
+#  title         :string           not null
+#  blog_id       :integer          not null
+#
+# Indexes
+#
+#  index_posts_on_blog_id  (blog_id)
 #
 
 class Post < ApplicationRecord
