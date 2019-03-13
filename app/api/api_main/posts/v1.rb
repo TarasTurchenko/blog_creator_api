@@ -27,11 +27,12 @@ module ApiMain
         end
       end
 
-      before { find_current_post! }
       params do
         requires :post_id, type: String
       end
       resources 'posts/:post_id' do
+        before { find_current_post! }
+
         desc 'Get all post data'
         get do
           present :post, current_post, with: ApiEntities::Post::Full
