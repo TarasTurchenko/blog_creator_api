@@ -5,12 +5,13 @@ module ApiMain
     class V1 < Grape::API
       desc 'Upload image to storage and get cdn url to file'
       params do
-        requires :src, type: String, desc: 'Base64 image'
-        requires :extension, type: String
+        requires :image, type: File
       end
       post :images do
-        image = Image.new(params[:src], params[:extension])
-        present :url, image.upload
+        image = Image.new
+        image.file = ActionDispatch::Http::UploadedFile.new params[:image]
+        image.save!
+        present :image, image
       end
     end
   end

@@ -8,6 +8,8 @@ ruby '2.5.1'
 gem 'aws-sdk-cloudfront', '~> 1.0.0.rc2'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave', '~> 1.0'
+gem 'fog-aws'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
