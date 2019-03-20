@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_055426) do
+ActiveRecord::Schema.define(version: 2019_03_20_203116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 2019_03_07_055426) do
     t.integer "offset_bottom", default: 5
     t.integer "offset_left", default: 5
     t.index ["container_id"], name: "index_elements_on_container_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "file"
   end
 
   create_table "posts", force: :cascade do |t|
