@@ -7,7 +7,7 @@
 
 ### How to setup?
 
-- Firstly you have to add requires environment variables into your .env
+- Firstly you have to add requires [environment variables](https://github.com/blog-creator-team/blog_creator_api/blob/master/.env.example) into your .env
 - Prepare app dependencies and run server.
 
 docker-compose:
