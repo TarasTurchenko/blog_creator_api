@@ -3,7 +3,7 @@
 module ApiMain
   module Elements
     class V1 < Grape::API
-      namespace do
+      namespace :containers do
         helpers ApiHelpers::ContainerHelpers
         helpers do
           def check_max_elements_limit!
@@ -25,7 +25,7 @@ module ApiMain
                    desc: 'Type of element'
           # requires :size, type: Integer
         end
-        post 'containers/:container_id/elements' do
+        post ':container_id/elements' do
           params = declared_params
           # Half size of container. get size from params in future versions
           params[:size] = 6

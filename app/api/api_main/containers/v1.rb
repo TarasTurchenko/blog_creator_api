@@ -3,7 +3,7 @@
 module ApiMain
   module Containers
     class V1 < Grape::API
-      namespace do
+      namespace :posts do
         helpers ApiHelpers::PostHelpers
         before { find_current_post! }
         desc 'Create new container'
@@ -11,7 +11,7 @@ module ApiMain
           requires :post_id, type: Integer
           requires :position, type: Integer
         end
-        post 'posts/:post_id/containers' do
+        post ':post_id/containers' do
           container = Container.create! declared_params
           present :container, container
         end
