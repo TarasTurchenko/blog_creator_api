@@ -41,14 +41,6 @@ container2 = create_record(Container, post: post, position: 1)
 create_record(
   Element,
   container: container2,
-  position: 0,
-  size: 6,
-  kind: 'blank'
-)
-
-create_record(
-  Element,
-  container: container2,
   position: 1,
   size: 6,
   kind: 'link'

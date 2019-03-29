@@ -28,10 +28,9 @@ class Element < ApplicationRecord
 
   MAX_SIZE = 12
 
-  KINDS = %i[blank text image link].freeze
+  KINDS = %i[text image link].freeze
 
   DEFAULT_SETTINGS = {
-    'blank' => {}.freeze,
     'text' => { content: 'Hey! Your text will be here' }.freeze,
     'image' => {
       src: Constants::Images::PLACEHOLDER,
@@ -74,12 +73,6 @@ class Element < ApplicationRecord
   def update_main_settings(changes)
     old = main_settings
     self.main_settings = old.merge changes
-  end
-
-  def self.update_sizes(sizes)
-    keys = sizes.map { |element| element[:id].to_i }
-    sizes_list = sizes.map { |element| { size: element[:size] } }
-    Element.update keys, sizes_list
   end
 
   def template_representation(publish_mode = false)

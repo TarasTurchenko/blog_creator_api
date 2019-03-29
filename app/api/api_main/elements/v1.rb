@@ -115,15 +115,6 @@ module ApiMain
           end
         end
         put(:link) { update_element_settings }
-
-        desc 'Update settings for blank element'
-        params do
-          use :common_element_options
-        end
-        put :blank do
-          current_element.update! declared_params.except(:element_id)
-          present :element, current_element
-        end
       end
     end
   end
