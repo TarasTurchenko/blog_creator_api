@@ -3,18 +3,12 @@
 #
 # Table name: elements
 #
-#  id            :bigint(8)        not null, primary key
-#  bg_color      :string           default("#FFF")
-#  bg_image      :string
-#  kind          :integer          not null
-#  main_settings :jsonb
-#  offset_bottom :integer          default(5)
-#  offset_left   :integer          default(5)
-#  offset_right  :integer          default(5)
-#  offset_top    :integer          default(5)
-#  position      :integer          not null
-#  size          :integer          not null
-#  container_id  :integer          not null
+#  id           :bigint(8)        not null, primary key
+#  attrs        :jsonb
+#  kind         :integer          not null
+#  position     :integer          not null
+#  size         :integer          not null
+#  container_id :integer          not null
 #
 # Indexes
 #
@@ -22,26 +16,12 @@
 #
 
 class Element < ApplicationRecord
-  self.table_name = :elements
-
   include SharedModels::PositionableModel
+  include SharedModels::WithAttrsJson
 
   MAX_SIZE = 12
 
   KINDS = %i[text image link].freeze
-
-  DEFAULT_SETTINGS = {
-    'text' => { content: 'Hey! Your text will be here' }.freeze,
-    'image' => {
-      src: Constants::Images::PLACEHOLDER,
-      alt: 'Placeholder image'
-    }.freeze,
-    'link' => {
-      destination_type: 'external',
-      destination: 'http://example-link.com',
-      text: 'Example link'
-    }.freeze
-  }.freeze
 
   LINK_DESTINATION_TYPES = %w[external homepage post].freeze
 
@@ -58,7 +38,6 @@ class Element < ApplicationRecord
   enum kind: KINDS
 
   validates :container_id, presence: true
-  validates :bg_image, format: OPTIONAL_URL_FORMATTER
   validates :size, presence: true, numericality: {
     only_integer: true, greater_than: 0,
     less_than_or_equal_to: MAX_SIZE
@@ -68,11 +47,6 @@ class Element < ApplicationRecord
 
   def move(to)
     super to, container.elements_positions
-  end
-
-  def update_main_settings(changes)
-    old = main_settings
-    self.main_settings = old.merge changes
   end
 
   def template_representation(publish_mode = false)
@@ -87,7 +61,8 @@ class Element < ApplicationRecord
   end
 
   def set_defaults
-    self.main_settings ||= DEFAULT_SETTINGS[kind]
+    defaults = { block: Elements::Defaults::BLOCK[kind] }
+    update_attrs defaults
   end
 
   def template_model

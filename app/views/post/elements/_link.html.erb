@@ -1,1 +1,2 @@
-<%= link_to element.main_settings['text'], element.link_destination(@post.blog_id) %>
+<% block = element.attrs['block'] %>
+<%= link_to block['text'], element.link_destination(@post.blog_id) %>

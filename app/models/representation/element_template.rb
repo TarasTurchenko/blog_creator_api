@@ -4,14 +4,8 @@ module Representation
   class ElementTemplate < Base
     attr_accessor(
       :id,
-      :bg_color,
-      :bg_image,
       :kind,
-      :main_settings,
-      :offset_bottom,
-      :offset_left,
-      :offset_right,
-      :offset_top,
+      :attrs,
       :position,
       :size,
       :container_id,
@@ -19,6 +13,7 @@ module Representation
     )
 
     def initialize(model, publish_mode)
+      puts model.attributes
       self.attributes = model.attributes
       self.publish_mode = publish_mode
     end
