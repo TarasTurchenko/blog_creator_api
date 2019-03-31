@@ -5,9 +5,10 @@ module Representation
     def link_destination(blog_id)
       raise BlogCreatorError, 'Element must be a link' if kind != 'link'
 
-      destination = main_settings['destination']
+      block = attrs['block']
+      destination = block['destination']
 
-      case main_settings['destination_type']
+      case block['destination_type']
       when 'post'
         post_path(blog_id, destination)
       when 'homepage'

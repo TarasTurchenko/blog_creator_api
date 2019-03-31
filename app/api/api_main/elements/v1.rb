@@ -5,16 +5,19 @@ module ApiMain
     class V1 < Grape::API
       namespace :containers do
         helpers ApiHelpers::ContainerHelpers
+
         helpers do
           def check_max_elements_limit!
             elements_count = current_container.elements.count
             max_elements_count! if elements_count >= Container::MAX_ELEMENTS_COUNT
           end
         end
+
         before do
           find_current_container!
           check_max_elements_limit!
         end
+
         desc 'Create new element'
         params do
           requires :container_id, type: Integer
@@ -41,18 +44,20 @@ module ApiMain
         helpers ApiHelpers::ElementHelpers
         helpers do
           params :common_element_options do
+            optional :offsets, type: Hash do
+              optional :top, type: Integer
+              optional :right, type: Integer
+              optional :bottom, type: Integer
+              optional :left, type: Integer
+            end
+
             optional :bg_color, type: String
             optional :bg_image, type: String
-            optional :offset_bottom, type: Integer
-            optional :offset_left, type: Integer
-            optional :offset_right, type: Integer
-            optional :offset_top, type: Integer
           end
 
           def update_element_settings
-           declared = declared_params
-            current_element.attributes = declared.except(:element_id, :main_settings)
-            current_element.update_main_settings declared[:main_settings]
+            params = declared_params.except(:element_id)
+            current_element.update_attrs params
             current_element.save!
             present :element, current_element
           end
@@ -78,7 +83,7 @@ module ApiMain
         desc 'Update settings for text element'
         params do
           use :common_element_options
-          requires :main_settings, type: Hash do
+          requires :block, type: Hash do
             optional :content, type: String
           end
         end
@@ -87,7 +92,7 @@ module ApiMain
         desc 'Update settings for image element'
         params do
           use :common_element_options
-          requires :main_settings, type: Hash do
+          requires :block, type: Hash do
             optional :alt, type: String
             optional :src, type: String
           end
@@ -97,10 +102,11 @@ module ApiMain
         desc 'Update settings for link element'
         params do
           use :common_element_options
-          requires :main_settings, type: Hash do
+          requires :block, type: Hash do
             optional :destination_type,
                      type: String,
                      values: Element::LINK_DESTINATION_TYPES
+
             optional :text, type: String
 
             given destination_type: ->(val) { val == 'external' } do

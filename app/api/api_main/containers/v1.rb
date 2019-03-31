@@ -26,15 +26,20 @@ module ApiMain
 
         desc 'Update container settings'
         params do
-          optional :offset_top, type: Integer
-          optional :offset_right, type: Integer
-          optional :offset_bottom, type: Integer
-          optional :offset_left, type: Integer
+          optional :offsets, type: Hash do
+            optional :top, type: Integer
+            optional :right, type: Integer
+            optional :bottom, type: Integer
+            optional :left, type: Integer
+          end
+
           optional :bg_color, type: String
           optional :bg_image, type: String
         end
         put do
-          current_container.update! declared_params.except(:container_id)
+          params = declared_params.except(:container_id)
+          current_container.update_attrs params
+          current_container.save!
           present :container, current_container
         end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_203116) do
+ActiveRecord::Schema.define(version: 2019_03_31_152612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,29 +24,18 @@ ActiveRecord::Schema.define(version: 2019_03_20_203116) do
   end
 
   create_table "containers", force: :cascade do |t|
-    t.string "bg_color", default: "#FFF"
-    t.string "bg_image"
     t.integer "post_id", null: false
     t.integer "position", null: false
-    t.integer "offset_top", default: 20
-    t.integer "offset_right", default: 10
-    t.integer "offset_bottom", default: 20
-    t.integer "offset_left", default: 10
+    t.jsonb "attrs", default: {"offsets"=>{"top"=>20, "left"=>10, "right"=>10, "bottom"=>20}, "bg_color"=>"#FFF", "bg_image"=>""}
     t.index ["post_id"], name: "index_containers_on_post_id"
   end
 
   create_table "elements", force: :cascade do |t|
     t.integer "container_id", null: false
-    t.string "bg_image"
-    t.string "bg_color", default: "#FFF"
     t.integer "size", null: false
     t.integer "position", null: false
     t.integer "kind", null: false
-    t.jsonb "main_settings"
-    t.integer "offset_top", default: 5
-    t.integer "offset_right", default: 5
-    t.integer "offset_bottom", default: 5
-    t.integer "offset_left", default: 5
+    t.jsonb "attrs", default: {"block"=>{}, "offsets"=>{"top"=>20, "left"=>10, "right"=>10, "bottom"=>20}, "bg_color"=>"#FFF", "bg_image"=>""}
     t.index ["container_id"], name: "index_elements_on_container_id"
   end
 
@@ -57,15 +46,9 @@ ActiveRecord::Schema.define(version: 2019_03_20_203116) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "published", default: false
-    t.string "bg_color", default: "#FFF"
-    t.string "bg_image"
-    t.string "thumbnail"
     t.integer "blog_id", null: false
     t.string "description"
-    t.integer "offset_top"
-    t.integer "offset_right"
-    t.integer "offset_bottom"
-    t.integer "offset_left"
+    t.jsonb "attrs", default: {"offsets"=>{"top"=>0, "left"=>0, "right"=>0, "bottom"=>0}, "bg_color"=>"#FFF", "bg_image"=>"", "thumbnail"=>"https://d1y0dpztrh9xjz.cloudfront.net/assets/placeholder.png"}
     t.index ["blog_id"], name: "index_posts_on_blog_id"
   end
 

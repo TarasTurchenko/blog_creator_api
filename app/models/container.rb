@@ -3,15 +3,10 @@
 #
 # Table name: containers
 #
-#  id            :bigint(8)        not null, primary key
-#  bg_color      :string           default("#FFF")
-#  bg_image      :string
-#  offset_bottom :integer          default(20)
-#  offset_left   :integer          default(10)
-#  offset_right  :integer          default(10)
-#  offset_top    :integer          default(20)
-#  position      :integer          not null
-#  post_id       :integer          not null
+#  id       :bigint(8)        not null, primary key
+#  attrs    :jsonb
+#  position :integer          not null
+#  post_id  :integer          not null
 #
 # Indexes
 #
@@ -20,6 +15,7 @@
 
 class Container < ApplicationRecord
   include SharedModels::PositionableModel
+  include SharedModels::WithAttrsJson
 
   MAX_ELEMENTS_COUNT = 2
 
@@ -29,15 +25,8 @@ class Container < ApplicationRecord
   belongs_to :post
   has_many :elements, dependent: :destroy
 
-  validates :bg_image, format: OPTIONAL_URL_FORMATTER
   validates :position, POSITION_VALIDATIONS
   validates :post_id, presence: true
-
-  def capture_attrs
-    attrs = attributes
-    attrs['elements'] = elements.order(:position)
-    attrs
-  end
 
   def move(to)
     super to, post.containers_positions

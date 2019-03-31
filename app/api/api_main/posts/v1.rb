@@ -40,19 +40,25 @@ module ApiMain
           params do
             optional :title, type: String
 
-            optional :offset_top, type: Integer
-            optional :offset_right, type: Integer
-            optional :offset_bottom, type: Integer
-            optional :offset_left, type: Integer
+            optional :attrs, type: Hash do
+              optional :offsets, type: Hash do
+                optional :top, type: Integer
+                optional :right, type: Integer
+                optional :bottom, type: Integer
+                optional :left, type: Integer
+              end
 
-            optional :bg_color, type: String
-            optional :bg_image, type: String
+              optional :bg_color, type: String
+              optional :bg_image, type: String
 
-            optional :thumbnail, type: String
+              optional :thumbnail, type: String
+            end
           end
           put do
             params = declared_params.except(:post_id)
-            current_post.update! params
+            current_post.attributes = params.except(:attrs)
+            current_post.update_attrs params[:attrs]
+            current_post.save!
             present :post, current_post, with: ApiEntities::Post::Post
           end
 
