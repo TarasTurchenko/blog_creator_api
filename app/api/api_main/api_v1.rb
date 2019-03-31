@@ -13,7 +13,7 @@ module ApiMain
     mount ApiMain::Blogs::V1
 
     namespace do
-      before { update_current_blog }
+      before { find_current_blog! }
 
       mount ApiMain::Posts::V1
       mount ApiMain::Containers::V1

@@ -16,7 +16,7 @@ module ApiMain
           present :blog, blog, with: ApiEntities::Blog::Blog
         end
 
-        before { update_current_blog }
+        before { find_current_blog! }
 
         desc 'Make homepage available for other anyone'
         post :publish do

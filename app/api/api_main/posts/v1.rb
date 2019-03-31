@@ -6,7 +6,7 @@ module ApiMain
 
       helpers ApiHelpers::PostHelpers
 
-      resources 'posts' do
+      resources :posts do
         desc 'Create new post'
         params do
           requires :title, type: String
@@ -18,7 +18,7 @@ module ApiMain
           present :post, post, with: ApiEntities::Post::ListItem
         end
 
-        desc 'Get all post for blog'
+        desc 'Get all post'
         get do
           blog = Blog.find current_blog.id
           posts = blog.posts.order id: :desc

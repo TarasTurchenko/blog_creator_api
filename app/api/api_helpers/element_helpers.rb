@@ -7,9 +7,9 @@ module ApiHelpers
     def find_current_element!
       @current_element = Element.find_by(id: params[:element_id])
 
-      unless current_element || element_of_current_blog?(current_element)
-        element_not_found!
-      end
+      element_not_found! unless current_element
+
+      element_not_found! unless element_of_current_blog?(current_element)
     end
 
     def element_of_current_blog?(element)

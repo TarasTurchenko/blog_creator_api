@@ -7,9 +7,9 @@ module ApiHelpers
     def find_current_container!
       @current_container = Container.find_by(id: params[:container_id])
 
-      unless current_container || container_of_current_blog?(current_container)
-        container_not_found!
-      end
+      container_not_found! unless current_container
+
+      container_not_found! unless container_of_current_blog?(current_container)
     end
 
     def container_of_current_blog?(container)
