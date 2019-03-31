@@ -3,18 +3,12 @@
 #
 # Table name: posts
 #
-#  id            :bigint(8)        not null, primary key
-#  bg_color      :string           default("#FFF")
-#  bg_image      :string
-#  description   :string
-#  offset_bottom :integer
-#  offset_left   :integer
-#  offset_right  :integer
-#  offset_top    :integer
-#  published     :boolean          default(FALSE)
-#  thumbnail     :string
-#  title         :string           not null
-#  blog_id       :integer          not null
+#  id          :bigint(8)        not null, primary key
+#  attrs       :jsonb
+#  description :string
+#  published   :boolean          default(FALSE)
+#  title       :string           not null
+#  blog_id     :integer          not null
 #
 # Indexes
 #
@@ -25,19 +19,8 @@ class Post < ApplicationRecord
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
-  before_create :set_defaults
-
   validates :title, presence: true
-  validates :bg_image, format: OPTIONAL_URL_FORMATTER
-  validates :thumbnail, format: OPTIONAL_URL_FORMATTER
   validates :blog_id, presence: true
-
-  def capture_attrs
-    attrs = attributes
-    attrs['blog'] = blog.attributes
-    attrs['containers'] = containers_with_order.map(&:capture_attrs)
-    attrs
-  end
 
   def containers_positions(*also_order_by)
     containers_with_order(*also_order_by).map(&:position_representation)
@@ -69,15 +52,5 @@ class Post < ApplicationRecord
     update! published: false
 
     blog.sync_homepage
-  end
-
-  private
-
-  def set_defaults
-    self.thumbnail ||= Constants::Images::PLACEHOLDER
-  end
-
-  def generate_unique_key
-    Digest::MD5.hexdigest "#{id}_#{DateTime.now}"
   end
 end

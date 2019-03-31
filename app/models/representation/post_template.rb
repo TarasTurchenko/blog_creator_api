@@ -4,20 +4,13 @@ module Representation
   class PostTemplate < Base
     attr_accessor(
       :id,
-      :bg_color,
-      :bg_image,
       :description,
-      :offset_bottom,
-      :offset_left,
-      :offset_right,
-      :offset_top,
       :published,
-      :thumbnail,
       :title,
+      :attrs,
       :blog,
       :blog_id,
       :containers,
-      :additional_styles,
       :publish_mode
     )
 

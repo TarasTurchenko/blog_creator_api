@@ -33,12 +33,6 @@ class Container < ApplicationRecord
   validates :position, POSITION_VALIDATIONS
   validates :post_id, presence: true
 
-  def capture_attrs
-    attrs = attributes
-    attrs['elements'] = elements.order(:position)
-    attrs
-  end
-
   def move(to)
     super to, post.containers_positions
   end

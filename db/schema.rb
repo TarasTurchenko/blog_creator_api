@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_203116) do
+ActiveRecord::Schema.define(version: 2019_03_31_140551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,15 +57,9 @@ ActiveRecord::Schema.define(version: 2019_03_20_203116) do
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "published", default: false
-    t.string "bg_color", default: "#FFF"
-    t.string "bg_image"
-    t.string "thumbnail"
     t.integer "blog_id", null: false
     t.string "description"
-    t.integer "offset_top"
-    t.integer "offset_right"
-    t.integer "offset_bottom"
-    t.integer "offset_left"
+    t.jsonb "attrs", default: {"offsets"=>{"top"=>0, "left"=>0, "right"=>0, "bottom"=>0}, "bg_color"=>"#FFF", "bg_image"=>"", "thumbnail"=>"https://d1y0dpztrh9xjz.cloudfront.net/assets/placeholder.png"}
     t.index ["blog_id"], name: "index_posts_on_blog_id"
   end
 
