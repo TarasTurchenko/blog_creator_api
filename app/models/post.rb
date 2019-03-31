@@ -16,6 +16,8 @@
 #
 
 class Post < ApplicationRecord
+  include SharedModels::WithAttrsJson
+
   belongs_to :blog
   has_many :containers, dependent: :destroy
 

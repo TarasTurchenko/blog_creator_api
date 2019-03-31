@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_140551) do
+ActiveRecord::Schema.define(version: 2019_03_31_145614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,9 @@ ActiveRecord::Schema.define(version: 2019_03_31_140551) do
   end
 
   create_table "containers", force: :cascade do |t|
-    t.string "bg_color", default: "#FFF"
-    t.string "bg_image"
     t.integer "post_id", null: false
     t.integer "position", null: false
-    t.integer "offset_top", default: 20
-    t.integer "offset_right", default: 10
-    t.integer "offset_bottom", default: 20
-    t.integer "offset_left", default: 10
+    t.jsonb "attrs", default: {"offsets"=>{"top"=>20, "left"=>10, "right"=>10, "bottom"=>20}, "bg_color"=>"#FFF", "bg_image"=>""}
     t.index ["post_id"], name: "index_containers_on_post_id"
   end
 

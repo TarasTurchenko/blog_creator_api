@@ -4,12 +4,7 @@ module Representation
   class ContainerTemplate < Base
     attr_accessor(
       :id,
-      :bg_color,
-      :bg_image,
-      :offset_bottom,
-      :offset_left,
-      :offset_right,
-      :offset_top,
+      :attrs,
       :position,
       :post_id,
       :elements,
