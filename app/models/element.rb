@@ -46,23 +46,23 @@ class Element < ApplicationRecord
   validates :position, POSITION_VALIDATIONS
 
   def move(to)
-    super to, container.elements_positions
+    super(to, container.elements_positions)
   end
 
   def template_representation(publish_mode = false)
-    template_model.new self, publish_mode
+    template_model.new(self, publish_mode)
   end
 
   private
 
   def reorder
     positions = container.elements_positions(id: :desc)
-    save_position_changes positions
+    save_position_changes(positions)
   end
 
   def set_defaults
     defaults = { block: Elements::Defaults::BLOCK[kind] }
-    update_attrs defaults
+    update_attrs(defaults)
   end
 
   def template_model

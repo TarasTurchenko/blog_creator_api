@@ -12,7 +12,7 @@ namespace :amazon do
     ASSETS.each do |asset|
       source = assets['post.css'].to_s
       path = "#{ASSETS_DIR}/#{asset}"
-      Helpers::Aws.upload_to_storage path, source
+      Helpers::Aws.upload_to_storage(path, source)
     end
     puts ' == Assets have upload'
     Rake::Task['amazon:reset_cdn_caches'].invoke
@@ -20,9 +20,9 @@ namespace :amazon do
 
   task :reset_cdn_caches do
     puts ' == Invalidation CloudFront cache'
-    key = Digest::SHA1.hexdigest "reset assets #{DateTime.now}"
+    key = Digest::SHA1.hexdigest("reset assets #{DateTime.now}")
     items = ["/#{ASSETS_DIR}/*"]
-    Helpers::Aws.invalidate_cdn_paths key, items
+    Helpers::Aws.invalidate_cdn_paths(key, items)
     puts ' == CloudFront cache have invalidate'
   end
 end

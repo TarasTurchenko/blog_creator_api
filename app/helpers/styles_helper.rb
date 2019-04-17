@@ -8,8 +8,8 @@ module StylesHelper
   end
 
   def wrapper_styles(wrapper)
-    background = bg_styles wrapper.attrs['bg_image'], wrapper.attrs['bg_color']
-    offsets = offsets_styles wrapper.attrs['offsets']
+    background = bg_styles(wrapper.attrs['bg_image'], wrapper.attrs['bg_color'])
+    offsets = offsets_styles(wrapper.attrs['offsets'])
     background + offsets
   end
 
@@ -22,6 +22,6 @@ module StylesHelper
   end
 
   def bg_styles(image, color)
-    format_styles 'background-image': image, 'background-color': color
+    format_styles('background-image': image, 'background-color': color)
   end
 end

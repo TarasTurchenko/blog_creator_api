@@ -9,9 +9,9 @@ module ApiMain
       end
       post :images do
         image = Image.new
-        image.file = ActionDispatch::Http::UploadedFile.new params[:image]
+        image.file = ActionDispatch::Http::UploadedFile.new(params[:image])
         image.save!
-        present :image, image
+        present(:image, image)
       end
     end
   end

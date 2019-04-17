@@ -6,14 +6,15 @@ module ApiMain
       namespace :posts do
         helpers ApiHelpers::PostHelpers
         before { find_current_post! }
+
         desc 'Create new container'
         params do
           requires :post_id, type: Integer
           requires :position, type: Integer
         end
         post ':post_id/containers' do
-          container = Container.create! declared_params
-          present :container, container
+          container = Container.create!(declared_params)
+          present(:container, container)
         end
       end
 
@@ -38,15 +39,15 @@ module ApiMain
         end
         put do
           params = declared_params.except(:container_id)
-          current_container.update_attrs params
+          current_container.update_attrs(params)
           current_container.save!
-          present :container, current_container
+          present(:container, current_container)
         end
 
         desc 'Delete container and all elements for this container'
         delete do
           current_container.destroy!
-          body false
+          body(false)
         end
 
         desc 'Change container position inside page'
@@ -54,7 +55,7 @@ module ApiMain
           requires :position, type: Integer
         end
         patch :position do
-          current_container.move params[:position]
+          current_container.move(params[:position])
           nil
         end
       end

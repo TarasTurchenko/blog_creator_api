@@ -3,7 +3,7 @@
 module Representation
   class ElementLinkTemplate < ElementTemplate
     def link_destination(blog_id)
-      raise BlogCreatorError, 'Element must be a link' if kind != 'link'
+      raise(BlogCreatorError, 'Element must be a link') if kind != 'link'
 
       block = attrs['block']
       destination = block['destination']
@@ -27,7 +27,7 @@ module Representation
     end
 
     def published_post_path(blog_id, post_id)
-      Helpers::Aws.build_cdn_url "blogs/#{blog_id}/posts/#{post_id}/index.html"
+      Helpers::Aws.build_cdn_url("blogs/#{blog_id}/posts/#{post_id}/index.html")
     end
 
     def post_preview_path(post_id)
@@ -37,7 +37,7 @@ module Representation
     def homepage_path(blog_id)
       return published_homepage_path(blog_id) if publish_mode
 
-      homepage_preview_path blog_id
+      homepage_preview_path(blog_id)
     end
 
     def published_homepage_path(blog_id)

@@ -11,15 +11,15 @@ module Services
 
     def publish
       path = "#{dir}/index.html"
-      Helpers::Aws.upload_to_storage path, render_html
+      Helpers::Aws.upload_to_storage(path, render_html)
     end
 
     def unpublish
-      Helpers::Aws.delete_folder_from_storage dir
+      Helpers::Aws.delete_folder_from_storage(dir)
     end
 
     def reset_cdn_caches
-      Helpers::Aws.invalidate_cdn_paths generate_unique_key, ["/#{dir}/*"]
+      Helpers::Aws.invalidate_cdn_paths(generate_unique_key, ["/#{dir}/*"])
     end
 
     def page_url

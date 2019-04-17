@@ -30,7 +30,7 @@ class Blog < ApplicationRecord
   end
 
   def template_representation(publish_mode = false)
-    Representation::BlogTemplate.new self, publish_mode
+    Representation::BlogTemplate.new(self, publish_mode)
   end
 
   def publish
@@ -55,7 +55,7 @@ class Blog < ApplicationRecord
     publisher.unpublish
     publisher.reset_cdn_caches
 
-    update! published: false
-    posts.update_all published: false
+    update!(published: false)
+    posts.update_all(published: false)
   end
 end

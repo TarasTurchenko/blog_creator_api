@@ -17,14 +17,8 @@ module ApiHelpers
     def jwt_payload(token)
       password = Rails.application.secrets.secret_key_base
 
-      payload = JWT.decode(
-        token,
-        password,
-        false,
-        { algorithm: 'HS256' }
-      )&.first
-
-      payload || {}
+      params = { algorithm: 'HS256' }
+      JWT.decode(token, password, false, params)&.first || {}
     end
   end
 end

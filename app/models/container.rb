@@ -41,7 +41,7 @@ class Container < ApplicationRecord
   end
 
   def template_representation(publish_mode = false)
-    Representation::ContainerTemplate.new self, publish_mode
+    Representation::ContainerTemplate.new(self, publish_mode)
   end
 
   private

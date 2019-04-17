@@ -32,8 +32,8 @@ module ApiMain
           params = declared_params
           # Half size of container. get size from params in future versions
           params[:size] = 6
-          element = Element.create! params
-          present :element, element
+          element = Element.create!(params)
+          present(:element, element)
         end
       end
 
@@ -57,9 +57,9 @@ module ApiMain
 
           def update_element_settings
             params = declared_params.except(:element_id)
-            current_element.update_attrs params
+            current_element.update_attrs(params)
             current_element.save!
-            present :element, current_element
+            present(:element, current_element)
           end
         end
 
@@ -68,7 +68,7 @@ module ApiMain
         desc 'Delete element'
         delete do
           current_element.destroy!
-          body false
+          body(false)
         end
 
         desc 'Change element position inside container'
@@ -76,7 +76,7 @@ module ApiMain
           requires :position, type: Integer
         end
         patch :position do
-          current_element.move position
+          current_element.move(position)
           nil
         end
 

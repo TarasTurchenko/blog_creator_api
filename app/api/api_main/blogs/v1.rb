@@ -12,16 +12,15 @@ module ApiMain
         post do
           params = declared_params
           params[:user] = current_user
-          blog = Blog.create! params
-          present :blog, blog, with: ApiEntities::Blog::Blog
+          blog = Blog.create!(params)
+          present(:blog, blog, with: ApiEntities::Blog::Blog)
         end
 
         before { find_current_blog! }
 
         desc 'Make homepage available for other anyone'
         post :publish do
-          url = current_blog.publish
-          present :url, url
+          present(:url, current_blog.publish)
         end
 
         desc 'Unshare home page and all posts'

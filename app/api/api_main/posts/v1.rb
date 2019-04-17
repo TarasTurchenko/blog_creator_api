@@ -14,15 +14,14 @@ module ApiMain
         post do
           params = declared_params
           params[:blog] = current_blog
-          post = Post.create! params
-          present :post, post, with: ApiEntities::Post::ListItem
+          post = Post.create!(params)
+          present(:post, post, with: ApiEntities::Post::ListItem)
         end
 
         desc 'Get all post'
         get do
-          blog = Blog.find current_blog.id
-          posts = blog.posts.order id: :desc
-          present :posts, posts, with: ApiEntities::Post::ListItem
+          posts = current_blog.posts.order(id: :desc)
+          present(:posts, posts, with: ApiEntities::Post::ListItem)
         end
 
         params do
@@ -33,7 +32,7 @@ module ApiMain
 
           desc 'Get all post data'
           get do
-            present :post, current_post, with: ApiEntities::Post::Full
+            present(:post, current_post, with: ApiEntities::Post::Full)
           end
 
           desc 'Update post settings'
@@ -59,19 +58,19 @@ module ApiMain
             current_post.attributes = params.except(:attrs)
             current_post.update_attrs params[:attrs]
             current_post.save!
-            present :post, current_post, with: ApiEntities::Post::Post
+            present(:post, current_post, with: ApiEntities::Post::Post)
           end
 
           desc 'Delete post'
           delete do
             current_post.destroy!
-            body false
+            body(false)
           end
 
           desc 'Make post available for other anyone'
           post :publish do
             url = current_post.publish
-            present :url, url
+            present(:url, url)
           end
 
           desc 'Unshare page'
@@ -83,8 +82,8 @@ module ApiMain
           desc 'Preview for built post page'
           content_type :html, 'text/html'
           format :html
-          get :preview do
 
+          get :preview do
             ApplicationController.render(
               template: 'post/index',
               assigns: { post: current_post.template_representation },

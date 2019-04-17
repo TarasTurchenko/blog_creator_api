@@ -33,7 +33,7 @@ class Post < ApplicationRecord
   end
 
   def template_representation(publish_mode = false)
-    Representation::PostTemplate.new self, publish_mode
+    Representation::PostTemplate.new(self, publish_mode)
   end
 
   def publish
@@ -51,7 +51,7 @@ class Post < ApplicationRecord
 
     publisher = Services::PostPublisher.new(self)
     publisher.unpublish
-    update! published: false
+    update!(published: false)
 
     blog.sync_homepage
   end

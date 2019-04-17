@@ -22,6 +22,6 @@ class User < ApplicationRecord
   def auth_token
     payload = { user_id: id }
     password = Rails.application.secrets.secret_key_base
-    JWT.encode payload, password, 'HS256'
+    JWT.encode(payload, password, 'HS256')
   end
 end

@@ -13,13 +13,13 @@ module Services
 
     def publish
       post = self.post.template_representation(true)
-      Helpers::Aws.upload_to_storage html_path, render_html(post)
-      styles = CSS_COMPRESSOR.compress render_css(post)
-      Helpers::Aws.upload_to_storage css_path, styles
+      Helpers::Aws.upload_to_storage(html_path, render_html(post))
+      styles = CSS_COMPRESSOR.compress(render_css(post))
+      Helpers::Aws.upload_to_storage(css_path, styles)
     end
 
     def unpublish
-      Helpers::Aws.delete_folder_from_storage dir
+      Helpers::Aws.delete_folder_from_storage(dir)
     end
 
     def page_url

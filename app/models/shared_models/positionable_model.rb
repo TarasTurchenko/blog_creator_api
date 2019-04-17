@@ -15,14 +15,14 @@ module SharedModels
       changes = positions_changes positions
       ids = changes.map { |changed| changed[:id] }
       values = changes.map { |changed| { position: changed[:position] } }
-      self.class.update ids, values
+      self.class.update(ids, values)
       changes
     end
 
     def move(to, positions)
       positions.delete_if { |model| model[:id] == id }
-      positions.insert to, position_representation
-      save_position_changes positions
+      positions.insert(to, position_representation)
+      save_position_changes(positions)
     end
 
     private

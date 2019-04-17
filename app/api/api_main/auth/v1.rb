@@ -16,12 +16,12 @@ module ApiMain
           use :credentials
         end
         post :sign_up do
-          user = User.new declared_params
+          user = User.new(declared_params)
 
           if user.save
-            present :token, user.auth_token
+            present(:token, user.auth_token)
           else
-            invalid_credentials! user.errors.messages
+            invalid_credentials!(user.errors.messages)
           end
         end
 
@@ -34,7 +34,7 @@ module ApiMain
           user = User.authenticate(params[:email], params[:password])
 
           if user.present?
-            present :token, user.auth_token
+            present(:token, user.auth_token)
           else
             invalid_credentials!
           end
