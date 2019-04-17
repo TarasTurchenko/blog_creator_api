@@ -19,15 +19,13 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
   include SharedModels::WithAttrsJson
 
-  MAX_SIZE = 12
-
+  MAX_SIZE = 12.freeze
   KINDS = %i[text image link].freeze
 
-  LINK_DESTINATION_TYPES = %w[external homepage post].freeze
+  DEFAULT_BLOCK = {}.freeze
+  KIND = :element_type.freeze
 
-  TEMPLATE_MODELS = {
-    'link' => Representation::ElementLinkTemplate
-  }.freeze
+  enum kind: KINDS
 
   before_create :set_defaults
   after_create :reorder
@@ -35,14 +33,11 @@ class Element < ApplicationRecord
 
   belongs_to :container
 
-  enum kind: KINDS
-
   validates :container_id, presence: true
   validates :size, presence: true, numericality: {
     only_integer: true, greater_than: 0,
     less_than_or_equal_to: MAX_SIZE
   }
-  validates :kind, presence: true, inclusion: { in: kinds }
   validates :position, POSITION_VALIDATIONS
 
   def move(to)
@@ -53,6 +48,19 @@ class Element < ApplicationRecord
     template_model.new(self, publish_mode)
   end
 
+  def self.element_constructor(kind)
+    case kind.to_sym
+    when :image
+      Element::Image
+    when :link
+      Element::Link
+    when :text
+      Element::Text
+    else
+      raise(BlogCreatorError, "Unknown element kind \"#{kind}\"")
+    end
+  end
+
   private
 
   def reorder
@@ -61,11 +69,18 @@ class Element < ApplicationRecord
   end
 
   def set_defaults
-    defaults = { block: Elements::Defaults::BLOCK[kind] }
-    update_attrs(defaults)
+    self.kind = self.class::KIND
+    update_attrs(block: self.class::DEFAULT_BLOCK)
   end
 
   def template_model
-    TEMPLATE_MODELS[kind] || Representation::ElementTemplate
+    case kind.to_sym
+    when :link
+      Representation::ElementLinkTemplate
+    when :text, :image
+      Representation::ElementTemplate
+    else
+      raise(BlogCreatorError, "Unknown element kind \"#{kind}\"")
+    end
   end
 end

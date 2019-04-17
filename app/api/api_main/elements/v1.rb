@@ -29,10 +29,13 @@ module ApiMain
           # requires :size, type: Integer
         end
         post ':container_id/elements' do
-          params = declared_params
+          attrs = declared_params.except(:kind)
           # Half size of container. get size from params in future versions
-          params[:size] = 6
-          element = Element.create!(params)
+          attrs[:size] = 6
+
+          element_constructor = Element.element_constructor(params[:kind])
+          element = element_constructor.create!(attrs)
+
           present(:element, element)
         end
       end
@@ -105,7 +108,7 @@ module ApiMain
           optional :block, type: Hash, default: {} do
             optional :destination_type,
                      type: String,
-                     values: Element::LINK_DESTINATION_TYPES
+                     values: Element::Link::LINK_DESTINATION_TYPES
 
             optional :text, type: String
 
