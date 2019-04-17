@@ -44,7 +44,7 @@ module ApiMain
         helpers ApiHelpers::ElementHelpers
         helpers do
           params :common_element_options do
-            optional :offsets, type: Hash do
+            optional :offsets, type: Hash, default: {} do
               optional :top, type: Integer
               optional :right, type: Integer
               optional :bottom, type: Integer
@@ -83,7 +83,7 @@ module ApiMain
         desc 'Update settings for text element'
         params do
           use :common_element_options
-          requires :block, type: Hash do
+          optional :block, type: Hash, default: {} do
             optional :content, type: String
           end
         end
@@ -92,7 +92,7 @@ module ApiMain
         desc 'Update settings for image element'
         params do
           use :common_element_options
-          requires :block, type: Hash do
+          optional :block, type: Hash, default: {} do
             optional :alt, type: String
             optional :src, type: String
           end
@@ -102,7 +102,7 @@ module ApiMain
         desc 'Update settings for link element'
         params do
           use :common_element_options
-          requires :block, type: Hash do
+          optional :block, type: Hash, default: {} do
             optional :destination_type,
                      type: String,
                      values: Element::LINK_DESTINATION_TYPES
