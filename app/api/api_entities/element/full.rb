@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 module ApiEntities
-  module Container
+  module Element
     class Full < Grape::Entity
       expose :id
+      expose :size
       expose :attrs
       expose :position
-
-      expose :elements do |post|
-        ApiEntities::Element::Full.represent(post.elements)
-      end
+      expose :kind, &:kind
     end
   end
 end

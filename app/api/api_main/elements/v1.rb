@@ -22,10 +22,7 @@ module ApiMain
         params do
           requires :container_id, type: Integer
           requires :position, type: Integer
-          requires :kind,
-                   type: Symbol,
-                   values: Element::KINDS,
-                   desc: 'Type of element'
+          requires :kind, type: Symbol, desc: 'Type of element'
           # requires :size, type: Integer
         end
         post ':container_id/elements' do

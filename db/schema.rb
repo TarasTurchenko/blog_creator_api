@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_152612) do
+ActiveRecord::Schema.define(version: 2019_04_18_174650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_152612) do
     t.integer "position", null: false
     t.integer "kind", null: false
     t.jsonb "attrs", default: {"block"=>{}, "offsets"=>{"top"=>20, "left"=>10, "right"=>10, "bottom"=>20}, "bg_color"=>"#FFF", "bg_image"=>""}
+    t.string "type"
     t.index ["container_id"], name: "index_elements_on_container_id"
   end
 

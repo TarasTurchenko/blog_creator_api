@@ -8,6 +8,7 @@
 #  kind         :integer          not null
 #  position     :integer          not null
 #  size         :integer          not null
+#  type         :string
 #  container_id :integer          not null
 #
 # Indexes
@@ -48,6 +49,10 @@ class Element < ApplicationRecord
     template_model.new(self, publish_mode)
   end
 
+  # def kind
+  #   type.delete_prefix('Element::').downcase
+  # end
+
   def self.element_constructor(kind)
     case kind.to_sym
     when :image
@@ -69,18 +74,16 @@ class Element < ApplicationRecord
   end
 
   def set_defaults
-    self.kind = self.class::KIND
-    update_attrs(block: self.class::DEFAULT_BLOCK)
+    update_attrs(block: default_block_attrs)
+  end
+
+  protected
+
+  def default_block_attrs
+    {}
   end
 
   def template_model
-    case kind.to_sym
-    when :link
-      Representation::ElementLinkTemplate
-    when :text, :image
-      Representation::ElementTemplate
-    else
-      raise(BlogCreatorError, "Unknown element kind \"#{kind}\"")
-    end
+    Representation::ElementTemplate
   end
 end

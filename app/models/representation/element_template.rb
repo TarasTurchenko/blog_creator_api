@@ -2,6 +2,8 @@
 
 module Representation
   class ElementTemplate < Base
+    IGNORED_ATTRIBUTES = %w(type).freeze
+
     attr_accessor(
       :id,
       :kind,
@@ -13,8 +15,8 @@ module Representation
     )
 
     def initialize(model, publish_mode)
-      puts model.attributes
-      self.attributes = model.attributes
+      self.attributes = model.attributes.except(*IGNORED_ATTRIBUTES)
+      self.kind = model.kind
       self.publish_mode = publish_mode
     end
   end
