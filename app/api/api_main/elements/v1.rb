@@ -33,7 +33,7 @@ module ApiMain
           element_constructor = Element.element_constructor(params[:kind])
           element = element_constructor.create!(attrs)
 
-          present(:element, element)
+          present(:element, element, with: ApiEntities::Element::Full)
         end
       end
 
@@ -59,7 +59,7 @@ module ApiMain
             params = declared_params.except(:element_id)
             current_element.update_attrs(params)
             current_element.save!
-            present(:element, current_element)
+            present(:element, current_element, with: ApiEntities::Element::Full)
           end
         end
 
