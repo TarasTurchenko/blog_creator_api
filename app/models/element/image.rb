@@ -1,12 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: elements
 #
 #  id           :bigint(8)        not null, primary key
 #  attrs        :jsonb
-#  kind         :integer          not null
 #  position     :integer          not null
 #  size         :integer          not null
 #  type         :string

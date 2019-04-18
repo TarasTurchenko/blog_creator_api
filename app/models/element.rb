@@ -5,7 +5,6 @@
 #
 #  id           :bigint(8)        not null, primary key
 #  attrs        :jsonb
-#  kind         :integer          not null
 #  position     :integer          not null
 #  size         :integer          not null
 #  type         :string
@@ -21,12 +20,6 @@ class Element < ApplicationRecord
   include SharedModels::WithAttrsJson
 
   MAX_SIZE = 12.freeze
-  KINDS = %i[text image link].freeze
-
-  DEFAULT_BLOCK = {}.freeze
-  KIND = :element_type.freeze
-
-  enum kind: KINDS
 
   before_create :set_defaults
   after_create :reorder
@@ -49,9 +42,9 @@ class Element < ApplicationRecord
     template_model.new(self, publish_mode)
   end
 
-  # def kind
-  #   type.delete_prefix('Element::').downcase
-  # end
+  def kind
+    type.delete_prefix('Element::').downcase
+  end
 
   def self.element_constructor(kind)
     case kind.to_sym
