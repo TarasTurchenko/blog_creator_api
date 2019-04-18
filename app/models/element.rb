@@ -35,7 +35,7 @@ class Element < ApplicationRecord
   validates :position, POSITION_VALIDATIONS
 
   def move(to)
-    super(to, container.elements_positions)
+    super(Element, to, container.elements_positions)
   end
 
   def template_representation(publish_mode = false)
@@ -63,7 +63,7 @@ class Element < ApplicationRecord
 
   def reorder
     positions = container.elements_positions(id: :desc)
-    save_position_changes(positions)
+    save_position_changes(Element, positions)
   end
 
   def set_defaults

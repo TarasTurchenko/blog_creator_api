@@ -29,7 +29,7 @@ class Container < ApplicationRecord
   validates :post_id, presence: true
 
   def move(to)
-    super to, post.containers_positions
+    super(Element, to, post.containers_positions)
   end
 
   def elements_positions(*also_order_by)
@@ -48,6 +48,6 @@ class Container < ApplicationRecord
 
   def reorder
     positions = post.containers_positions(id: :desc)
-    save_position_changes positions
+    save_position_changes(Container, positions)
   end
 end
