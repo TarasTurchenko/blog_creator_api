@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class ImageUploader < BaseUploader
   def store_dir
     "images/#{model.id}"
   end

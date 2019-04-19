@@ -2,7 +2,7 @@
 
 module ApiEntities
   module Container
-    class Full < Grape::Entity
+    class Full < ApiEntities::Base
       expose :id
       expose :attrs
       expose :position

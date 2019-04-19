@@ -2,7 +2,7 @@
 
 module ApiMain
   module Elements
-    class V1 < Grape::API
+    class V1 < BaseApi
       namespace :containers do
         helpers ApiHelpers::ContainerHelpers
 

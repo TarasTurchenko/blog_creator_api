@@ -2,7 +2,7 @@
 
 module ApiMain
   module Posts
-    class V1 < Grape::API
+    class V1 < BaseApi
 
       helpers ApiHelpers::PostHelpers
 

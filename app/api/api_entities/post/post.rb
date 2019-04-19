@@ -2,7 +2,7 @@
 
 module ApiEntities
   module Post
-    class Post < Grape::Entity
+    class Post < ApiEntities::Base
       expose :title
       expose :published
       expose :description

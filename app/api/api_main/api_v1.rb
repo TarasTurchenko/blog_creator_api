@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApiMain
-  class ApiV1 < Grape::API
+  class ApiV1 < BaseApi
     version 'v1', using: :path
 
     mount ApiMain::Auth::V1

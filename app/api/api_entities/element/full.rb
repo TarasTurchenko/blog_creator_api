@@ -2,7 +2,7 @@
 
 module ApiEntities
   module Element
-    class Full < Grape::Entity
+    class Full < ApiEntities::Base
       expose :id
       expose :size
       expose :attrs

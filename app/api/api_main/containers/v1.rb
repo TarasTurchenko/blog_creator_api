@@ -2,7 +2,7 @@
 
 module ApiMain
   module Containers
-    class V1 < Grape::API
+    class V1 < BaseApi
       namespace :posts do
         helpers ApiHelpers::PostHelpers
         before { find_current_post! }

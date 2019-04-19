@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RootApi < Grape::API
+class RootApi < BaseApi
   format :json
   rescue_from :all
 

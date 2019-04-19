@@ -2,7 +2,7 @@
 
 module ApiEntities
   module Blog
-    class Blog < Grape::Entity
+    class Blog < ApiEntities::Base
       expose :name
       expose :author
       expose :published

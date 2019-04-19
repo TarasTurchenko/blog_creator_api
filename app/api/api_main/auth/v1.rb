@@ -2,7 +2,7 @@
 
 module ApiMain
   module Auth
-    class V1 < Grape::API
+    class V1 < BaseApi
       helpers do
         params :credentials do
           requires :email, type: String, regexp: Constants::Regexps::EMAIL

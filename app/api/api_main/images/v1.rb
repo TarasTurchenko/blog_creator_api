@@ -2,7 +2,7 @@
 
 module ApiMain
   module Images
-    class V1 < Grape::API
+    class V1 < BaseApi
       desc 'Upload image to storage and get cdn url to file'
       params do
         requires :image, type: File

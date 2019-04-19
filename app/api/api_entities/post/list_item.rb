@@ -2,7 +2,7 @@
 
 module ApiEntities
   module Post
-    class ListItem < Grape::Entity
+    class ListItem < ApiEntities::Base
         expose :id
         expose :title
         expose :published
