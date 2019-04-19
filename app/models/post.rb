@@ -24,6 +24,10 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :blog_id, presence: true
 
+  def run_destroy_worker
+    DestroyPostWorker.perform_async(id)
+  end
+
   def containers_positions(*also_order_by)
     containers_with_order(*also_order_by).map(&:position_representation)
   end

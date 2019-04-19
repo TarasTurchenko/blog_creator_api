@@ -63,7 +63,7 @@ module ApiMain
 
           desc 'Delete post'
           delete do
-            current_post.destroy!
+            current_post.run_destroy_worker
             body(false)
           end
 
