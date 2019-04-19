@@ -1,10 +1,5 @@
 version: '3'
 services:
-  db:
-    container_name: blog_creator_api_db
-    image: postgres:11.1-alpine
-    volumes:
-      - data-postgres:/var/lib/postgresql/data
   web:
     container_name: blog_creator_api_main
     build: .
@@ -19,10 +14,35 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - redis
+  db:
+    container_name: blog_creator_api_db
+    image: postgres:11.1-alpine
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+  redis:
+    container_name: blog_creator_api_redis
+    image: redis:5.0.4-alpine
+    volumes:
+      - data-redis:/data
+  sidekiq:
+    container_name: blog_creator_api_sidekiq
+    build: .
+    volumes:
+      - .:/myapp:rw
+      - data-ruby-tmp:/myapp/tmp
+      - data-ruby-bundle:/bundle
+    depends_on:
+      - redis
+      - db
+    command: bundle exec sidekiq
+    env_file: .env
 volumes:
   data-ruby-tmp:
     driver: local
   data-postgres:
+    driver: local
+  data-redis:
     driver: local
   data-ruby-bundle:
     driver: local

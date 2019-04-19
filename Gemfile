@@ -20,6 +20,7 @@ gem 'puma', '~> 3.11'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.2'
 gem 'sass-rails', '~> 5.0'
+gem 'sidekiq', '~> 5.0', '>= 5.0.5'
 gem 'sorcery'
 gem 'yui-compressor', '~> 0.12.0', require: 'yui/compressor'
 
