@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   end
 
   def unpublish
-    raise BlogCreatorError.new('Post already unpublished') unless published
+    raise(BlogCreatorError, 'Post is not published') unless published
 
     Services::PostPublisher.new(self).unpublish
   end

@@ -34,28 +34,6 @@ class Blog < ApplicationRecord
   end
 
   def publish
-    publisher = Services::BlogPublisher.new(self)
-    publisher.publish
-    publisher.reset_cdn_caches
-    update!(published: true) unless published
-
-    publisher.page_url
-  end
-
-  def sync_homepage
-    publisher = Services::BlogPublisher.new(self)
-    publisher.publish if published
-    publisher.reset_cdn_caches
-  end
-
-  def unpublish
-    raise BlogCreatorError.new('Blog already unpublished') unless published
-
-    publisher = Services::BlogPublisher.new(self)
-    publisher.unpublish
-    publisher.reset_cdn_caches
-
-    update!(published: false)
-    posts.update_all(published: false)
+    Services::BlogPublisher.new(self).publish
   end
 end

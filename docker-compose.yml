@@ -15,6 +15,7 @@ services:
     depends_on:
       - db
       - redis
+      - sidekiq
   db:
     container_name: blog_creator_api_db
     image: postgres:11.1-alpine

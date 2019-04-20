@@ -4,15 +4,12 @@ module Helpers
   module Aws
     # @param [String] unique_key
     # @param [Array] items -- cache for these paths will reset
-    def self.invalidate_cdn_paths(unique_key, items)
+    def self.invalidate_cdn_paths(items)
       CLOUDFRONT.create_invalidation(
         distribution_id: ENV['CLOUDFRONT_DISTRIBUTION'],
         invalidation_batch: {
-          caller_reference: unique_key,
-          paths: {
-            quantity: items.length,
-            items: items
-          }
+          caller_reference: Helpers.generate_uniq_key,
+          paths: { quantity: items.length, items: items }
         }
       )
     end

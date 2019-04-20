@@ -5,7 +5,7 @@ module ApiMain
     class V1 < BaseApi
       helpers do
         params :credentials do
-          requires :email, type: String, regexp: Constants::Regexps::EMAIL
+          requires :email, type: String, regexp: Regexps::EMAIL
           requires :password, type: String
         end
       end

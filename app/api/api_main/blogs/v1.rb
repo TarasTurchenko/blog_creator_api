@@ -18,17 +18,6 @@ module ApiMain
 
         before { find_current_blog! }
 
-        desc 'Make homepage available for other anyone'
-        post :publish do
-          present(:url, current_blog.publish)
-        end
-
-        desc 'Unshare home page and all posts'
-        post :unpublish do
-          current_blog.unpublish
-          nil
-        end
-
         desc 'Homepage preview'
         content_type :html, 'text/html'
         format :html

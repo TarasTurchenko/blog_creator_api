@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   authenticates_with_sorcery!
 
-  validates :email, presence: true, format: { with: Constants::Regexps::EMAIL }
+  validates :email, presence: true, format: { with: Regexps::EMAIL }
 
   def auth_token
     payload = { user_id: id }

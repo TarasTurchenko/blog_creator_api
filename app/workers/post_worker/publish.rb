@@ -8,10 +8,11 @@ module PostWorker
       self.css_path = css_path
 
       publish
+      post.blog.publish
+
+      AssetsWorker::ResetCaches.perform_async(html_path, css_path)
 
       post.update!(published: true) unless post.published
-
-      post.blog.sync_homepage
     end
 
     private
