@@ -25,7 +25,7 @@ class Post < ApplicationRecord
   validates :blog_id, presence: true
 
   def run_destroy_worker
-    DestroyPostWorker.perform_async(id)
+    PostWorker::Destroy.perform_async(id)
   end
 
   def containers_positions(*also_order_by)
@@ -41,22 +41,12 @@ class Post < ApplicationRecord
   end
 
   def publish
-    publisher = Services::PostPublisher.new(self)
-    publisher.publish
-    update!(published: true) unless published
-
-    blog.sync_homepage
-
-    publisher.page_url
+    Services::PostPublisher.new(self).publish
   end
 
   def unpublish
     raise BlogCreatorError.new('Post already unpublished') unless published
 
-    publisher = Services::PostPublisher.new(self)
-    publisher.unpublish
-    update!(published: false)
-
-    blog.sync_homepage
+    Services::PostPublisher.new(self).unpublish
   end
 end
