@@ -10,7 +10,7 @@ module BlogWorker
 
       publish
 
-      AssetsWorker::ResetCaches.perform_async(html_path)
+      AssetsWorker::ResetCaches.perform_async('/' + html_path)
 
       blog.update!(published: true) unless blog.published
     end

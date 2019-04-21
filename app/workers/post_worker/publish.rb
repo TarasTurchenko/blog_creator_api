@@ -9,7 +9,7 @@ module PostWorker
       publish
       post.blog.publish
 
-      AssetsWorker::ResetCaches.perform_async(dir_path)
+      AssetsWorker::ResetCaches.perform_async('/' + dir_path)
 
       post.update!(published: true) unless post.published
     end
@@ -34,7 +34,7 @@ module PostWorker
     end
 
     def render_html(post)
-      styles_url = Helpers::Aws.build_cdn_url(css_path)
+      styles_url = Helpers::Aws.build_cdn_url("#{dir_path}/styles.css")
       payload = { post: post, styles_url: styles_url }
 
       ApplicationController.render(

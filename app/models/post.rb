@@ -20,6 +20,8 @@
 class Post < ApplicationRecord
   include SharedModels::WithAttrsJson
 
+  before_create :set_defaults
+
   belongs_to :blog
   has_many :containers, dependent: :destroy
 
@@ -46,7 +48,7 @@ class Post < ApplicationRecord
   def unpublish
     raise(BlogCreatorError, 'Post is not published') unless published
 
-    PostWorker::Unpublish.perform_async(published_directory_path)
+    PostWorker::Unpublish.perform_async(id, published_directory_path)
   end
 
   def published_directory_path
@@ -55,5 +57,11 @@ class Post < ApplicationRecord
 
   def published_page_path
     "#{published_directory_path}/index.html"
+  end
+
+  private
+
+  def set_defaults
+    self.attrs['thumbnail'] = Config::Images::PLACEHOLDER
   end
 end

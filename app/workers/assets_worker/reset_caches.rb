@@ -3,7 +3,7 @@
 module AssetsWorker
   class ResetCaches < ApplicationWorker
     def perform(*paths)
-      Helpers::Aws.invalidate_cdn_paths(paths)
+      Helpers::Aws.invalidate_cdn_paths(*paths)
     end
   end
 end
