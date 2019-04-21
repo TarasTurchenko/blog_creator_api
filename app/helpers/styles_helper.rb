@@ -7,9 +7,9 @@ module StylesHelper
     attributes.join ''
   end
 
-  def wrapper_styles(wrapper)
-    background = bg_styles(wrapper.attrs['bg_image'], wrapper.attrs['bg_color'])
-    offsets = offsets_styles(wrapper.attrs['offsets'])
+  def wrapper_styles(attrs)
+    background = bg_styles(attrs['bg_image'], attrs['bg_color'])
+    offsets = offsets_styles(attrs['offsets'])
     background + offsets
   end
 

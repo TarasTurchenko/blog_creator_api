@@ -1,4 +1,4 @@
-[data-container="<%= container.id %>"] {<%= wrapper_styles(container) %>}
+[data-container="<%= container.id %>"] {<%= wrapper_styles(container.attrs) %>}
 <% container.elements.each do |element| %>
-  <%= render 'post/element_wrapper/styles', element: element %>
+  <%= render('post/element_wrapper/styles', element: element) %>
 <% end %>

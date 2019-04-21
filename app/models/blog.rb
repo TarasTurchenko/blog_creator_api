@@ -29,10 +29,6 @@ class Blog < ApplicationRecord
     posts.where(published: true)
   end
 
-  def template_representation(publish_mode = false)
-    Representation::BlogTemplate.new(self, publish_mode)
-  end
-
   def publish
     BlogWorker::Publish.perform_async(id, published_directory_path)
     Helpers::Aws::build_cdn_url(published_page_path)

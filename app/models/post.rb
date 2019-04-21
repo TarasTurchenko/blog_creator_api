@@ -8,6 +8,8 @@
 #  description :string
 #  published   :boolean          default(FALSE)
 #  title       :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #  blog_id     :integer          not null
 #
 # Indexes
@@ -34,10 +36,6 @@ class Post < ApplicationRecord
 
   def containers_with_order(*also_order_by)
     containers.order(:position, *also_order_by)
-  end
-
-  def template_representation(publish_mode = false)
-    Representation::PostTemplate.new(self, publish_mode)
   end
 
   def publish

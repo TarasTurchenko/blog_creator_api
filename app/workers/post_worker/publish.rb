@@ -17,7 +17,7 @@ module PostWorker
     private
 
     def publish
-      post = self.post.template_representation(true)
+      post = PostViewModel::Post.new(self.post, true)
       publish_html(post)
       publish_styles(post)
     end

@@ -1,11 +1,9 @@
 <html lang="en">
   <head>
     <title><%= @post.title %></title>
-    <%= stylesheet_link_tag 'post' %>
-    <style><%= render template: 'post/styles' %></style>
+    <%= stylesheet_link_tag('post') %>
+    <style><%= render(template: 'post/styles') %></style>
   </head>
 
-  <body data-blog="<%= @post.blog.id %>" data-post="<%= @post.id %>">
-    <%= yield %>
-  </body>
+  <body data-blog="<%= @post.blog_id %>" data-post="<%= @post.id %>"><%= yield %></body>
 </html>

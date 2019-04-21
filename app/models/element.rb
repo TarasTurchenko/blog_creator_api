@@ -51,10 +51,6 @@ class Element < ApplicationRecord
     super(Element, to, container.elements_positions)
   end
 
-  def template_representation(publish_mode = false)
-    template_model.new(self, publish_mode)
-  end
-
   def kind
     type.delete_prefix('Element::').downcase
   end

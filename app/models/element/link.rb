@@ -26,9 +26,5 @@ class Element
         text: 'Example link'
       }
     end
-
-    def template_model
-      Representation::ElementLinkTemplate
-    end
   end
 end
