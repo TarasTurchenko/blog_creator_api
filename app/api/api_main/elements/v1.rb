@@ -57,8 +57,7 @@ module ApiMain
 
           def update_element_settings
             params = declared_params.except(:element_id)
-            current_element.update_attrs(params)
-            current_element.save!
+            current_element.update_attrs!(params)
             present(:element, current_element, with: ApiEntities::Element::Full)
           end
         end

@@ -13,15 +13,23 @@
 #
 
 class User < ApplicationRecord
-  has_one :blog, dependent: :destroy
-
   authenticates_with_sorcery!
+
+  has_one :blog, dependent: :destroy
 
   validates :email, presence: true, format: { with: Config::Regexps::EMAIL }
 
-  def auth_token
+  def self.from_auth_token(token)
+    password = Rails.application.secrets.secret_key_base
+    params = { algorithm: Config::Auth::TOKEN_ENCRYPTION }
+    payload = JWT.decode(token, password, false, params)&.first || {}
+
+    User.find(payload['post_id'])
+  end
+
+  def to_auth_token
     payload = { user_id: id }
     password = Rails.application.secrets.secret_key_base
-    JWT.encode(payload, password, 'HS256')
+    JWT.encode(payload, password, Config::Auth::TOKEN_ENCRYPTION)
   end
 end

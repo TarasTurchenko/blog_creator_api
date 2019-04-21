@@ -34,18 +34,6 @@ class Element < ApplicationRecord
   }
   validates :position, POSITION_VALIDATIONS
 
-  def move(to)
-    super(Element, to, container.elements_positions)
-  end
-
-  def template_representation(publish_mode = false)
-    template_model.new(self, publish_mode)
-  end
-
-  def kind
-    type.delete_prefix('Element::').downcase
-  end
-
   def self.element_constructor(kind)
     case kind.to_sym
     when :image
@@ -59,15 +47,16 @@ class Element < ApplicationRecord
     end
   end
 
-  private
-
-  def reorder
-    positions = container.elements_positions(id: :desc)
-    save_position_changes(Element, positions)
+  def move(to)
+    super(Element, to, container.elements_positions)
   end
 
-  def set_defaults
-    update_attrs(block: default_block_attrs)
+  def template_representation(publish_mode = false)
+    template_model.new(self, publish_mode)
+  end
+
+  def kind
+    type.delete_prefix('Element::').downcase
   end
 
   protected
@@ -78,5 +67,16 @@ class Element < ApplicationRecord
 
   def template_model
     Representation::ElementTemplate
+  end
+
+  private
+
+  def reorder
+    positions = container.elements_positions(id: :desc)
+    save_position_changes(Element, positions)
+  end
+
+  def set_defaults
+    self.attrs = attrs.deep_merge(block: default_block_attrs)
   end
 end

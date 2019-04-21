@@ -19,7 +19,7 @@ module ApiMain
           user = User.new(declared_params)
 
           if user.save
-            present(:token, user.auth_token)
+            present(:token, user.to_auth_token)
           else
             invalid_credentials!(user.errors.messages)
           end
@@ -34,7 +34,7 @@ module ApiMain
           user = User.authenticate(params[:email], params[:password])
 
           if user.present?
-            present(:token, user.auth_token)
+            present(:token, user.to_auth_token)
           else
             invalid_credentials!
           end

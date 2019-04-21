@@ -56,8 +56,7 @@ module ApiMain
           put do
             params = declared_params.except(:post_id)
             current_post.attributes = params.except(:attrs)
-            current_post.update_attrs params[:attrs]
-            current_post.save!
+            current_post.update_attrs!(params[:attrs])
             present(:post, current_post, with: ApiEntities::Post::Post)
           end
 

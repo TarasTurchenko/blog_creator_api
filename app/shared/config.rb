@@ -9,4 +9,8 @@ module Config
     URL = URI::DEFAULT_PARSER.make_regexp
     EMAIL = URI::MailTo::EMAIL_REGEXP
   end
+
+  module Auth
+    TOKEN_ENCRYPTION = 'HS256'
+  end
 end

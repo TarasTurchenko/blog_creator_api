@@ -39,8 +39,7 @@ module ApiMain
         end
         put do
           params = declared_params.except(:container_id)
-          current_container.update_attrs(params)
-          current_container.save!
+          current_container.update_attrs!(params)
           present(:container, current_container)
         end
 
