@@ -20,9 +20,7 @@ namespace :amazon do
 
   task :reset_cdn_caches do
     puts ' == Invalidation CloudFront cache'
-    key = Digest::SHA1.hexdigest("reset assets #{DateTime.now}")
-    items = ["/#{ASSETS_DIR}/*"]
-    Helpers::Aws.invalidate_cdn_paths(key, items)
+    Helpers::Aws.invalidate_cdn_paths("/#{ASSETS_DIR}/*")
     puts ' == CloudFront cache have invalidate'
   end
 end

@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
-module Constants
+module Config
   module Images
     PLACEHOLDER = Helpers::Aws.build_cdn_url('assets/placeholder.png')
+  end
+
+  module Regexps
+    URL = URI::DEFAULT_PARSER.make_regexp
+    EMAIL = URI::MailTo::EMAIL_REGEXP
   end
 end

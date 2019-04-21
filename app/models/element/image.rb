@@ -19,7 +19,7 @@ class Element
   class Image < Element
     def default_block_attrs
       {
-        src: Constants::Images::PLACEHOLDER,
+        src: Config::Images::PLACEHOLDER,
         alt: 'Placeholder image'
       }
     end

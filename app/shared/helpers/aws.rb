@@ -14,6 +14,14 @@ module Helpers
       )
     end
 
+    def self.invalidation_complete?(invalidation_id)
+      invalidation = CLOUDFRONT.get_invalidation(
+        distribution_id: ENV['CLOUDFRONT_DISTRIBUTION'],
+        id: invalidation_id
+      )
+      invalidation.status == 'Complete'
+    end
+
     # @param [String] path to upload. eg blogs/5/index.html
     # @param [String] body
     def self.upload_to_storage(path, body)

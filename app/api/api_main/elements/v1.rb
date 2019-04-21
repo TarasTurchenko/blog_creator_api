@@ -112,7 +112,7 @@ module ApiMain
             given destination_type: ->(val) { val == 'external' } do
               requires :destination,
                        type: String,
-                       regexp: Regexps::URL,
+                       regexp: Config::Regexps::URL,
                        desc: 'Custom url destination'
             end
 
