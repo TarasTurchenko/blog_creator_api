@@ -34,6 +34,15 @@ class Blog < ApplicationRecord
   end
 
   def publish
-    Services::BlogPublisher.new(self).publish
+    BlogWorker::Publish.perform_async(id, published_directory_path)
+    Helpers::Aws::build_cdn_url(published_page_path)
+  end
+
+  def published_directory_path
+    "blogs/#{id}"
+  end
+
+  def published_page_path
+    "#{published_directory_path}/index.html"
   end
 end

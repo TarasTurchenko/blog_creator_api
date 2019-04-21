@@ -41,12 +41,21 @@ class Post < ApplicationRecord
   end
 
   def publish
-    Services::PostPublisher.new(self).publish
+    PostWorker::Publish.perform_async(id, published_directory_path)
+    Helpers::Aws::build_cdn_url(published_page_path)
   end
 
   def unpublish
     raise(BlogCreatorError, 'Post is not published') unless published
 
-    Services::PostPublisher.new(self).unpublish
+    PostWorker::Unpublish.perform_async(published_directory_path)
+  end
+
+  def published_directory_path
+    "blogs/#{blog_id}/posts/#{id}"
+  end
+
+  def published_page_path
+    "#{published_directory_path}/index.html"
   end
 end

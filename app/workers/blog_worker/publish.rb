@@ -4,9 +4,9 @@ module BlogWorker
   class Publish < ApplicationWorker
     attr_accessor :blog, :html_path
 
-    def perform(blog_id, html_path)
+    def perform(blog_id, dir_path)
       self.blog = Blog.find(blog_id)
-      self.html_path = html_path
+      self.html_path = "#{dir_path}/index.html"
 
       publish
 

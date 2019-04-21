@@ -1,16 +1,15 @@
 module PostWorker
   class Publish < ApplicationWorker
-    attr_accessor :post, :html_path, :css_path
+    attr_accessor :post, :dir_path
 
-    def perform(post_id, html_path, css_path)
+    def perform(post_id, dir_path)
       self.post = Post.find(post_id)
-      self.html_path = html_path
-      self.css_path = css_path
+      self.dir_path = dir_path
 
       publish
       post.blog.publish
 
-      AssetsWorker::ResetCaches.perform_async(html_path, css_path)
+      AssetsWorker::ResetCaches.perform_async(dir_path)
 
       post.update!(published: true) unless post.published
     end
@@ -19,17 +18,28 @@ module PostWorker
 
     def publish
       post = self.post.template_representation(true)
+      publish_html(post)
+      publish_styles(post)
+    end
+
+    def publish_html(post)
+      html_path = "#{dir_path}/index.html"
       Helpers::Aws.upload_to_storage(html_path, render_html(post))
+    end
+
+    def publish_styles(post)
+      css_path = "#{dir_path}/styles.css"
       styles = CSS_COMPRESSOR.compress(render_css(post))
       Helpers::Aws.upload_to_storage(css_path, styles)
     end
 
     def render_html(post)
       styles_url = Helpers::Aws.build_cdn_url(css_path)
+      payload = { post: post, styles_url: styles_url }
 
       ApplicationController.render(
         template: 'post/index',
-        assigns: { post: post, styles_url: styles_url },
+        assigns: payload,
         layout: 'post/published'
       )
     end
