@@ -1,0 +1,10 @@
+- name: copy dotenv file
+  become: true
+  become_user: ubuntu
+  shell: bash -c "cp /home/ubuntu/.env /home/ubuntu/blog_creator_api/current/.env"
+- name: up project
+  become: true
+  become_user: ubuntu
+  shell: bash -c "cd /home/ubuntu/blog_creator_api/current/ansible && chmod +x ./up_project.sh && ./up_project.sh"
+  register: ps
+- debug: msg={{ ps.stdout }}
