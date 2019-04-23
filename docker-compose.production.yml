@@ -11,6 +11,8 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - .:/myapp
   db:
     image: postgres:11.1-alpine
     env_file:
