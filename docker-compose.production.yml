@@ -33,11 +33,7 @@ services:
     command: bundle exec sidekiq
     env_file: .env
 volumes:
-  data-ruby-tmp:
-    driver: local
   data-postgres:
     driver: local
   data-redis:
-    driver: local
-  data-ruby-bundle:
     driver: local

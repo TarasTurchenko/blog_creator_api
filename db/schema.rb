@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_190003) do
+ActiveRecord::Schema.define(version: 2019_04_23_191251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2019_04_21_190003) do
     t.boolean "published", default: false
     t.integer "blog_id", null: false
     t.string "description"
-    t.jsonb "attrs", default: {"default"=>{"offsets"=>{"top"=>0, "left"=>0, "right"=>0, "bottom"=>0}, "bg_color"=>"#FFF", "bg_image"=>"", "thumbnail"=>""}}
+    t.jsonb "attrs", default: {"offsets"=>{"top"=>0, "left"=>0, "right"=>0, "bottom"=>0}, "bg_color"=>"#FFF", "bg_image"=>"", "thumbnail"=>""}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["blog_id"], name: "index_posts_on_blog_id"
