@@ -21,4 +21,11 @@ class Element::Text < Element
   def default_block_attrs
     { content: 'Hey! Your text will be here' }
   end
+
+  def update_attrs!(changes)
+    attrs = changes.deep_stringify_keys
+    content = attrs.try(:[], 'block').try(:[], 'content')
+    attrs['block']['content'] = HtmlSanitizer.new(content).sanitize if content.present?
+    super(attrs)
+  end
 end
