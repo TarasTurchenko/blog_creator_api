@@ -23,9 +23,9 @@ class Element::Text < Element
   end
 
   def update_attrs!(changes)
-    attrs = changes.deep_stringify_keys
-    content = attrs.try(:[], 'block').try(:[], 'content')
-    attrs['block']['content'] = HtmlSanitizer.new(content).sanitize if content.present?
+    attrs = changes.deep_symbolize_keys
+    content = attrs.try(:[], :block).try(:[], :content)
+    attrs[:block][:content] = HtmlSanitizer.new(content).sanitize if content.present?
     super(attrs)
   end
 end
