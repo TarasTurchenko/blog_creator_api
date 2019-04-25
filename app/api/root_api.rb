@@ -2,9 +2,12 @@
 
 class RootApi < BaseApi
   format :json
+  helpers ApiHelpers::CommonHelpers
+
+  mount ApiRedirect::ApiV1
+
   rescue_from :all
 
-  helpers ApiHelpers::CommonHelpers
   helpers ApiHelpers::ErrorResponses
   helpers ApiHelpers::AuthHelpers
   helpers ApiHelpers::BlogHelpers
