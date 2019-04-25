@@ -1,0 +1,4 @@
+localhost {
+    proxy /api web:3000
+    proxy / https://d2ndn3opzra2g7.cloudfront.net/blogs
+}

@@ -3,6 +3,7 @@
 class RootApi < BaseApi
   format :json
   rescue_from :all
+  prefix 'api'
 
   helpers ApiHelpers::CommonHelpers
   helpers ApiHelpers::ErrorResponses

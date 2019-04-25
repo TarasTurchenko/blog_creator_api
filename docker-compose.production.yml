@@ -32,6 +32,14 @@ services:
       - web
     command: bundle exec sidekiq
     env_file: .env
+  caddy:
+    container_name: blog_creator_caddy
+    image: abiosoft/caddy
+    ports:
+      - 80:2015
+      - 443:2015
+    volumes:
+      - ./Caddyfile:/etc/Caddyfile
 volumes:
   data-postgres:
     driver: local

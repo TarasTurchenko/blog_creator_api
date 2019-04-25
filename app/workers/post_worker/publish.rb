@@ -9,7 +9,7 @@ module PostWorker
       publish
       post.blog.publish
 
-      AssetsWorker::ResetCaches.perform_async('/' + dir_path)
+      AssetsWorker::ResetCaches.perform_async("/#{dir_path}/*")
 
       post.update!(published: true) unless post.published
     end
