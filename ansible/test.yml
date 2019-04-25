@@ -1,6 +1,6 @@
 ---
 - name: production deploy
-  hosts: production
+  hosts: test
   remote_user: ubuntu
   vars:
     ansistrano_deploy_to: '/home/ubuntu/blog_creator_api'
