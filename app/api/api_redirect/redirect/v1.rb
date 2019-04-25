@@ -5,7 +5,7 @@ module ApiRedirect
     class V1 < BaseApi
       resource :redirect do
         get do
-          headers
+          request.url
         end
       end
     end
