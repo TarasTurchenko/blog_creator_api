@@ -11,7 +11,7 @@ module ApiMain
         image = Image.new
         image.file = ActionDispatch::Http::UploadedFile.new(params[:image])
         image.save!
-        present(:image, image)
+        present(:url, image.file.url)
       end
     end
   end

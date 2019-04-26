@@ -12,17 +12,13 @@ module BlogViewModel
     def path
       return '#' unless publish_mode
 
-      post_published_path
+      model.published_page_path
     end
 
     private
 
     def permitted_model_attrs
       [:id, :title, :description, :attrs]
-    end
-
-    def post_published_path
-      Helpers::Aws.build_cdn_url(model.published_page_path)
     end
   end
 end

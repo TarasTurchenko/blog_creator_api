@@ -12,5 +12,5 @@ class RootApi < BaseApi
 
   mount ApiMain::ApiV1
 
-  add_swagger_documentation(mount_path: '/swagger_doc')
+  add_swagger_documentation(mount_path: '/swagger_doc', host: '')
 end

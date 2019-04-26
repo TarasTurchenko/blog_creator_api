@@ -25,6 +25,6 @@ CarrierWave.configure do |config|
   else
     config.storage = :file
     config.enable_processing = Rails.env.development?
-    config.asset_host = ENV['DEV_APP_URL']
+    config.asset_host = ENV['APP_URL']
   end
 end

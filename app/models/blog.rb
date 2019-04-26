@@ -7,11 +7,13 @@
 #  author    :string           not null
 #  name      :string           not null
 #  published :boolean          default(FALSE)
+#  subdomain :string
 #  user_id   :bigint(8)
 #
 # Indexes
 #
-#  index_blogs_on_user_id  (user_id)
+#  index_blogs_on_subdomain  (subdomain) UNIQUE
+#  index_blogs_on_user_id    (user_id)
 #
 # Foreign Keys
 #
@@ -35,10 +37,10 @@ class Blog < ApplicationRecord
   end
 
   def published_directory_path
-    "blogs/#{id}"
+    "blogs/#{subdomain}"
   end
 
   def published_page_path
-    "#{published_directory_path}/index.html"
+    Helpers.build_server_path("#{subdomain}/index.html")
   end
 end

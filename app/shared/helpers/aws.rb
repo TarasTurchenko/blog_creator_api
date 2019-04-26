@@ -22,7 +22,7 @@ module Helpers
       invalidation.status == 'Complete'
     end
 
-    # @param [String] path to upload. eg blogs/5/index.html
+    # @param [String] path to upload. eg blogs/jesus/index.html
     # @param [String] body
     def self.upload_to_storage(path, body)
       extension = path.split('.').last

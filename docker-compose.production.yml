@@ -39,7 +39,7 @@ services:
       - 80:2015
       - 443:2015
     volumes:
-      - ./Caddyfile:/etc/Caddyfile
+      - ./Caddyfile.production:/etc/Caddyfile
 volumes:
   data-postgres:
     driver: local

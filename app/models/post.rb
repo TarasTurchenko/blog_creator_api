@@ -42,7 +42,7 @@ class Post < ApplicationRecord
 
   def publish
     PostWorker::Publish.perform_async(id, published_directory_path)
-    Helpers::Aws::build_cdn_url(published_page_path)
+    published_page_path
   end
 
   def unpublish
@@ -52,11 +52,11 @@ class Post < ApplicationRecord
   end
 
   def published_directory_path
-    "blogs/#{blog_id}/posts/#{id}"
+    "blogs/#{blog.subdomain}/posts/#{id}"
   end
 
   def published_page_path
-    "#{published_directory_path}/index.html"
+    Helpers.build_server_path("#{blog.subdomain}/posts/#{id}/index.html")
   end
 
   private
