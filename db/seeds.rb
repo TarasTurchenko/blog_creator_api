@@ -9,7 +9,7 @@ end
 puts '----------------------------- Seeds started -----------------------------'
 
 user = User.last || create!(User, email: 'admin@mail.com', password: 'admin')
-blog = user.blog || create!(Blog, name: 'Godly blog', author: 'Jesus', user: user)
+blog = user.blog || create!(Blog, name: 'Godly blog', author: 'Jesus', user: user, subdomain: 'jesus')
 post = create!(Post, title: 'Water to wine. It\'s real, or fantasy?', blog: blog)
 
 container1 = create!(Container, post: post, position: 0)

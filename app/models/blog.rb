@@ -7,7 +7,7 @@
 #  author    :string           not null
 #  name      :string           not null
 #  published :boolean          default(FALSE)
-#  subdomain :string
+#  subdomain :string           not null
 #  user_id   :bigint(8)
 #
 # Indexes
