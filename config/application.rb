@@ -20,6 +20,6 @@ module BlogCreatorApi
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
-    config.action_cable.mount_path = '/events/action_cable'
+    config.action_cable.mount_path = '/events'
   end
 end

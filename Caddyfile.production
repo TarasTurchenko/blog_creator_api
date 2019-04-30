@@ -1,5 +1,9 @@
 18.184.84.119 {
     proxy /api web:3000
+    proxy /events web:3000 {
+        header_upstream Connection {>Connection}
+        header_upstream Upgrade {>Upgrade}
+    }
     proxy /images web:3000
     proxy /assets web:3000
     proxy /assets/app https://d2ndn3opzra2g7.cloudfront.net
