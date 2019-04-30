@@ -8,6 +8,7 @@ require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
 require 'sprockets/railtie'
+require 'action_cable/engine'
 
 Bundler.require(*Rails.groups)
 
@@ -18,5 +19,7 @@ module BlogCreatorApi
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+    config.action_cable.mount_path = '/events/action_cable'
   end
 end

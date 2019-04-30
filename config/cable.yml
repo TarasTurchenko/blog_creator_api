@@ -1,0 +1,15 @@
+default: &default
+  adapter: redis
+  url: <%= ENV['REDIS_URL'] %>/1
+
+development:
+  <<: *default
+  channel_prefix: blog_creator_development
+
+test:
+  <<: *default
+  channel_prefix: blog_creator_test
+
+production:
+  <<: *default
+  channel_prefix: blog_creator_production
