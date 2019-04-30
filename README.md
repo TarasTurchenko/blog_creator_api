@@ -30,12 +30,6 @@ docker-compose up
 
 ```
 
-Before running in production environment you have to upload your assets to s3
-
-```bash
-docker-compose run --rm web rails amazon:upload_assets
-```
-
 ## API Documentation
 
 Swagger documentation: `/api_docs`
