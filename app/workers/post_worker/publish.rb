@@ -1,5 +1,13 @@
 module PostWorker
   class Publish < ApplicationWorker
+    class BatchCallback
+      def on_success(_, params = {})
+        post = Post.find(params['post_id'])
+        message = I18n.t('messages.success.post_published', post_title: post.title)
+        NotificationsChannel.notify_success(post.blog.user, message)
+      end
+    end
+
     attr_accessor :post, :dir_path
 
     def perform(post_id, dir_path)
@@ -9,7 +17,7 @@ module PostWorker
       publish
       post.blog.publish
 
-      AssetsWorker::ResetCaches.perform_async("/#{dir_path}/*")
+      reset_caches
 
       post.update!(published: true) unless post.published
     end
@@ -49,6 +57,12 @@ module PostWorker
         template: 'post/styles',
         assigns: { post: post }
       )
+    end
+
+    def reset_caches
+      batch = Sidekiq::Batch.new
+      batch.on(:success, BatchCallback, post_id: post.id)
+      batch.jobs { AssetsWorker::ResetCaches.perform_async("/#{dir_path}/*") }
     end
   end
 end

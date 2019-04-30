@@ -8,3 +8,5 @@ en:
       container_not_found: "Container not found"
       element_not_found: "Element not found"
       max_elements_count: "Can't create more elements for this container"
+    success:
+      post_published: "Post \"%{post_title}\" successfully published"
