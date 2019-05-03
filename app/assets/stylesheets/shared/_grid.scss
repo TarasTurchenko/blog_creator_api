@@ -1,5 +1,9 @@
 .app-grid__row {
-  display: flex
+  display: flex;
+
+  @media #{$query--only-mobile} {
+    flex-direction: column;
+  }
 }
 
 .app-grid__element--1 {

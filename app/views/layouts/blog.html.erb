@@ -1,9 +1,15 @@
-<head>
-  <title><%= @blog.name %></title>
-</head>
-<body>
-<header>
-  <h1><%= @blog.name %> by <%= @blog.author %></h1>
-</header>
-<main><%= yield %></main>
-</body>
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title><%= @blog.name %></title>
+  </head>
+
+  <body>
+    <header>
+      <h1><%= @blog.name %> by <%= @blog.author %></h1>
+    </header>
+
+    <main><%= yield %></main>
+  </body>
+</html>

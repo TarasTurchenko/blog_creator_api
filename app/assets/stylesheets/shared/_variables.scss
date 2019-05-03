@@ -1,0 +1,6 @@
+// Media queries
+
+$device-width--mobile: 767px;
+$device-width--tablet: 1200px;
+
+$query--only-mobile: "(max-width: #{$device-width--mobile})";
