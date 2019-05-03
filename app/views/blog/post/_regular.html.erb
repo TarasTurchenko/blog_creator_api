@@ -1,3 +1,5 @@
-<h2><%= post.title %></h2>
-<p><%= post.description %></p>
-<img src="<%= post.attrs['thumbnail'] %>" alt="Post thumbnail">
+<h2><%= @post.title %></h2>
+<% if @post.description.present? %>
+  <p><%= @post.description %></p>
+<% end %>
+<img src="<%= @post.attrs['thumbnail'] %>" alt="Post thumbnail">

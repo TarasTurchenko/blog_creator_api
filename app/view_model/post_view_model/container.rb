@@ -14,11 +14,11 @@ module PostViewModel
     end
 
     def render_html
-      render(partial: HTML_TEMPLATE, locals: { container: self })
+      render(partial: HTML_TEMPLATE, assigns: { container: self })
     end
 
     def render_styles
-      render(partial: STYLES_TEMPLATE, locals: { container: self })
+      render(partial: STYLES_TEMPLATE, assigns: { container: self })
     end
 
     private

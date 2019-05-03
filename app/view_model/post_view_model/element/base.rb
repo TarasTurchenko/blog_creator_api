@@ -18,13 +18,13 @@ module PostViewModel
       def render_html
         render(
           partial: self.class::TEMPLATE_NAME,
-          locals: { element: self },
+          assigns: { element: self },
           layout: WRAPPER_HTML_TEMPLATE
         )
       end
 
       def render_styles
-        render(partial: WRAPPER_STYLES_TEMPLATE, locals: { element: self })
+        render(partial: WRAPPER_STYLES_TEMPLATE, assigns: { element: self })
       end
 
       def build_size_class

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationViewModel
+  include ViewModelHelper::Styles
+
   attr_accessor :model, :publish_mode
 
   def initialize(model)

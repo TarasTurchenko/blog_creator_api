@@ -19,7 +19,7 @@ module BlogViewModel
       render(
         partial: template_name,
         layout: WRAPPER_TEMPLATE,
-        locals: { post: self }
+        assigns: { post: self }
       )
     end
 

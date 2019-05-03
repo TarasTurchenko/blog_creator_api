@@ -1,2 +1,2 @@
-<% block = element.attrs['block'] %>
-<%= link_to block['text'], element.link_destination %>
+<% text = @element.attrs['block']['text'] %>
+<%= link_to(text, @element.link_destination) %>
