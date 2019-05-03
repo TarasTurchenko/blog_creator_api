@@ -46,6 +46,11 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
+    asset_sync (2.7.0)
+      activemodel (>= 4.1.0)
+      fog-core
+      mime-types (>= 2.99)
+      unf
     aws-eventstream (1.0.1)
     aws-partitions (1.137.0)
     aws-sdk-cloudfront (1.0.0)
@@ -249,6 +254,9 @@ GEM
     tilt (2.0.9)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.6)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -269,6 +277,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  asset_sync
   aws-sdk-cloudfront (~> 1.0.0.rc2)
   aws-sdk-s3 (~> 1.0.0.rc2)
   bootsnap (>= 1.1.0)

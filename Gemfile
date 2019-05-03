@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem "asset_sync"
 gem 'aws-sdk-cloudfront', '~> 1.0.0.rc2'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'bootsnap', '>= 1.1.0', require: false

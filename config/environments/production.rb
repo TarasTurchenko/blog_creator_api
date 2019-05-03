@@ -6,7 +6,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.assets.compile = false
   config.assets.css_compressor = :sass
   config.log_level = :debug
   config.log_tags = [:request_id]
@@ -21,4 +20,11 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
+
+  config.action_controller.asset_host = ENV['CDN_URL']
+  config.serve_static_files = true
+  config.assets.compile = true
+  config.assets.digest = true
+  config.assets.enabled = true
+  config.assets.initialize_on_precompile = true
 end
