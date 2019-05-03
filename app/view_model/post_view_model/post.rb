@@ -21,11 +21,5 @@ module PostViewModel
         PostViewModel::Container.new(container, publish_mode)
       end
     end
-
-    def containers_representations(post)
-      post.containers_with_order.map do |container|
-        container.template_representation(publish_mode)
-      end
-    end
   end
 end

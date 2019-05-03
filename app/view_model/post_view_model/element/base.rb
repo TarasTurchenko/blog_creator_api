@@ -14,6 +14,10 @@ module PostViewModel
         "app-grid__element--#{size}"
       end
 
+      def build_template_name
+        "post/elements/#{kind}"
+      end
+
       private
 
       def permitted_model_attrs

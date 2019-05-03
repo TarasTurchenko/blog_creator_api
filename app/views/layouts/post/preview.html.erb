@@ -7,5 +7,5 @@
     <style><%= render(template: 'post/styles') %></style>
   </head>
 
-  <body data-blog="<%= @post.blog_id %>" data-post="<%= @post.id %>"><%= yield %></body>
+  <body class="post" data-blog="<%= @post.blog_id %>" data-post="<%= @post.id %>"><%= yield %></body>
 </html>
