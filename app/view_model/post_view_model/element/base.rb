@@ -3,7 +3,7 @@
 module PostViewModel
   module Element
     class Base < ApplicationViewModel
-      WRAPPER_STYLES_TEMPLATE = 'post/element_wrapper/styles'.freeze
+      WRAPPER_STYLES_TEMPLATE = 'post/element/styles'.freeze
       WRAPPER_HTML_TEMPLATE = 'post/element/wrapper'.freeze
 
       TEMPLATE_NAME = ''.freeze
