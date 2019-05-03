@@ -19,15 +19,7 @@ module BlogWorker
 
     def publish
       blog = BlogViewModel::Blog.new(self.blog, true)
-      Helpers::Aws.upload_to_storage(html_path, render_html(blog))
-    end
-
-    def render_html(blog)
-      ApplicationController.render(
-        template: 'blog/index',
-        layout: 'blog',
-        assigns: { blog: blog }
-      )
+      Helpers::Aws.upload_to_storage(html_path, blog.render_html)
     end
   end
 end

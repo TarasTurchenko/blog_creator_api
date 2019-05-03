@@ -22,6 +22,10 @@ class ApplicationViewModel
     end
   end
 
+  def render(params)
+    ApplicationController.render(params)
+  end
+
   protected
 
   def permitted_model_attrs

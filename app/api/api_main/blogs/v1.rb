@@ -24,13 +24,7 @@ module ApiMain
         content_type :html, 'text/html'
         format :html
         get :preview do
-          payload = { blog: BlogViewModel::Blog.new(current_blog) }
-
-          ApplicationController.render(
-            template: 'blog/index',
-            assigns: payload,
-            layout: 'blog'
-          )
+          BlogViewModel::Blog.new(current_blog).render_html
         end
       end
     end
