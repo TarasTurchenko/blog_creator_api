@@ -2,9 +2,10 @@
 
 module BlogViewModel
   class Post < ApplicationViewModel
-    REGULAR_POST_TEMPLATE = 'blog/post/regular'
-    NEWEST_POST_TEMPLATE = 'blog/post/newest'
-    WRAPPER_TEMPLATE = 'blog/post/wrapper'
+    REGULAR_POST_TEMPLATE = 'blog/post/regular'.freeze
+    NEWEST_POST_TEMPLATE = 'blog/post/newest'.freeze
+
+    WRAPPER_TEMPLATE = 'blog/post/wrapper'.freeze
 
     attr_accessor :publish_mode, :is_newest
 

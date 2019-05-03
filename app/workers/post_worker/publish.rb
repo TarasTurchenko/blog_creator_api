@@ -32,31 +32,13 @@ module PostWorker
 
     def publish_html(post)
       html_path = "#{dir_path}/index.html"
-      Helpers::Aws.upload_to_storage(html_path, render_html(post))
+      Helpers::Aws.upload_to_storage(html_path, post.render_html)
     end
 
     def publish_styles(post)
       css_path = "#{dir_path}/styles.css"
-      styles = CSS_COMPRESSOR.compress(render_css(post))
+      styles = CSS_COMPRESSOR.compress(post.render_styles)
       Helpers::Aws.upload_to_storage(css_path, styles)
-    end
-
-    def render_html(post)
-      styles_url = Helpers::Aws.build_cdn_url("#{dir_path}/styles.css")
-      payload = { post: post, styles_url: styles_url }
-
-      ApplicationController.render(
-        template: 'post/index',
-        assigns: payload,
-        layout: 'post/published'
-      )
-    end
-
-    def render_css(post)
-      ApplicationController.render(
-        template: 'post/styles',
-        assigns: { post: post }
-      )
     end
 
     def reset_caches

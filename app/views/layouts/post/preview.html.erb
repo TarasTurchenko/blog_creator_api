@@ -4,7 +4,7 @@
   <head>
     <title><%= @post.title %></title>
     <%= stylesheet_link_tag('post') %>
-    <style><%= render(template: 'post/styles') %></style>
+    <style><%= @post.render_styles %></style>
   </head>
 
   <body class="post" data-blog="<%= @post.blog_id %>" data-post="<%= @post.id %>"><%= yield %></body>

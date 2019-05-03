@@ -1,5 +1,3 @@
 .container--<%= container.id %> {<%= wrapper_styles(container.attrs) %>}
 
-<% container.elements.each do |element| %>
-  <%= render('post/element_wrapper/styles', element: element) %>
-<% end %>
+<%= container.elements.map(&:render_styles).join('') %>

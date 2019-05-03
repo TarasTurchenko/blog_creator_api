@@ -3,6 +3,8 @@
 module PostViewModel
   module Element
     class Link < PostViewModel::Element::Base
+      TEMPLATE_NAME = 'post/element/link'
+
       def link_destination
         return "#" unless publish_mode
 

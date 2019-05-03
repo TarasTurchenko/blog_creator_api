@@ -83,13 +83,7 @@ module ApiMain
           format :html
 
           get :preview do
-            payload = { post: PostViewModel::Post.new(current_post) }
-
-            ApplicationController.render(
-              template: 'post/index',
-              assigns: payload,
-              layout: 'post/preview'
-            )
+            PostViewModel::Post.new(current_post).render_html
           end
         end
       end
