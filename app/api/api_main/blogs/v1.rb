@@ -10,9 +10,10 @@ module ApiMain
           requires :author, type: String
         end
         post do
+          name = declared_params[:name]
           params = declared_params.merge(
             user: current_user,
-            subdomain: ActiveSupport::Inflector.parameterize(declared_params[:name])
+            subdomain: ActiveSupport::Inflector.parameterize(name)
           )
           blog = Blog.create!(params)
           present(:blog, blog, with: ApiEntities::Blog::Blog)

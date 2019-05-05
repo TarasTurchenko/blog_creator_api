@@ -2,8 +2,8 @@
 
 module PostViewModel
   class Container < ApplicationViewModel
-    HTML_TEMPLATE = 'post/container/template'.freeze
-    STYLES_TEMPLATE = 'post/container/styles'.freeze
+    HTML_TEMPLATE = 'post/container/template'
+    STYLES_TEMPLATE = 'post/container/styles'
 
     attr_accessor :elements, :publish_mode
 
@@ -24,7 +24,7 @@ module PostViewModel
     private
 
     def permitted_model_attrs
-      [:id, :attrs]
+      %i[id attrs]
     end
 
     def prepare_elements

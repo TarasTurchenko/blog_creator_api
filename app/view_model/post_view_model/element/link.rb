@@ -6,9 +6,16 @@ module PostViewModel
       TEMPLATE_NAME = 'post/element/link'
 
       def link_destination
-        return "#" unless publish_mode
+        return '#' unless publish_mode
 
-        type, target = attrs['block'].values_at('destination_type', 'destination')
+        published_link_destination
+      end
+
+      private
+
+      def published_link_destination
+        block = attrs['block']
+        type, target = block.values_at('destination_type', 'destination')
 
         case type
         when 'post'

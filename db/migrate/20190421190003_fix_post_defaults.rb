@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixPostDefaults < ActiveRecord::Migration[5.2]
   def change
     change_column_default :posts, :attrs, default: {

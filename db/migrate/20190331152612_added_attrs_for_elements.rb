@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddedAttrsForElements < ActiveRecord::Migration[5.2]
   def change
     remove_column :elements, :offset_top, :integer, default: 5

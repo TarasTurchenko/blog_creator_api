@@ -3,10 +3,10 @@
 module PostViewModel
   module Element
     class Base < ApplicationViewModel
-      WRAPPER_STYLES_TEMPLATE = 'post/element/styles'.freeze
-      WRAPPER_HTML_TEMPLATE = 'post/element/wrapper'.freeze
+      WRAPPER_STYLES_TEMPLATE = 'post/element/styles'
+      WRAPPER_HTML_TEMPLATE = 'post/element/wrapper'
 
-      TEMPLATE_NAME = ''.freeze
+      TEMPLATE_NAME = ''
 
       attr_accessor :publish_mode
 
@@ -34,7 +34,7 @@ module PostViewModel
       private
 
       def permitted_model_attrs
-        [:id, :kind, :attrs, :size]
+        %i[id kind attrs size]
       end
     end
   end

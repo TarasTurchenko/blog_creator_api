@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddedAttrsForContainers < ActiveRecord::Migration[5.2]
   def change
     remove_column :containers, :offset_top, :integer, default: 20

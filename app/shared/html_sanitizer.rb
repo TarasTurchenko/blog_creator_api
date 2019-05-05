@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class HtmlSanitizer
-
-  ALLOWED_TAGS = %w(b i u strike sub sup div span blockquote ul ol li h1 h2 h3 h4 h5 h6 br font a hr).freeze
-  ALLOWED_ATTRIBUTES = %w(style size face color href target).freeze
+  ALLOWED_TAGS = %w[b i u strike sub sup div span blockquote ul ol li h1 h2 h3
+                    h4 h5 h6 br font a hr].freeze
+  ALLOWED_ATTRIBUTES = %w[style size face color href target].freeze
 
   attr_accessor :source, :sanitizer
 

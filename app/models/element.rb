@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: elements
@@ -19,7 +20,7 @@ class Element < ApplicationRecord
   include SharedModels::PositionableModel
   include SharedModels::WithAttrsJson
 
-  MAX_SIZE = 12.freeze
+  MAX_SIZE = 12
 
   before_create :set_defaults
   after_create :reorder

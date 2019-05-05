@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem "asset_sync"
+gem 'asset_sync'
 gem 'aws-sdk-cloudfront', '~> 1.0.0.rc2'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -20,10 +20,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.2'
+gem 'rails-html-sanitizer'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 5.0', '>= 5.0.5'
 gem 'sidekiq-batch', '~> 0.1.5'
-gem 'rails-html-sanitizer'
 gem 'sorcery'
 gem 'yui-compressor', '~> 0.12.0', require: 'yui/compressor'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PostWorker
   class Unpublish < ApplicationWorker
     def perform(post_id)

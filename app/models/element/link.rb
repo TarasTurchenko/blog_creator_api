@@ -16,7 +16,6 @@
 #  index_elements_on_container_id  (container_id)
 #
 
-
 class Element::Link < Element
   LINK_DESTINATION_TYPES = %w[external homepage post].freeze
 

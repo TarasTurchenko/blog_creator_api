@@ -16,7 +16,6 @@
 #  index_elements_on_container_id  (container_id)
 #
 
-
 class Element::Image < Element
   def default_block_attrs
     {

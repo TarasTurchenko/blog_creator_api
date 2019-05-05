@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSubdomainForBlogs < ActiveRecord::Migration[5.2]
   def up
     add_column :blogs, :subdomain, :string, null: true

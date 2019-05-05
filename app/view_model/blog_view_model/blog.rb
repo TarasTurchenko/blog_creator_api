@@ -2,11 +2,11 @@
 
 module BlogViewModel
   class Blog < ApplicationViewModel
-    PREVIEW_LAYOUT_TEMPLATE = 'blog/preview'.freeze
-    PUBLISH_LAYOUT_TEMPLATE = 'blog/published'.freeze
+    PREVIEW_LAYOUT_TEMPLATE = 'blog/preview'
+    PUBLISH_LAYOUT_TEMPLATE = 'blog/published'
 
-    PLACEHOLDER_TEMPLATE = 'blog/placeholder'.freeze
-    POSTS_TEMPLATE = 'blog/posts'.freeze
+    PLACEHOLDER_TEMPLATE = 'blog/placeholder'
+    POSTS_TEMPLATE = 'blog/posts'
 
     attr_accessor :posts, :publish_mode
 
@@ -25,19 +25,19 @@ module BlogViewModel
     end
 
     def posts?
-      posts.size > 0
+      !posts.empty?
     end
 
     private
 
     def permitted_model_attrs
-      [:id, :name, :author]
+      %i[id name author]
     end
 
     def prepare_posts(model)
       posts = model.published_posts.order(updated_at: :desc)
       self.posts = posts.map.with_index do |post, index|
-        BlogViewModel::Post.new(post, publish_mode, index == 0)
+        BlogViewModel::Post.new(post, publish_mode, index.zero?)
       end
     end
 

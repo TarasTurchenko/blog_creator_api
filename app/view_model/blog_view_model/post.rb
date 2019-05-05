@@ -2,10 +2,10 @@
 
 module BlogViewModel
   class Post < ApplicationViewModel
-    REGULAR_POST_TEMPLATE = 'blog/post/regular'.freeze
-    NEWEST_POST_TEMPLATE = 'blog/post/newest'.freeze
+    REGULAR_POST_TEMPLATE = 'blog/post/regular'
+    NEWEST_POST_TEMPLATE = 'blog/post/newest'
 
-    WRAPPER_TEMPLATE = 'blog/post/wrapper'.freeze
+    WRAPPER_TEMPLATE = 'blog/post/wrapper'
 
     attr_accessor :publish_mode, :is_newest
 
@@ -32,7 +32,7 @@ module BlogViewModel
     private
 
     def permitted_model_attrs
-      [:id, :title, :description, :attrs]
+      %i[id title description attrs]
     end
 
     def template_name

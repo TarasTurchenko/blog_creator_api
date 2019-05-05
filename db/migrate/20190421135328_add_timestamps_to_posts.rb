@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTimestampsToPosts < ActiveRecord::Migration[5.2]
   def up
     add_timestamps :posts, null: true

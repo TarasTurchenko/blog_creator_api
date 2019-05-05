@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -65,6 +66,6 @@ class Post < ApplicationRecord
   private
 
   def set_defaults
-    self.attrs['thumbnail'] = Config::Images::PLACEHOLDER
+    attrs['thumbnail'] = Config::Images::PLACEHOLDER
   end
 end

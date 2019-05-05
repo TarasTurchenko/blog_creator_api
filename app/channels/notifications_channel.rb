@@ -10,10 +10,10 @@ class NotificationsChannel < ApplicationCable::Channel
   end
 
   def self.notify_error(user, message)
-    self.notify(user, :error, message)
+    notify(user, :error, message)
   end
 
   def self.notify_success(user, message)
-    self.notify(user, :success, message)
+    notify(user, :success, message)
   end
 end

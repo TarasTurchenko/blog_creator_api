@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddedAttrsForPosts < ActiveRecord::Migration[5.2]
   def change
     remove_column :posts, :offset_top, :integer

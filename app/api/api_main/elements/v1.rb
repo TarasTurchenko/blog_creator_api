@@ -8,8 +8,12 @@ module ApiMain
 
         helpers do
           def check_max_elements_limit!
+            max_elements_count! if max_elements_limit?
+          end
+
+          def max_elements_limit?
             elements_count = current_container.elements.count
-            max_elements_count! if elements_count >= Container::MAX_ELEMENTS_COUNT
+            elements_count >= Container::MAX_ELEMENTS_COUNT
           end
         end
 

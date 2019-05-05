@@ -2,11 +2,11 @@
 
 module PostViewModel
   class Post < ApplicationViewModel
-    PREVIEW_LAYOUT_TEMPLATE = 'post/preview'.freeze
-    PUBLISHED_LAYOUT_TEMPLATE = 'post/published'.freeze
+    PREVIEW_LAYOUT_TEMPLATE = 'post/preview'
+    PUBLISHED_LAYOUT_TEMPLATE = 'post/published'
 
-    HTML_TEMPLATE = 'post/index'.freeze
-    STYLES_TEMPLATE = 'post/styles'.freeze
+    HTML_TEMPLATE = 'post/index'
+    STYLES_TEMPLATE = 'post/styles'
 
     attr_accessor :publish_mode, :containers
 
@@ -42,7 +42,7 @@ module PostViewModel
     end
 
     def permitted_model_attrs
-      [:id, :title, :blog_id, :attrs]
+      %i[id title blog_id attrs]
     end
 
     def prepare_containers

@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 module PostWorker
   class Publish < ApplicationWorker
     class BatchCallback
-      def on_success(_, params = {})
+      def on_success(_status, params = {})
         post = Post.find(params['post_id'])
-        message = I18n.t('messages.success.post_published', post_title: post.title)
+
+        message_params = { post_title: post.title }
+        message = I18n.t('messages.success.post_published', message_params)
+
         NotificationsChannel.notify_success(post.blog.user, message)
       end
     end
