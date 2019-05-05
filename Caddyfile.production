@@ -6,7 +6,12 @@
         header_upstream Connection {>Connection}
         header_upstream Upgrade {>Upgrade}
     }
-    proxy /images {$CDN_URL}
+    proxy /assets/user-data {$CDN_URL} {
+        without /assets/user-data
+    }
+    proxy /user-data {$CDN_URL} {
+        without /user-data
+    }
     proxy /assets {$CDN_URL}
     proxy / {$CDN_URL}/blogs
 }

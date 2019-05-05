@@ -14,7 +14,7 @@ CarrierWave.configure do |config|
       aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       region: ENV['AWS_REGION']
     }
-    config.fog_directory  = ENV['S3_BUCKET']
+    config.fog_directory = ENV['S3_BUCKET']
     config.fog_attributes = {
       cache_control: "public, max-age=#{365.days.to_i}"
     }
@@ -23,5 +23,5 @@ CarrierWave.configure do |config|
     config.storage = :file
     config.enable_processing = Rails.env.development?
   end
-  config.asset_host = ''
+  config.asset_host = '/user-data'
 end
