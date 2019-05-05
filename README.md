@@ -37,7 +37,7 @@ Swagger documentation: `/api/docs`
 App using [CaddyServer](https://caddyserver.com) for proxying and encapsulating
 app resources.
  
-Any request, except following, will proxied to `CDN_URL/blogs` 
+Any request, except following, will proxy to `CDN_URL/blogs` 
 - `/api/*` - Rails app
 - `/events/*` - ActiveCable connection
 - `/assets/*` - Rails app assets. Will proxy to local (in development) or S3 (in production)
