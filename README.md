@@ -8,7 +8,7 @@
 ### How to setup?
 
 - Firstly you have to add requires [environment variables](https://github.com/blog-creator-team/blog_creator_api/blob/master/.env.example) into your .env
-- Prepare app dependencies and run server.
+- Prepare app dependencies and up project.
 
 docker-compose:
 
@@ -32,7 +32,18 @@ docker-compose up
 
 ## API Documentation
 
-Swagger documentation: `/api_docs`
+Swagger documentation: `/api/docs`
+
+App using [CaddyServer](https://caddyserver.com) for proxying and encapsulating
+app resources.
+ 
+Any request, except following, will proxied to `CDN_URL/blogs` 
+- `/api/*` - Rails app
+- `/events/*` - ActiveCable connection
+- `/assets/*` - Rails app assets. Will proxy to local (in development) or S3 (in production)
+- `/images/*` - Uploaded images. Will proxy to local (in development) or S3 (in production)
+
+Example of API request: `http://localhost/api/v1/posts`
 
 ## Links
 

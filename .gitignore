@@ -35,3 +35,5 @@ heroku.yml
 !.elasticbeanstalk/*.global.yml
 
 public/images/*
+
+ansible/*.retry
