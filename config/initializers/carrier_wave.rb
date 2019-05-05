@@ -21,10 +21,10 @@ CarrierWave.configure do |config|
       cache_control: "public, max-age=#{365.days.to_i}"
     }
     config.storage = :fog
-    config.asset_host = ENV['CDN_URL']
+    config.asset_host = ''
   else
     config.storage = :file
     config.enable_processing = Rails.env.development?
-    config.asset_host = ENV['APP_URL']
+    config.asset_host = ''
   end
 end

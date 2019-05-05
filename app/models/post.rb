@@ -41,22 +41,25 @@ class Post < ApplicationRecord
   end
 
   def publish
-    PostWorker::Publish.perform_async(id, published_directory_path)
-    published_page_path
+    PostWorker::Publish.perform_async(id)
   end
 
   def unpublish
     raise(BlogCreatorError, 'Post is not published') unless published
 
-    PostWorker::Unpublish.perform_async(id, published_directory_path)
+    PostWorker::Unpublish.perform_async(id)
   end
 
-  def published_directory_path
-    "blogs/#{blog.subdomain}/posts/#{id}"
+  def published_dir_path
+    "#{blog.published_dir_path}/posts/#{id}"
   end
 
   def published_page_path
-    Helpers.build_server_path("#{blog.subdomain}/posts/#{id}/index.html")
+    "#{published_dir_path}/index.html"
+  end
+
+  def physical_dir_path
+    "#{blog.physical_dir_path}/posts/#{id}"
   end
 
   private

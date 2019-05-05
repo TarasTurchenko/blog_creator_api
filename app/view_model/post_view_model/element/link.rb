@@ -8,15 +8,15 @@ module PostViewModel
       def link_destination
         return "#" unless publish_mode
 
-        block = attrs['block']
+        type, target = attrs['block'].values_at('destination_type', 'destination')
 
-        case block['destination_type']
+        case type
         when 'post'
-          ::Post.find(block['destination']).published_page_path
+          ::Post.find(target).published_page_path
         when 'homepage'
           model.container.post.blog.published_page_path
         else
-          block['destination']
+          target
         end
       end
     end

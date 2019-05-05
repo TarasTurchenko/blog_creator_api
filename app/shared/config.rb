@@ -2,7 +2,7 @@
 
 module Config
   module Images
-    PLACEHOLDER = Helpers::Aws.build_cdn_url('assets/placeholder.png')
+    PLACEHOLDER = 'placeholder.png'
   end
 
   module Regexps

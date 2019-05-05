@@ -39,6 +39,8 @@ services:
   caddy:
     container_name: blog_creator_caddy
     image: abiosoft/caddy
+    env_file:
+      - .env
     ports:
       - 80:2015
       - 443:2015

@@ -1,10 +1,12 @@
 localhost {
-    proxy /api web:3000
+    proxy /api web:3000 {
+        without /api
+    }
     proxy /events web:3000 {
         header_upstream Connection {>Connection}
         header_upstream Upgrade {>Upgrade}
     }
     proxy /assets web:3000
     proxy /images web:3000
-    proxy / https://d2ndn3opzra2g7.cloudfront.net/blogs
+    proxy / {$CDN_URL}/blogs
 }

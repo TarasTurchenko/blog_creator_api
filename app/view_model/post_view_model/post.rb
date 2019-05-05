@@ -34,8 +34,7 @@ module PostViewModel
     private
 
     def published_styles_url
-      dir_path = model.published_directory_path
-      Helpers::Aws.build_cdn_url("#{dir_path}/styles.css")
+      "#{model.published_dir_path}/styles.css"
     end
 
     def layout_template_name

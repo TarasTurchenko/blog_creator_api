@@ -1,2 +1,2 @@
 <% src, alt = @element.attrs['block'].values_at('src', 'alt') %>
-<img class="size--max-parent block align--center" src="<%= src %>" alt="<%= alt %>">
+<img class="size--max-parent block align--center" src="<%= image_path(src) %>" alt="<%= alt %>">

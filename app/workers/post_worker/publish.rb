@@ -10,9 +10,9 @@ module PostWorker
 
     attr_accessor :post, :dir_path
 
-    def perform(post_id, dir_path)
+    def perform(post_id)
       self.post = Post.find(post_id)
-      self.dir_path = dir_path
+      self.dir_path = post.physical_dir_path
 
       publish
       post.blog.publish

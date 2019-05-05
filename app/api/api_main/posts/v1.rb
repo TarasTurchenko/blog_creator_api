@@ -68,8 +68,8 @@ module ApiMain
 
           desc 'Make post available for other anyone'
           post :publish do
-            url = current_post.publish
-            present(:url, url)
+            current_post.publish
+            nil
           end
 
           desc 'Unshare page'

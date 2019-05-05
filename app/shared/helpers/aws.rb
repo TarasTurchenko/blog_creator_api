@@ -37,9 +37,5 @@ module Helpers
     def self.delete_folder_from_storage(path)
       S3_BUCKET.objects(prefix: path).batch_delete!
     end
-
-    def self.build_cdn_url(resource)
-      "#{ENV['CDN_URL']}/#{resource}"
-    end
   end
 end
