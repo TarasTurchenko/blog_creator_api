@@ -26,4 +26,6 @@ Rails.application.configure do
   config.assets.digest = true
   config.assets.enabled = true
   config.assets.initialize_on_precompile = true
+
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
 end
