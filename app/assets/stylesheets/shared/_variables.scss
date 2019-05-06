@@ -4,3 +4,7 @@ $device-width--mobile: 767px;
 $device-width--tablet: 1200px;
 
 $query--only-mobile: "(max-width: #{$device-width--mobile})";
+$query--only-tablet: "(min-width: #{$device-width--mobile}) and (max-width: #{$device-width--tablet})";
+$query--only-desktop: "(min-width: #{$device-width--tablet})";
+
+$query--bigger-than-mobile: "(min-width: #{$device-width--mobile})"

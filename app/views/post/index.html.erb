@@ -1,1 +1,3 @@
-<%= @post.containers.map(&:render_html).join('').html_safe %>
+<div class="page__content">
+  <%= @post.containers.map(&:render_html).join('').html_safe %>
+</div>

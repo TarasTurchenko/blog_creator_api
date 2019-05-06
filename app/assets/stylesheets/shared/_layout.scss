@@ -1,0 +1,14 @@
+.page__content {
+  @media #{$query--bigger-than-mobile} {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media #{$query--only-tablet} {
+    max-width: 767px;
+  }
+
+  @media #{$query--only-desktop} {
+    max-width: 1000px;
+  }
+}
