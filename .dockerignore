@@ -9,3 +9,4 @@
 .elasticbeanstalk/*
 .git
 .gitignore
+mode_modules
