@@ -12,8 +12,7 @@ module ViewModelHelper
       bg_image, bg_color = model.attrs.values_at('bg_image', 'bg_color')
       background_styles = render_background_styles(bg_image, bg_color)
 
-      offsets_styles = render_offsets_styles(model.attrs[:offsets])
-
+      offsets_styles = render_offsets_styles(model.attrs['offsets'])
       background_styles + offsets_styles
     end
 
