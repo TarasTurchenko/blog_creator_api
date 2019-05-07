@@ -5,8 +5,6 @@ module BlogViewModel
     PREVIEW_LAYOUT_TEMPLATE = 'blog/preview'
     PUBLISH_LAYOUT_TEMPLATE = 'blog/published'
 
-    TEMPLATE_NAME = 'blog/index'
-
     PLACEHOLDER_TEMPLATE = 'blog/placeholder'
     POSTS_TEMPLATE = 'blog/posts'
 
@@ -20,7 +18,7 @@ module BlogViewModel
 
     def render_html
       render(
-        template: TEMPLATE_NAME,
+        template: content_template_name,
         layout: layout_template_name,
         assigns: { blog: self }
       )

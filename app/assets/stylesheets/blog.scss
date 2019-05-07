@@ -1,3 +1,9 @@
 @import "normalize.css/normalize";
 
+@import "shared/variables";
+@import "shared/helpers";
 @import "shared/layout";
+
+.blog {
+  padding: 10px;
+}

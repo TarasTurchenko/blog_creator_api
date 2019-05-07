@@ -2,4 +2,4 @@
 <% if @post.description.present? %>
   <p><%= @post.description %></p>
 <% end %>
-<img src="<%= image_path(@post.attrs['thumbnail']) %>" alt="Post thumbnail">
+<img class="size--max-parent" src="<%= image_path(@post.attrs['thumbnail']) %>" alt="Post thumbnail">
