@@ -1,17 +1,26 @@
 localhost {
+    proxy /app http://localhost:4200 {
+        without /app
+    }
+
     proxy /api web:3000 {
         without /api
     }
+
     proxy /events web:3000 {
         header_upstream Connection {>Connection}
         header_upstream Upgrade {>Upgrade}
     }
+
     proxy /assets/user-data web:3000 {
         without /assets/user-data
     }
+
     proxy /user-data web:3000 {
         without /user-data
     }
+
     proxy /assets web:3000
+
     proxy / {$CDN_URL}/blogs
 }

@@ -1,17 +1,26 @@
 18.184.84.119, localhost {
+    proxy /app {$CDN_URL}/app {
+        without /app
+    }
+
     proxy /api web:3000 {
         without /api
     }
+
     proxy /events web:3000 {
         header_upstream Connection {>Connection}
         header_upstream Upgrade {>Upgrade}
     }
+
     proxy /assets/user-data {$CDN_URL} {
         without /assets/user-data
     }
+
     proxy /user-data {$CDN_URL} {
         without /user-data
     }
+
     proxy /assets {$CDN_URL}
+
     proxy / {$CDN_URL}/blogs
 }
