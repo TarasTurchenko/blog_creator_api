@@ -18,15 +18,17 @@ module ApiMain
         end
 
         desc 'Get all post'
-        get do
-          posts = current_blog.posts.order(id: :desc)
-          present(:posts, posts, with: ApiEntities::Post::ListItem)
+        params do
+          optional :published, type: Boolean
         end
-
-        desc 'Get list of published pages'
-        get :published do
-          posts = current_blog.published_posts
-          present(:posts, posts, with: ApiEntities::Post::Named)
+        get do
+          if params[:published]
+            posts = current_blog.published_posts.order(:created_at)
+            present(:posts, posts, with: ApiEntities::Post::Named)
+          else
+            posts = current_blog.posts.order(id: :desc)
+            present(:posts, posts, with: ApiEntities::Post::ListItem)
+          end
         end
 
         params do
