@@ -35,12 +35,6 @@ services:
       - web
     command: bundle exec sidekiq
     env_file: .env
-  frontend:
-    container_name: blog_creator_frontend
-    build: ./frontend
-    ports:
-      - 4200:4200
-    command: node /myapp/production-server.js
   caddy:
     container_name: blog_creator_caddy
     image: abiosoft/caddy

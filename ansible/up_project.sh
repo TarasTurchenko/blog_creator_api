@@ -2,8 +2,6 @@
 
 cd /home/ubuntu/blog_creator_api/current
 
-./ansible/deploy-frontend.sh
-
 docker-compose -f docker-compose.production.yml stop
 docker-compose -f docker-compose.production.yml rm -f -v
 docker-compose -f docker-compose.production.yml build
