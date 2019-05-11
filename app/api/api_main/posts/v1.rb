@@ -23,6 +23,12 @@ module ApiMain
           present(:posts, posts, with: ApiEntities::Post::ListItem)
         end
 
+        desc 'Get list of published pages'
+        get :published do
+          posts = current_blog.published_posts
+          present(:posts, posts, with: ApiEntities::Post::Named)
+        end
+
         params do
           requires :post_id, type: String
         end

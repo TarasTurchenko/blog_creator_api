@@ -2,7 +2,7 @@
 
 def create!(model, attrs)
   record = model.create!(attrs)
-  puts "Created #{model.name} (#{record.id}):"
+  puts "Created #{model.name} (id: #{record.id}):"
   record
 end
 
