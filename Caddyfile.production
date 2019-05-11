@@ -1,4 +1,7 @@
 18.184.84.119, localhost {
+    proxy /app frontend:4200 {
+        without /app
+    }
     proxy /api web:3000 {
         without /api
     }

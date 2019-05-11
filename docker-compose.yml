@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     container_name: blog_creator_api_main
+    image: blog_creator_api
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     env_file:
@@ -10,10 +11,9 @@ services:
       - .:/myapp
       - data-ruby-tmp:/myapp/tmp
       - data-ruby-bundle:/bundle
-    ports:
-      - 3000:3000
     depends_on:
-      - sidekiq
+      - db
+      - redis
   db:
     container_name: blog_creator_api_db
     image: postgres:11.1-alpine
@@ -26,14 +26,13 @@ services:
       - data-redis:/data
   sidekiq:
     container_name: blog_creator_api_sidekiq
-    build: .
+    image: blog_creator_api
     volumes:
       - .:/myapp:rw
       - data-ruby-tmp:/myapp/tmp
       - data-ruby-bundle:/bundle
     depends_on:
-      - redis
-      - db
+      - web
     command: bundle exec sidekiq
     env_file: .env
   caddy:
